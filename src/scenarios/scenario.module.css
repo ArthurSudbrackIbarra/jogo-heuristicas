@@ -1,0 +1,267 @@
+/* ──────────────────────────────────────────────────────────
+   Shared styles for all scenario mock-UI components.
+   Import this in each scenario's TSX file.
+   ────────────────────────────────────────────────────────── */
+
+/* ── Mock app wrapper ──────────────────────────────────── */
+.app {
+  background: #f8fafc;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #1e293b;
+}
+
+/* ── Mock app toolbar / navbar ─────────────────────────── */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.toolbarTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  flex: 1;
+}
+
+/* ── Content area ──────────────────────────────────────── */
+.body {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.centered {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 16px;
+  padding: 32px;
+}
+
+/* ── Cards / panels ────────────────────────────────────── */
+.card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+}
+
+/* ── Form elements ─────────────────────────────────────── */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.input {
+  padding: 9px 12px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #1e293b;
+  background: #fff;
+  outline: none;
+  transition: border-color 140ms ease;
+}
+
+.input:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 0 3px rgba(108,99,255,0.12);
+}
+
+.input.error {
+  border-color: #f43f5e;
+}
+
+.inputError {
+  font-size: 12px;
+  color: #f43f5e;
+  font-weight: 500;
+}
+
+/* ── Buttons ───────────────────────────────────────────── */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 120ms ease, background-color 120ms ease, transform 100ms ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn:hover:not(:disabled) { opacity: 0.88; }
+.btn:active:not(:disabled) { transform: scale(0.97); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btnPrimary { background: #6c63ff; color: #fff; }
+.btnSuccess { background: #22c55e; color: #fff; }
+.btnDanger  { background: #f43f5e; color: #fff; }
+.btnSecondary { background: #f1f5f9; color: #374151; border: 1px solid #e2e8f0; }
+
+/* ── Inline alerts / feedback ──────────────────────────── */
+.alertSuccess {
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #166534;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.alertError {
+  background: #fff1f2;
+  border: 1px solid #fda4af;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #9f1239;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.alertInfo {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #1d4ed8;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Progress / loading ────────────────────────────────── */
+.progressTrack {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #6c63ff, #a78bfa);
+  border-radius: 99px;
+  transition: width 200ms ease;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e2e8f0;
+  border-top-color: #6c63ff;
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Typography ────────────────────────────────────────── */
+.heading {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.subheading {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.muted {
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* ── Lists ─────────────────────────────────────────────── */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.listRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* ── Toast ─────────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e293b;
+  color: #f8fafc;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  z-index: 999;
+  animation: toastIn 300ms ease both;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.toastAction {
+  background: none;
+  border: none;
+  color: #a78bfa;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+/* ── Utility ───────────────────────────────────────────── */
+.row { display: flex; align-items: center; gap: 8px; }
+.col { display: flex; flex-direction: column; gap: 8px; }
+.spaceBetween { justify-content: space-between; }
+.flexEnd { justify-content: flex-end; }
+.bold { font-weight: 700; }
+.success { color: #22c55e; }
+.danger { color: #f43f5e; }
