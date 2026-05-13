@@ -66,6 +66,19 @@
   "heuristic": {
     "completed": "✓ Concluída"
   },
+  "sidebar": {
+    "title": "Heurísticas",
+    "toggle": "Abrir barra de progresso",
+    "bad": "Ruim",
+    "good": "Bom",
+    "reveal": "Revelação",
+    "scenarioDoneTitle": "Concluído",
+    "seeResults": "🏁 Ver resultados →",
+    "confirmTitle": "Sair deste cenário?",
+    "confirmBody": "Este cenário ainda não foi concluído. Se você sair agora, precisará refazê-lo para ganhar a marca de conclusão.",
+    "stay": "Ficar",
+    "leave": "Sair mesmo assim"
+  },
   "scenarios": {
     "h01": {
       "toolbarTitle": "Mensagens — Ana",

@@ -55,6 +55,7 @@ export interface GameState {
   scenarioIndex: 0 | 1;
   scenarioStartTime: number;
   completedEntries: CompletedEntry[];
+  completedHeuristicIds: number[];
   coins: number;
   lang: Lang;
 }
@@ -67,4 +68,6 @@ export type GameAction =
   | { type: 'DISMISS_REVEAL' }
   | { type: 'BUY_ITEM' }
   | { type: 'RESTART' }
-  | { type: 'SET_LANG'; lang: Lang };
+  | { type: 'SET_LANG'; lang: Lang }
+  | { type: 'NAVIGATE_TO'; heuristicIndex: number; scenarioIndex: 0 | 1 }
+  | { type: 'FINISH_GAME' };

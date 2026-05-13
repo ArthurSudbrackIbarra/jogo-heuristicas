@@ -66,6 +66,19 @@
   "heuristic": {
     "completed": "✓ Completed"
   },
+  "sidebar": {
+    "title": "Heuristics",
+    "toggle": "Open progress sidebar",
+    "bad": "Bad",
+    "good": "Good",
+    "reveal": "Reveal",
+    "scenarioDoneTitle": "Completed",
+    "seeResults": "🏁 See results →",
+    "confirmTitle": "Leave this scenario?",
+    "confirmBody": "This scenario isn't complete yet. If you leave now you'll need to redo it to earn the completion mark.",
+    "stay": "Stay",
+    "leave": "Leave anyway"
+  },
   "scenarios": {
     "h01": {
       "toolbarTitle": "Messages — Ana",

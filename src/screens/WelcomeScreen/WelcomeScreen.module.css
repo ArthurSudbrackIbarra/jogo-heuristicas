@@ -14,7 +14,7 @@
   align-items: center;
   text-align: center;
   gap: var(--space-8);
-  max-width: 560px;
+  max-width: 1200px;
   position: relative;
   z-index: var(--z-above);
   animation: fadeInScale 600ms var(--ease-out) both;
