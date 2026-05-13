@@ -39,9 +39,6 @@ export function BadScenario({ onTaskComplete }: ScenarioProps) {
             <button className={`${s.btn} ${s.btnPrimary}`} onClick={handleSave}>
               {t('scenarios.h02.bad.btnSave')}
             </button>
-            <button className={`${s.btn} ${s.btnSecondary}`} style={{ opacity: 0.6 }}>
-              {t('scenarios.h02.bad.btnCloud')}
-            </button>
             <button className={`${s.btn} ${s.btnDanger}`} style={{ opacity: 0.6 }}>
               {t('scenarios.h02.bad.btnDiscard')}
             </button>

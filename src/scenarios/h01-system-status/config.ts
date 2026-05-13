@@ -31,7 +31,7 @@ export const h01: HeuristicConfig = {
       narratorAfter: {
         en: 'Did you notice anything strange? After clicking Send, the interface gave you zero feedback. No spinner, no progress, no confirmation. You had no idea if the message was sent or lost.',
         pt: 'Notou algo estranho? Após clicar em Enviar, a interface não deu nenhum retorno. Sem carregamento, sem progresso, sem confirmação. Você não tinha como saber se a mensagem foi enviada ou perdida.',
-      },
+      }, 
     },
     {
       kind: 'good',

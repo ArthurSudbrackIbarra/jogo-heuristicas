@@ -9,9 +9,8 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
   const { t } = useTranslation();
   const [phase, setPhase] = useState<Phase>('idle');
   const [progress, setProgress] = useState(0);
-  const [message, setMessage] = useState('');
-
-  const defaultMsg = t('scenarios.h01.replyText');
+  const [message, setMessage] = useState(t('scenarios.h01.replyText'));
+  const [sentMessage, setSentMessage] = useState('');
 
   useEffect(() => {
     if (phase !== 'sending') return;
@@ -30,6 +29,7 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
   useEffect(() => {
     if (progress >= 100 && phase === 'sending') {
       setTimeout(() => {
+        setMessage('');
         setPhase('done');
         setTimeout(onTaskComplete, 1200);
       }, 200);
@@ -38,11 +38,10 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
 
   function handleSend() {
     if (phase !== 'idle') return;
+    setSentMessage(message);
     setPhase('sending');
     setProgress(0);
   }
-
-  const currentMessage = message || defaultMsg;
 
   return (
     <div className={s.app}>
@@ -73,7 +72,7 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
             {phase === 'done' && (
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <span style={{ background: '#6c63ff', color: '#fff', borderRadius: 12, padding: '8px 14px', fontSize: 13, maxWidth: 220 }}>
-                  {currentMessage}
+                  {sentMessage}
                 </span>
               </div>
             )}
@@ -85,7 +84,8 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
           <textarea
             className={s.input}
             rows={3}
-            value={currentMessage}
+            value={phase !== 'done' ? message : ''}
+            placeholder={t('scenarios.h01.replyPlaceholder')}
             onChange={e => setMessage(e.target.value)}
             disabled={phase !== 'idle'}
             style={{ width: '100%', resize: 'none' }}

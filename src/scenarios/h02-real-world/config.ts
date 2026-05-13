@@ -41,8 +41,8 @@ export const h02: HeuristicConfig = {
         pt: 'Mesma tarefa — salvar o documento. Observe como a linguagem mudou.',
       },
       narratorAfter: {
-        en: 'Instantly clear! "💾 Save", "☁️ Save to Cloud", "✕ Discard changes" — these match how people think about documents in the real world. No translation needed.',
-        pt: 'Imediatamente claro! "💾 Salvar", "☁️ Salvar na Nuvem", "✕ Descartar alterações" — esses termos correspondem à forma como as pessoas pensam sobre documentos no mundo real. Sem necessidade de tradução.',
+        en: 'Instantly clear! "💾 Save", "✕ Discard changes" — these match how people think about documents in the real world. No translation needed.',
+        pt: 'Imediatamente claro! "💾 Salvar", "✕ Descartar alterações" — esses termos correspondem à forma como as pessoas pensam sobre documentos no mundo real. Sem necessidade de tradução.',
       },
     },
   ],

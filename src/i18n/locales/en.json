@@ -71,6 +71,7 @@
       "toolbarTitle": "Messages — Ana",
       "msgText": "Hey, Ana! Are we still on for dinner tonight?",
       "replyText": "Hey! Yeah, dinner sounds great 😊",
+      "replyPlaceholder": "Type here...",
       "btnSend": "Send",
       "good": {
         "statusSending": "Sending…",
@@ -90,7 +91,6 @@
         "statusPending": "Volatile state: PENDING COMMIT",
         "actionsLabel": "Persistence operations:",
         "btnSave": "Serialize and commit to persistent storage layer",
-        "btnCloud": "Synchronize blob to distributed cloud repository",
         "btnDiscard": "Discard volatile in-memory state and abort process",
         "alertSaved": "ℹ️ Entity object serialized. Persistence layer mutation: COMMITTED."
       },
@@ -99,7 +99,6 @@
         "statusUnsaved": "Unsaved changes",
         "actionsLabel": "What would you like to do?",
         "btnSave": "💾 Save",
-        "btnCloud": "☁️ Save to Cloud",
         "btnDiscard": "✕ Discard changes",
         "alertSaved": "✅ Document saved! Your changes are safe."
       }
@@ -185,7 +184,7 @@
         "titleUnderline": "Underline",
         "wrongChoice": "That's not bold. Select the word again and try a different option.",
         "hint": "Hint: the bold option uses a Greek letter",
-        "alertDone": "✅ Bold applied — but did you know what 'β' meant before finding it by trial and error?"
+        "alertDone": "✅ Bold applied — but how were you supposed to know option 2 was the right one, instead of 1 or 3? You had to guess, not recognize."
       },
       "good": {
         "alertSelectWord": "ℹ️ Select the word 'important' in the document to format it.",

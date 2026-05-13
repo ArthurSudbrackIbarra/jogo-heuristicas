@@ -58,6 +58,7 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
             <span style={{ position: 'relative', display: 'inline-block' }}>
               {selected && (
                 <span style={toolbarStyle}>
+                  <button style={{ ...toolBtnStyle, fontStyle: 'italic' }} title="Italic">I</button>
                   <button
                     style={{ ...toolBtnStyle, fontWeight: 800 }}
                     onClick={handleBold}
@@ -65,7 +66,6 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
                   >
                     B
                   </button>
-                  <button style={{ ...toolBtnStyle, fontStyle: 'italic' }} title="Italic">I</button>
                   <button style={{ ...toolBtnStyle, textDecoration: 'underline' }} title="Underline">U</button>
                 </span>
               )}

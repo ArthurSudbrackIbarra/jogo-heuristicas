@@ -8,10 +8,7 @@ type Phase = 'idle' | 'sending' | 'done';
 export function BadScenario({ onTaskComplete }: ScenarioProps) {
   const { t } = useTranslation();
   const [phase, setPhase] = useState<Phase>('idle');
-  const [message, setMessage] = useState('');
-
-  // Initialize message from translation after mount
-  const defaultMsg = t('scenarios.h01.replyText');
+  const [message, setMessage] = useState(t('scenarios.h01.replyText'));
 
   function handleSend() {
     if (phase !== 'idle') return;
@@ -46,7 +43,8 @@ export function BadScenario({ onTaskComplete }: ScenarioProps) {
           <textarea
             className={s.input}
             rows={3}
-            value={message || defaultMsg}
+            value={message}
+            placeholder={t('scenarios.h01.replyPlaceholder')}
             onChange={e => setMessage(e.target.value)}
             disabled={phase !== 'idle'}
             style={{ width: '100%', resize: 'none' }}

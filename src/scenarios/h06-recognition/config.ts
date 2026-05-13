@@ -29,8 +29,8 @@ export const h06: HeuristicConfig = {
         pt: "Selecione a palavra 'importante' para ver a barra de formatação. A barra vai aparecer — mas você consegue descobrir qual botão a deixa em negrito?",
       },
       narratorAfter: {
-        en: "The toolbar appeared, but the bold option was labeled 'β' — a Greek letter that looks like B but isn't the standard icon. You had to guess or try each button. That's the opposite of recognition.",
-        pt: "A barra apareceu, mas a opção de negrito estava rotulada como 'β' — uma letra grega que parece um B mas não é o ícone padrão. Você teve que adivinhar ou tentar cada botão. Isso é o oposto de reconhecimento.",
+        en: "The toolbar appeared, but the options were simply labeled '1', '2', and '3'. How were you supposed to know which one was for bold? You had to guess or use trial and error for each button. That's the opposite of recognition.",
+        pt: "A barra apareceu, mas as opções estavam rotuladas apenas como '1', '2' e '3'. Como saber qual delas aplicaria o negrito? Você teve que adivinhar ou testar cada botão por tentativa e erro. Isso é o oposto de reconhecimento.",
       },
     },
     {

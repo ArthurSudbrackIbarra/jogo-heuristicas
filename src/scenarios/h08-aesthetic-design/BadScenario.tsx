@@ -50,8 +50,8 @@ export function BadScenario({ onTaskComplete }: ScenarioProps) {
         </div>
 
         {/* Promo banner */}
-        <div style={{ background: '#fdf2f8', border: '1px solid #f0abfc', borderRadius: 8, padding: '10px 14px', fontSize: 12 }}>
-          {t('scenarios.h08.bad.promo')}
+        <div className={s.marqueeTrack} style={{ background: '#fdf2f8', border: '1px solid #f0abfc', borderRadius: 8, padding: '10px 0', fontSize: 12 }}>
+          <span className={s.marqueeContent}>{t('scenarios.h08.bad.promo')}</span>
         </div>
 
         {/* Social proof noise */}

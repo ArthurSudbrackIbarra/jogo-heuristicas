@@ -293,6 +293,22 @@
   line-height: 1.6;
 }
 
+/* ── Marquee / ticker banner ───────────────────────────── */
+.marqueeTrack {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marqueeContent {
+  display: inline-block;
+  animation: marqueeScroll 14s linear infinite;
+}
+
+@keyframes marqueeScroll {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(-100%); }
+}
+
 /* ── Utility ───────────────────────────────────────────── */
 .row { display: flex; align-items: center; gap: 8px; }
 .col { display: flex; flex-direction: column; gap: 8px; }

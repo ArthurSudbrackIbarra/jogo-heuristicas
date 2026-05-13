@@ -12,7 +12,7 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
   const [typed, setTyped] = useState('');
   const [checked, setChecked] = useState(false);
 
-  const canConfirm = typed === 'DELETE' && checked;
+  const canConfirm = typed.toUpperCase() === 'DELETE' && checked;
 
   function handleConfirm() {
     if (!canConfirm) return;

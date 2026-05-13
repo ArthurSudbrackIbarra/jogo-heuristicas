@@ -73,27 +73,27 @@ export function BadScenario({ onTaskComplete }: ScenarioProps) {
             <span style={{ position: 'relative', display: 'inline-block' }}>
               {selected && (
                 <span style={toolbarStyle}>
-                  {/* I is recognizable, but β for bold is not standard */}
+                  {/* Using numbers instead of icons to make it less guessable */}
                   <button
-                    style={{ ...toolBtnStyle, fontStyle: 'italic' }}
+                    style={{ ...toolBtnStyle }}
                     onClick={() => handleWrong('italic')}
                     title={t('scenarios.h06.bad.titleItalic')}
                   >
-                    I
+                    1
                   </button>
                   <button
-                    style={{ ...toolBtnStyle, fontFamily: 'serif', fontSize: 15, fontWeight: 400 }}
+                    style={{ ...toolBtnStyle }}
                     onClick={handleBold}
                     title={t('scenarios.h06.bad.titleBold')}
                   >
-                    β
+                    2
                   </button>
                   <button
-                    style={{ ...toolBtnStyle, textDecoration: 'underline' }}
+                    style={{ ...toolBtnStyle }}
                     onClick={() => handleWrong('underline')}
                     title={t('scenarios.h06.bad.titleUnderline')}
                   >
-                    U
+                    3
                   </button>
                 </span>
               )}

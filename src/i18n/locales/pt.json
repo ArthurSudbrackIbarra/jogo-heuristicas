@@ -71,6 +71,7 @@
       "toolbarTitle": "Mensagens — Ana",
       "msgText": "Ei, Ana! Ainda vamos jantar hoje à noite?",
       "replyText": "Oi! Sim, o jantar vai ser ótimo 😊",
+      "replyPlaceholder": "Escreva aqui...",
       "btnSend": "Enviar",
       "good": {
         "statusSending": "Enviando…",
@@ -90,7 +91,6 @@
         "statusPending": "Estado volátil: COMMIT PENDENTE",
         "actionsLabel": "Operações de persistência:",
         "btnSave": "Serializar e confirmar na camada de armazenamento persistente",
-        "btnCloud": "Sincronizar blob para repositório distribuído na nuvem",
         "btnDiscard": "Descartar estado volátil em memória e abortar processo",
         "alertSaved": "ℹ️ Objeto entidade serializado. Mutação na camada de persistência: CONFIRMADA."
       },
@@ -99,7 +99,6 @@
         "statusUnsaved": "Alterações não salvas",
         "actionsLabel": "O que você gostaria de fazer?",
         "btnSave": "💾 Salvar",
-        "btnCloud": "☁️ Salvar na Nuvem",
         "btnDiscard": "✕ Descartar alterações",
         "alertSaved": "✅ Documento salvo! Suas alterações estão seguras."
       }
@@ -184,8 +183,7 @@
         "titleBold": "Alternar peso do caractere",
         "titleUnderline": "Sublinhado",
         "wrongChoice": "Esse não é o negrito. Selecione a palavra novamente e tente outra opção.",
-        "hint": "Dica: a opção de negrito usa uma letra grega",
-        "alertDone": "✅ Negrito aplicado — mas você sabia o que 'β' significava antes de encontrá-lo por tentativa e erro?"
+        "alertDone": "✅ Negrito aplicado — mas como você saberia que a opção correta era a 2, e não a 1 ou a 3? Você teve que adivinhar em vez de apenas reconhecer."
       },
       "good": {
         "alertSelectWord": "ℹ️ Selecione a palavra 'importante' no documento para formatá-la.",
