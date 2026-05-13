@@ -1,17 +1,19 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { ScenarioProps } from '../../types/game';
 import s from '../scenario.module.css';
 
-const MESSAGES = [
-  { from: 'Alice', preview: 'Are you free this weekend?', body: 'Hey! I was wondering if you are free this weekend. We were thinking about going to the park — let me know! 😊' },
-  { from: 'Bob', preview: 'The meeting notes are ready', body: 'Hi team, I just finished writing up the meeting notes from yesterday. You can find them in the shared folder under "Q3 Planning". Let me know if anything is missing.' },
-  { from: 'Carol', preview: 'Thanks for the presentation!', body: 'Just wanted to say — your presentation today was fantastic! Really clear and well-prepared. The team was very impressed. Great job! 🎉' },
-];
-
 // BAD: must open each notification individually (2 clicks each) — no bulk action
 export function BadScenario({ onTaskComplete }: ScenarioProps) {
+  const { t } = useTranslation();
   const [read, setRead] = useState<boolean[]>([false, false, false]);
   const [openedIndex, setOpenedIndex] = useState<number | null>(null);
+
+  const MESSAGES = [
+    { from: t('scenarios.h07.msg1From'), preview: t('scenarios.h07.msg1Preview'), body: t('scenarios.h07.msg1Body') },
+    { from: t('scenarios.h07.msg2From'), preview: t('scenarios.h07.msg2Preview'), body: t('scenarios.h07.msg2Body') },
+    { from: t('scenarios.h07.msg3From'), preview: t('scenarios.h07.msg3Preview'), body: t('scenarios.h07.msg3Body') },
+  ];
 
   function openNotification(i: number) {
     setOpenedIndex(i);
@@ -32,13 +34,13 @@ export function BadScenario({ onTaskComplete }: ScenarioProps) {
       <div className={s.toolbar}>
         <span>🔔</span>
         <span className={s.toolbarTitle}>
-          Notifications ({read.filter(r => !r).length} unread)
+          {t('scenarios.h07.toolbarTitle', { unread: read.filter(r => !r).length })}
         </span>
         {/* No "mark all as read" button */}
       </div>
       <div className={s.body}>
         <p className={s.muted} style={{ fontSize: 12 }}>
-          Open each notification to mark it as read.
+          {t('scenarios.h07.bad.instruction')}
         </p>
         <div className={s.list}>
           {MESSAGES.map((m, i) => (
@@ -66,10 +68,10 @@ export function BadScenario({ onTaskComplete }: ScenarioProps) {
                   style={{ fontSize: 11, padding: '4px 10px' }}
                   onClick={() => openNotification(i)}
                 >
-                  Open
+                  {t('scenarios.h07.bad.btnOpen')}
                 </button>
               ) : (
-                <span style={{ fontSize: 12, color: '#22c55e' }}>✓ Read</span>
+                <span style={{ fontSize: 12, color: '#22c55e' }}>{t('scenarios.h07.bad.btnRead')}</span>
               )}
             </div>
           ))}
@@ -88,7 +90,7 @@ export function BadScenario({ onTaskComplete }: ScenarioProps) {
                 style={{ fontSize: 13 }}
                 onClick={() => markRead(openedIndex)}
               >
-                ✓ Mark as read
+                {t('scenarios.h07.bad.btnMarkRead')}
               </button>
             </div>
           </div>

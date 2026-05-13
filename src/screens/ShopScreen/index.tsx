@@ -13,7 +13,7 @@ export function ShopScreen() {
         <div className={styles.candy} aria-hidden="true">🍬</div>
 
         <div className={styles.coinBadge}>
-          🪙 {t('shop.coins')}
+          {t('shop.coins')}
         </div>
 
         <div className={styles.header}>

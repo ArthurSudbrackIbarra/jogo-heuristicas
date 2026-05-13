@@ -40,6 +40,7 @@
 .header {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--space-4);
 }
 
@@ -111,6 +112,7 @@
 .langSwitcher {
   display: flex;
   gap: var(--space-2);
+  margin-bottom: var(--space-3);
 }
 
 .langBtn {

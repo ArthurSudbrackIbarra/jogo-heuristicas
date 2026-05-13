@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { ScenarioProps } from '../../types/game';
 import s from '../scenario.module.css';
 
 // GOOD: clear inline errors that explain exactly what's wrong and how to fix it
 export function GoodScenario({ onTaskComplete }: ScenarioProps) {
-  const [email, setEmail] = useState('john.doe@');
+  const { t } = useTranslation();
+  const [email, setEmail] = useState('john.doe@example.com');
   const [password, setPassword] = useState('pass123');
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const [success, setSuccess] = useState(false);
@@ -12,10 +14,10 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
   function validate() {
     const e: { email?: string; password?: string } = {};
     if (!email.includes('@') || !email.includes('.')) {
-      e.email = 'Please use a valid format: name@example.com';
+      e.email = t('scenarios.h09.good.errorEmail');
     }
     if (password.length < 8) {
-      e.password = `Password must be at least 8 characters (currently ${password.length})`;
+      e.password = t('scenarios.h09.good.errorPassword', { length: password.length });
     }
     return e;
   }
@@ -33,23 +35,23 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
     <div className={s.app}>
       <div className={s.toolbar}>
         <span>📋</span>
-        <span className={s.toolbarTitle}>Registration</span>
+        <span className={s.toolbarTitle}>{t('scenarios.h09.toolbarTitle')}</span>
       </div>
       <div className={s.body}>
         <div className={s.card}>
-          <p className={s.subheading}>Create an account</p>
-          <div className={s.formGroup} style={{ marginTop:12 }}>
-            <label className={s.label}>Email address</label>
+          <p className={s.subheading}>{t('scenarios.h09.formTitle')}</p>
+          <div className={s.formGroup} style={{ marginTop: 12 }}>
+            <label className={s.label}>{t('scenarios.h09.labelEmail')}</label>
             <input
               className={`${s.input} ${errors.email ? s.error : ''}`}
               value={email}
               onChange={e => { setEmail(e.target.value); setErrors(err => ({ ...err, email: undefined })); }}
-              placeholder="you@example.com"
+              placeholder={t('scenarios.h09.emailPlaceholder')}
             />
             {errors.email && <p className={s.inputError}>⚠️ {errors.email}</p>}
           </div>
-          <div className={s.formGroup} style={{ marginTop:10 }}>
-            <label className={s.label}>Password</label>
+          <div className={s.formGroup} style={{ marginTop: 10 }}>
+            <label className={s.label}>{t('scenarios.h09.labelPassword')}</label>
             <input
               className={`${s.input} ${errors.password ? s.error : ''}`}
               type="password"
@@ -60,15 +62,15 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
           </div>
           <button
             className={`${s.btn} ${s.btnPrimary}`}
-            style={{ marginTop:14 }}
+            style={{ marginTop: 14 }}
             onClick={handleSubmit}
           >
-            Register
+            {t('scenarios.h09.btnRegister')}
           </button>
 
           {success && (
-            <div className={s.alertSuccess} style={{ marginTop:12 }}>
-              ✅ Account created successfully! Welcome aboard.
+            <div className={s.alertSuccess} style={{ marginTop: 12 }}>
+              {t('scenarios.h09.good.alertSuccess')}
             </div>
           )}
         </div>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { ScenarioProps } from '../../types/game';
 import s from '../scenario.module.css';
 
@@ -6,6 +7,7 @@ type State = 'inbox' | 'deleted-toast' | 'recovered' | 'gone';
 
 // GOOD: undo toast after deletion with a 10-second window
 export function GoodScenario({ onTaskComplete }: ScenarioProps) {
+  const { t } = useTranslation();
   const [state, setState] = useState<State>('inbox');
   const [countdown, setCountdown] = useState(10);
 
@@ -15,8 +17,8 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
       setState('gone');
       return;
     }
-    const t = setTimeout(() => setCountdown(c => c - 1), 1000);
-    return () => clearTimeout(t);
+    const timer = setTimeout(() => setCountdown(c => c - 1), 1000);
+    return () => clearTimeout(timer);
   }, [state, countdown]);
 
   function handleDelete() {
@@ -33,7 +35,7 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
     <div className={s.app}>
       <div className={s.toolbar}>
         <span>📧</span>
-        <span className={s.toolbarTitle}>Inbox</span>
+        <span className={s.toolbarTitle}>{t('scenarios.h03.toolbarTitle')}</span>
       </div>
       <div className={s.body}>
         {state === 'inbox' && (
@@ -41,20 +43,20 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
             <div className={s.card}>
               <div className={`${s.row} ${s.spaceBetween}`}>
                 <div>
-                  <p className={s.subheading}>HR Team</p>
-                  <p className={s.muted}>Your contract renewal — please review</p>
+                  <p className={s.subheading}>{t('scenarios.h03.emailSender')}</p>
+                  <p className={s.muted}>{t('scenarios.h03.emailPreview')}</p>
                 </div>
                 <button
                   className={`${s.btn} ${s.btnDanger}`}
                   style={{ fontSize: 12, padding: '6px 12px' }}
                   onClick={handleDelete}
                 >
-                  🗑 Delete
+                  {t('scenarios.h03.btnDelete')}
                 </button>
               </div>
             </div>
             <p className={s.muted} style={{ textAlign: 'center' }}>
-              Oops! You just deleted that email by accident. Can you get it back?
+              {t('scenarios.h03.oopsMsg')}
             </p>
           </>
         )}
@@ -62,19 +64,19 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
         {state === 'deleted-toast' && (
           <div className={s.centered}>
             <span style={{ fontSize: 40 }}>📭</span>
-            <p className={s.heading}>Inbox empty</p>
-            <p className={s.muted}>Email moved to Trash.</p>
+            <p className={s.heading}>{t('scenarios.h03.good.inboxEmpty')}</p>
+            <p className={s.muted}>{t('scenarios.h03.good.emailMoved')}</p>
           </div>
         )}
 
         {state === 'recovered' && (
           <div className={s.centered}>
             <div className={s.alertSuccess} style={{ justifyContent: 'center' }}>
-              ✅ Email recovered! It's back in your inbox.
+              {t('scenarios.h03.good.emailRecovered')}
             </div>
             <div className={s.card}>
-              <p className={s.subheading}>HR Team</p>
-              <p className={s.muted}>Your contract renewal — please review</p>
+              <p className={s.subheading}>{t('scenarios.h03.emailSender')}</p>
+              <p className={s.muted}>{t('scenarios.h03.emailPreview')}</p>
             </div>
           </div>
         )}
@@ -82,16 +84,14 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
         {state === 'gone' && (
           <div className={s.centered}>
             <span style={{ fontSize: 40 }}>📭</span>
-            <p className={s.heading}>Email permanently deleted</p>
-            <p className={s.muted}>
-              The undo window (10s) expired. The email was deleted permanently.
-            </p>
+            <p className={s.heading}>{t('scenarios.h03.good.emailDeleted')}</p>
+            <p className={s.muted}>{t('scenarios.h03.good.undoExpired')}</p>
             <button
               className={`${s.btn} ${s.btnSecondary}`}
               style={{ marginTop: 12 }}
               onClick={onTaskComplete}
             >
-              Continue →
+              {t('scenarios.h03.good.btnContinue')}
             </button>
           </div>
         )}
@@ -99,9 +99,9 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
 
       {state === 'deleted-toast' && (
         <div className={s.toast}>
-          Email deleted
+          {t('scenarios.h03.good.toastMsg')}
           <button className={s.toastAction} onClick={handleUndo}>
-            Undo ({countdown}s)
+            {t('scenarios.h03.good.toastUndo', { countdown })}
           </button>
         </div>
       )}

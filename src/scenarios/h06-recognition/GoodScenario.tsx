@@ -1,15 +1,14 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { ScenarioProps } from '../../types/game';
 import s from '../scenario.module.css';
 
-// GOOD: click a word to select it, contextual toolbar appears — recognize, don't recall
+// GOOD: select word to get contextual toolbar — recognize, don't recall
 export function GoodScenario({ onTaskComplete }: ScenarioProps) {
+  const { t } = useTranslation();
+  const [pressing, setPressing] = useState(false);
   const [selected, setSelected] = useState(false);
   const [bold, setBold] = useState(false);
-
-  function handleSelectWord() {
-    setSelected(true);
-  }
 
   function handleBold() {
     setBold(true);
@@ -49,13 +48,13 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
     <div className={s.app}>
       <div className={s.toolbar}>
         <span>✏️</span>
-        <span className={s.toolbarTitle}>Text Editor</span>
+        <span className={s.toolbarTitle}>{t('scenarios.h06.toolbarTitle')}</span>
       </div>
       <div className={s.body}>
         <div className={s.card}>
-          <p className={s.subheading} style={{ marginBottom: 8 }}>Document:</p>
+          <p className={s.subheading} style={{ marginBottom: 8 }}>{t('scenarios.h06.docLabel')}</p>
           <p style={{ fontSize: 14, lineHeight: 1.8, fontFamily: 'Georgia, serif' }}>
-            Today's project update includes an{' '}
+            {t('scenarios.h06.docTextBefore')}{' '}
             <span style={{ position: 'relative', display: 'inline-block' }}>
               {selected && (
                 <span style={toolbarStyle}>
@@ -71,11 +70,18 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
                 </span>
               )}
               <span
-                onClick={handleSelectWord}
+                onPointerDown={() => { if (!bold) setPressing(true); }}
+                onPointerUp={() => {
+                  if (pressing) {
+                    setPressing(false);
+                    if (!bold) setSelected(true);
+                  }
+                }}
+                onPointerLeave={() => setPressing(false)}
                 style={{
                   fontWeight: bold ? 700 : 400,
-                  background: selected ? '#bfdbfe' : 'transparent',
-                  color: selected ? '#1e40af' : 'inherit',
+                  background: pressing ? '#93c5fd' : selected ? '#bfdbfe' : 'transparent',
+                  color: (pressing || selected) ? '#1e40af' : 'inherit',
                   borderRadius: 2,
                   padding: '0 2px',
                   cursor: bold ? 'default' : 'pointer',
@@ -83,28 +89,28 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
                   userSelect: 'none',
                 }}
               >
-                important
+                {t('scenarios.h06.docTextWord')}
               </span>
             </span>{' '}
-            milestone for the team.
+            {t('scenarios.h06.docTextAfter')}
           </p>
         </div>
 
         {!bold && !selected && (
           <div className={s.alertInfo}>
-            ℹ️ Click the word <strong>important</strong> in the document to select it.
+            {t('scenarios.h06.good.alertSelectWord')}
           </div>
         )}
 
         {selected && (
           <div className={s.alertInfo}>
-            ✨ Word selected! A formatting toolbar appeared — click <strong>B</strong> to make it bold.
+            {t('scenarios.h06.good.alertSelected')}
           </div>
         )}
 
         {bold && (
           <div className={s.alertSuccess}>
-            ✅ Bold applied! You clicked the word, saw the toolbar appear, and recognized the action — no memorization needed.
+            {t('scenarios.h06.good.alertDone')}
           </div>
         )}
       </div>

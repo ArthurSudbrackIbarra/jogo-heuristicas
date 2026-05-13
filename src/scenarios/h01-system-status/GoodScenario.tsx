@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { ScenarioProps } from '../../types/game';
 import s from '../scenario.module.css';
 
 type Phase = 'idle' | 'sending' | 'done';
 
 export function GoodScenario({ onTaskComplete }: ScenarioProps) {
+  const { t } = useTranslation();
   const [phase, setPhase] = useState<Phase>('idle');
   const [progress, setProgress] = useState(0);
-  const [message, setMessage] = useState('Hey Ana! Are we still on for dinner tonight?');
+  const [message, setMessage] = useState('');
+
+  const defaultMsg = t('scenarios.h01.replyText');
 
   useEffect(() => {
     if (phase !== 'sending') return;
@@ -38,34 +42,38 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
     setProgress(0);
   }
 
+  const currentMessage = message || defaultMsg;
+
   return (
     <div className={s.app}>
       <div className={s.toolbar}>
         <span>💬</span>
-        <span className={s.toolbarTitle}>Messages — Ana</span>
+        <span className={s.toolbarTitle}>{t('scenarios.h01.toolbarTitle')}</span>
         {phase === 'sending' && (
-          <span className={s.muted} style={{ fontSize:12, display:'flex', alignItems:'center', gap:6 }}>
-            <span className={s.spinner} style={{ width:14, height:14 }} />
-            Sending…
+          <span className={s.muted} style={{ fontSize: 12, display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span className={s.spinner} style={{ width: 14, height: 14 }} />
+            {t('scenarios.h01.good.statusSending')}
           </span>
         )}
         {phase === 'done' && (
-          <span style={{ fontSize:12, color:'#22c55e', fontWeight:600 }}>✓ Delivered</span>
+          <span style={{ fontSize: 12, color: '#22c55e', fontWeight: 600 }}>
+            {t('scenarios.h01.good.statusDelivered')}
+          </span>
         )}
       </div>
       <div className={s.body}>
         {/* Chat history */}
         <div className={s.card}>
-          <div className={s.col} style={{ gap:10 }}>
-            <div style={{ display:'flex', justifyContent:'flex-start' }}>
-              <span style={{ background:'#f1f5f9', borderRadius:12, padding:'8px 14px', fontSize:13, maxWidth:220 }}>
-                Hey! Yeah, dinner sounds great 😊
+          <div className={s.col} style={{ gap: 10 }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+              <span style={{ background: '#f1f5f9', borderRadius: 12, padding: '8px 14px', fontSize: 13, maxWidth: 220 }}>
+                {t('scenarios.h01.msgText')}
               </span>
             </div>
             {phase === 'done' && (
-              <div style={{ display:'flex', justifyContent:'flex-end' }}>
-                <span style={{ background:'#6c63ff', color:'#fff', borderRadius:12, padding:'8px 14px', fontSize:13, maxWidth:220 }}>
-                  {message}
+              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <span style={{ background: '#6c63ff', color: '#fff', borderRadius: 12, padding: '8px 14px', fontSize: 13, maxWidth: 220 }}>
+                  {currentMessage}
                 </span>
               </div>
             )}
@@ -77,38 +85,42 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
           <textarea
             className={s.input}
             rows={3}
-            value={message}
+            value={currentMessage}
             onChange={e => setMessage(e.target.value)}
             disabled={phase !== 'idle'}
-            style={{ width:'100%', resize:'none' }}
+            style={{ width: '100%', resize: 'none' }}
           />
 
           {phase === 'sending' && (
-            <div style={{ marginTop:10 }}>
-              <div className={`${s.row} ${s.spaceBetween}`} style={{ marginBottom:4 }}>
-                <span className={s.muted} style={{ fontSize:12 }}>Sending to Ana…</span>
-                <span className={s.muted} style={{ fontSize:12 }}>{progress}%</span>
+            <div style={{ marginTop: 10 }}>
+              <div className={`${s.row} ${s.spaceBetween}`} style={{ marginBottom: 4 }}>
+                <span className={s.muted} style={{ fontSize: 12 }}>{t('scenarios.h01.good.progressLabel')}</span>
+                <span className={s.muted} style={{ fontSize: 12 }}>{progress}%</span>
               </div>
               <div className={s.progressTrack}>
-                <div className={s.progressFill} style={{ width:`${progress}%` }} />
+                <div className={s.progressFill} style={{ width: `${progress}%` }} />
               </div>
             </div>
           )}
 
-          <div className={`${s.row} ${s.flexEnd}`} style={{ marginTop:10 }}>
+          <div className={`${s.row} ${s.flexEnd}`} style={{ marginTop: 10 }}>
             <button
               className={`${s.btn} ${s.btnPrimary}`}
               onClick={handleSend}
               disabled={phase !== 'idle'}
             >
-              {phase === 'idle' ? 'Send' : phase === 'sending' ? 'Sending…' : '✓ Sent!'}
+              {phase === 'idle'
+                ? t('scenarios.h01.btnSend')
+                : phase === 'sending'
+                  ? t('scenarios.h01.good.btnSending')
+                  : t('scenarios.h01.good.btnSent')}
             </button>
           </div>
         </div>
 
         {phase === 'done' && (
           <div className={s.alertSuccess}>
-            ✅ Message delivered to Ana
+            {t('scenarios.h01.good.alertDelivered')}
           </div>
         )}
       </div>

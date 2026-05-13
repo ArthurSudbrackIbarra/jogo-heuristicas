@@ -1,112 +1,151 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { ScenarioProps } from '../../types/game';
 import s from '../scenario.module.css';
 
-type Stage = 'idle' | 'asked-word' | 'done';
+type Format = 'none' | 'italic' | 'underline' | 'bold';
 
-// BAD: must recall a hidden format command, nothing is shown
+// BAD: toolbar appears on selection but bold option uses a cryptic symbol — trial and error required
 export function BadScenario({ onTaskComplete }: ScenarioProps) {
-  const [command, setCommand] = useState('');
-  const [attempts, setAttempts] = useState(0);
-  const [error, setError] = useState('');
-  const [stage, setStage] = useState<Stage>('idle');
-  const [word, setWord] = useState('');
-  const [wordError, setWordError] = useState('');
+  const { t } = useTranslation();
+  const [selected, setSelected] = useState(false);
+  const [format, setFormat] = useState<Format>('none');
+  const [wrongAttempts, setWrongAttempts] = useState(0);
+  const [wrongMsg, setWrongMsg] = useState('');
 
-  function handleApplyCommand() {
-    const trimmed = command.trim().toLowerCase();
-    if (trimmed === 'bold' || trimmed === 'negrito') {
-      setStage('asked-word');
-      setError('');
-    } else {
-      setAttempts(a => a + 1);
-      setError(`Unknown command "${command}". Try again.`);
-    }
+  function handleSelectWord() {
+    if (format === 'bold') return;
+    setSelected(true);
+    setWrongMsg('');
   }
 
-  function handleApplyWord() {
-    const trimmed = word.trim().toLowerCase();
-    if (trimmed === 'important' || trimmed === 'importante') {
-      setStage('done');
-      setTimeout(onTaskComplete, 900);
-    } else {
-      setWordError(`Word "${word}" not found in the document.`);
-    }
+  function handleBold() {
+    setFormat('bold');
+    setSelected(false);
+    setTimeout(onTaskComplete, 900);
   }
+
+  function handleWrong(type: 'italic' | 'underline') {
+    setFormat(type);
+    setSelected(false);
+    setWrongAttempts(a => a + 1);
+    setWrongMsg(t('scenarios.h06.bad.wrongChoice'));
+    setTimeout(() => setFormat('none'), 1200);
+  }
+
+  const toolbarStyle: React.CSSProperties = {
+    position: 'absolute',
+    top: -44,
+    left: '50%',
+    transform: 'translateX(-50%)',
+    background: '#1e293b',
+    border: '1px solid #334155',
+    borderRadius: 8,
+    padding: '4px 6px',
+    display: 'flex',
+    gap: 2,
+    boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+    zIndex: 10,
+    whiteSpace: 'nowrap',
+  };
+
+  const toolBtnStyle: React.CSSProperties = {
+    padding: '4px 10px',
+    borderRadius: 4,
+    border: 'none',
+    background: 'transparent',
+    color: '#e2e8f0',
+    fontSize: 13,
+    cursor: 'pointer',
+  };
 
   return (
     <div className={s.app}>
       <div className={s.toolbar}>
         <span>✏️</span>
-        <span className={s.toolbarTitle}>Text Editor</span>
-        {/* intentionally no formatting buttons */}
+        <span className={s.toolbarTitle}>{t('scenarios.h06.toolbarTitle')}</span>
       </div>
       <div className={s.body}>
         <div className={s.card}>
-          <p className={s.subheading} style={{ marginBottom: 8 }}>Document:</p>
+          <p className={s.subheading} style={{ marginBottom: 8 }}>{t('scenarios.h06.docLabel')}</p>
           <p style={{ fontSize: 14, lineHeight: 1.8, fontFamily: 'Georgia, serif' }}>
-            Today's project update includes an{' '}
-            <span style={{ fontWeight: stage === 'done' ? 700 : 400 }}>important</span>{' '}
-            milestone for the team.
+            {t('scenarios.h06.docTextBefore')}{' '}
+            <span style={{ position: 'relative', display: 'inline-block' }}>
+              {selected && (
+                <span style={toolbarStyle}>
+                  {/* I is recognizable, but β for bold is not standard */}
+                  <button
+                    style={{ ...toolBtnStyle, fontStyle: 'italic' }}
+                    onClick={() => handleWrong('italic')}
+                    title={t('scenarios.h06.bad.titleItalic')}
+                  >
+                    I
+                  </button>
+                  <button
+                    style={{ ...toolBtnStyle, fontFamily: 'serif', fontSize: 15, fontWeight: 400 }}
+                    onClick={handleBold}
+                    title={t('scenarios.h06.bad.titleBold')}
+                  >
+                    β
+                  </button>
+                  <button
+                    style={{ ...toolBtnStyle, textDecoration: 'underline' }}
+                    onClick={() => handleWrong('underline')}
+                    title={t('scenarios.h06.bad.titleUnderline')}
+                  >
+                    U
+                  </button>
+                </span>
+              )}
+              <span
+                onClick={handleSelectWord}
+                style={{
+                  fontWeight: format === 'bold' ? 700 : 400,
+                  fontStyle: format === 'italic' ? 'italic' : 'normal',
+                  textDecoration: format === 'underline' ? 'underline' : 'none',
+                  background: selected ? '#bfdbfe' : 'transparent',
+                  color: selected ? '#1e40af' : 'inherit',
+                  borderRadius: 2,
+                  padding: '0 2px',
+                  cursor: format === 'bold' ? 'default' : 'pointer',
+                  transition: 'background 150ms, color 150ms',
+                  userSelect: 'none',
+                }}
+              >
+                {t('scenarios.h06.docTextWord')}
+              </span>
+            </span>
+            {' '}{t('scenarios.h06.docTextAfter')}
           </p>
         </div>
 
-        {stage === 'idle' && (
-          <div className={s.card}>
-            <p className={s.label}>Format command</p>
-            <p className={s.muted} style={{ marginBottom: 8 }}>
-              Enter a formatting command to apply to the document.
-            </p>
-            <div className={s.row}>
-              <input
-                className={s.input}
-                style={{ flex: 1, fontFamily: 'monospace' }}
-                placeholder="Enter command..."
-                value={command}
-                onChange={e => { setCommand(e.target.value); setError(''); }}
-                onKeyDown={e => e.key === 'Enter' && handleApplyCommand()}
-              />
-              <button className={`${s.btn} ${s.btnPrimary}`} onClick={handleApplyCommand}>
-                Apply
-              </button>
-            </div>
-            {error && (
-              <p style={{ color: '#ef4444', fontSize: 13, marginTop: 6 }}>
-                {error}
-                {attempts >= 2 && ' (Hint: try "bold")'}
-              </p>
+        {format !== 'bold' && !selected && !wrongMsg && (
+          <div className={s.alertInfo}>
+            ℹ️ {t('scenarios.h06.bad.alertSelectWord')}
+          </div>
+        )}
+
+        {selected && (
+          <div className={s.alertInfo}>
+            {t('scenarios.h06.bad.alertSelected')}
+          </div>
+        )}
+
+        {wrongMsg && (
+          <div className={s.alertError}>
+            {wrongMsg}
+            {wrongAttempts >= 2 && (
+              <>
+                <br />
+                <small>{t('scenarios.h06.bad.hint')}</small>
+              </>
             )}
           </div>
         )}
 
-        {stage === 'asked-word' && (
-          <div className={s.card}>
-            <p className={s.label}>Which word to bold?</p>
-            <p className={s.muted} style={{ marginBottom: 8 }}>
-              Type the exact word from the document you want to make bold.
-            </p>
-            <div className={s.row}>
-              <input
-                className={s.input}
-                style={{ flex: 1 }}
-                placeholder="Type word..."
-                value={word}
-                onChange={e => { setWord(e.target.value); setWordError(''); }}
-                onKeyDown={e => e.key === 'Enter' && handleApplyWord()}
-              />
-              <button className={`${s.btn} ${s.btnPrimary}`} onClick={handleApplyWord}>
-                Bold it
-              </button>
-            </div>
-            {wordError && (
-              <p style={{ color: '#ef4444', fontSize: 13, marginTop: 6 }}>{wordError}</p>
-            )}
-          </div>
-        )}
-
-        {stage === 'done' && (
+        {format === 'bold' && (
           <div className={s.alertSuccess}>
-            ✅ Bold applied! (You had to recall the command AND the exact word — nothing was shown to guide you.)
+            {t('scenarios.h06.bad.alertDone')}
           </div>
         )}
       </div>

@@ -25,29 +25,29 @@ export const h06: HeuristicConfig = {
       kind: 'bad',
       component: BadScenario,
       narratorBefore: {
-        en: "Try to make the word 'important' bold. There's a way to do it — but the interface won't show you how.",
-        pt: "Tente deixar a palavra 'importante' em negrito. Há uma maneira de fazer isso — mas a interface não vai te mostrar como.",
+        en: "Select the word 'important' to get the formatting toolbar. The toolbar will appear — but can you figure out which button makes it bold?",
+        pt: "Selecione a palavra 'importante' para ver a barra de formatação. A barra vai aparecer — mas você consegue descobrir qual botão a deixa em negrito?",
       },
       narratorAfter: {
-        en: 'The system required you to recall a hidden command from memory. With no visible options, you were left guessing. This is the opposite of good design.',
-        pt: 'O sistema exigiu que você se lembrasse de um comando oculto da memória. Sem opções visíveis, você ficou adivinhando. Isso é o oposto de um bom design.',
+        en: "The toolbar appeared, but the bold option was labeled 'β' — a Greek letter that looks like B but isn't the standard icon. You had to guess or try each button. That's the opposite of recognition.",
+        pt: "A barra apareceu, mas a opção de negrito estava rotulada como 'β' — uma letra grega que parece um B mas não é o ícone padrão. Você teve que adivinhar ou tentar cada botão. Isso é o oposto de reconhecimento.",
       },
     },
     {
       kind: 'good',
       component: GoodScenario,
       narratorBefore: {
-        en: "Same task — make 'important' bold. Notice what changes.",
-        pt: "Mesma tarefa — deixe 'importante' em negrito. Observe o que muda.",
+        en: "Same task — make 'important' bold. Select the word and notice what changes.",
+        pt: "Mesma tarefa — deixe 'importante' em negrito. Selecione a palavra e observe o que muda.",
       },
       narratorAfter: {
-        en: 'You clicked the word, saw your options appear, and recognized what to do. No memorization, no guessing. Visible choices eliminate cognitive load.',
-        pt: 'Você clicou na palavra, viu as opções aparecerem e reconheceu o que fazer. Sem memorização, sem adivinhação. Escolhas visíveis eliminam a carga cognitiva.',
+        en: 'You selected the word, saw your options appear, and recognized what to do. No memorization, no guessing. Visible, familiar choices eliminate cognitive load.',
+        pt: 'Você selecionou a palavra, viu as opções aparecerem e reconheceu o que fazer. Sem memorização, sem adivinhação. Escolhas visíveis e familiares eliminam a carga cognitiva.',
       },
     },
   ],
   revealText: {
-    en: 'Heuristic #6 is Recognition Rather Than Recall. Visible options, menus, and labels reduce cognitive load. Users should never have to remember what command to type — they should be able to recognize the right action when they see it.',
-    pt: 'A Heurística #6 é Reconhecimento em vez de Memorização. Opções, menus e rótulos visíveis reduzem a carga cognitiva. Os usuários nunca devem precisar lembrar qual comando digitar — eles devem ser capazes de reconhecer a ação correta quando a veem.',
+    en: 'Heuristic #6 is Recognition Rather Than Recall. Visible options, menus, and labels reduce cognitive load. Users should never have to guess what a symbol means — they should be able to recognize the right action when they see it.',
+    pt: 'A Heurística #6 é Reconhecimento em vez de Memorização. Opções, menus e rótulos visíveis reduzem a carga cognitiva. Os usuários nunca devem precisar adivinhar o que um símbolo significa — eles devem ser capazes de reconhecer a ação correta quando a veem.',
   },
 };

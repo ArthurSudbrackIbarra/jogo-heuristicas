@@ -1,18 +1,36 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { ScenarioProps } from '../../types/game';
 import s from '../scenario.module.css';
 
 // BAD: inconsistent button labels and placement across steps
-const STEPS = [
-  { title: 'Personal Info', back: null,        forward: 'Proceed ›'   },
-  { title: 'Address',       back: '‹ Return',  forward: 'Go on ›'     },
-  { title: 'Payment',       back: '‹ Go Back', forward: 'Continue →'  },
-  { title: 'Confirm',       back: '‹ Previous',forward: 'Submit Now'  },
-];
-
 export function BadScenario({ onTaskComplete }: ScenarioProps) {
+  const { t } = useTranslation();
   const [step, setStep] = useState(0);
   const [values, setValues] = useState(['', '', '', '']);
+
+  const STEPS = [
+    {
+      title: t('scenarios.h04.stepPersonal'),
+      back: null,
+      forward: t('scenarios.h04.bad.next0'),
+    },
+    {
+      title: t('scenarios.h04.stepAddress'),
+      back: t('scenarios.h04.bad.back1'),
+      forward: t('scenarios.h04.bad.next1'),
+    },
+    {
+      title: t('scenarios.h04.stepPayment'),
+      back: t('scenarios.h04.bad.back2'),
+      forward: t('scenarios.h04.bad.next2'),
+    },
+    {
+      title: t('scenarios.h04.stepConfirm'),
+      back: t('scenarios.h04.bad.back3'),
+      forward: t('scenarios.h04.bad.next3'),
+    },
+  ];
 
   function next() {
     if (step >= STEPS.length - 1) { onTaskComplete(); return; }
@@ -26,7 +44,9 @@ export function BadScenario({ onTaskComplete }: ScenarioProps) {
     <div className={s.app}>
       <div className={s.toolbar}>
         <span>🛒</span>
-        <span className={s.toolbarTitle}>Checkout — Step {step + 1} of {STEPS.length}</span>
+        <span className={s.toolbarTitle}>
+          {t('scenarios.h04.toolbarTitle', { step: step + 1, total: STEPS.length })}
+        </span>
       </div>
       <div className={s.body}>
         <div className={s.row} style={{ gap: 4 }}>
@@ -42,12 +62,12 @@ export function BadScenario({ onTaskComplete }: ScenarioProps) {
         <div className={s.card}>
           <p className={s.subheading}>{current.title}</p>
           <p className={s.muted} style={{ marginTop: 6 }}>
-            Fill in your {current.title.toLowerCase()} details here.
+            {t('scenarios.h04.fillDetails')}
           </p>
           <div className={s.formGroup} style={{ marginTop: 12 }}>
             <input
               className={s.input}
-              placeholder="Sample field"
+              placeholder={t('scenarios.h04.sampleField')}
               value={values[step]}
               onChange={e => {
                 const next = [...values];

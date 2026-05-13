@@ -1,13 +1,20 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { ScenarioProps } from '../../types/game';
 import s from '../scenario.module.css';
 
 // GOOD: same button labels and positions on every step
-const STEPS = ['Personal Info', 'Address', 'Payment', 'Confirm'];
-
 export function GoodScenario({ onTaskComplete }: ScenarioProps) {
+  const { t } = useTranslation();
   const [step, setStep] = useState(0);
   const [values, setValues] = useState(['', '', '', '']);
+
+  const STEPS = [
+    t('scenarios.h04.stepPersonal'),
+    t('scenarios.h04.stepAddress'),
+    t('scenarios.h04.stepPayment'),
+    t('scenarios.h04.stepConfirm'),
+  ];
 
   function next() {
     if (step >= STEPS.length - 1) { onTaskComplete(); return; }
@@ -19,7 +26,9 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
     <div className={s.app}>
       <div className={s.toolbar}>
         <span>🛒</span>
-        <span className={s.toolbarTitle}>Checkout — Step {step + 1} of {STEPS.length}</span>
+        <span className={s.toolbarTitle}>
+          {t('scenarios.h04.toolbarTitle', { step: step + 1, total: STEPS.length })}
+        </span>
       </div>
       <div className={s.body}>
         <div className={s.row} style={{ gap: 4 }}>
@@ -35,12 +44,12 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
         <div className={s.card}>
           <p className={s.subheading}>{STEPS[step]}</p>
           <p className={s.muted} style={{ marginTop: 6 }}>
-            Fill in your {STEPS[step].toLowerCase()} details here.
+            {t('scenarios.h04.fillDetails')}
           </p>
           <div className={s.formGroup} style={{ marginTop: 12 }}>
             <input
               className={s.input}
-              placeholder="Sample field"
+              placeholder={t('scenarios.h04.sampleField')}
               value={values[step]}
               onChange={e => {
                 const next = [...values];
@@ -55,11 +64,13 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
         <div className={`${s.row} ${s.spaceBetween}`}>
           {step > 0 ? (
             <button className={`${s.btn} ${s.btnSecondary}`} onClick={back}>
-              ← Back
+              {t('scenarios.h04.good.btnBack')}
             </button>
           ) : <span />}
           <button className={`${s.btn} ${s.btnPrimary}`} onClick={next}>
-            {step === STEPS.length - 1 ? 'Confirm order →' : 'Next →'}
+            {step === STEPS.length - 1
+              ? t('scenarios.h04.good.btnConfirm')
+              : t('scenarios.h04.good.btnNext')}
           </button>
         </div>
       </div>
