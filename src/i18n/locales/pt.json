@@ -104,26 +104,39 @@
       }
     },
     "h03": {
-      "toolbarTitle": "Caixa de Entrada",
-      "emailSender": "Time de RH",
-      "emailPreview": "Sua renovação de contrato — por favor revise",
-      "oopsMsg": "Ops! Você acabou de excluir esse e-mail por acidente. Você consegue recuperá-lo?",
-      "btnDelete": "🗑 Excluir",
+      "toolbarTitle": "Configurações da Conta",
+      "currentPlan": "Plano atual: Gratuito",
+      "btnUpgrade": "Fazer Upgrade",
+      "stepOf": "Etapa {{step}} de 3",
+      "step1Title": "Escolha seu plano",
+      "step2Title": "Dados de cobrança",
+      "step3Title": "Confirmar upgrade",
+      "planPro": "Pro — R$49/mês",
+      "planBusiness": "Business — R$99/mês",
+      "labelName": "Nome completo",
+      "namePlaceholder": "Maria Silva",
+      "labelCard": "Número do cartão",
+      "cardPlaceholder": "•••• •••• •••• ••••",
+      "btnNext": "Próximo →",
+      "oopsMsg": "Você clicou em \"Fazer Upgrade\" sem querer. Tente sair sem concluir o upgrade.",
       "bad": {
-        "inboxEmpty": "Caixa de entrada vazia",
-        "noEmails": "Nenhum e-mail encontrado.",
-        "permanentlyDeleted": "O e-mail foi excluído permanentemente. Não há como recuperá-lo.",
-        "btnGiveUp": "Desisti — não tem como recuperar →"
+        "step3Summary": "Você está prestes a fazer upgrade para o Pro (R$49/mês). Seu cartão será cobrado imediatamente.",
+        "btnGiveUp": "Desisti — não tem como sair →",
+        "btnConfirm": "Confirmar Upgrade →",
+        "upgradedMsg": "Upgrade feito! Não havia Cancelar, nem ✕, nem Voltar na primeira etapa. Você foi forçado a concluir o processo.",
+        "btnContinue": "Entendi o problema →"
       },
       "good": {
-        "inboxEmpty": "Caixa de entrada vazia",
-        "emailMoved": "E-mail movido para a lixeira.",
-        "emailRecovered": "✅ E-mail recuperado! Ele está de volta na sua caixa de entrada.",
-        "emailDeleted": "E-mail excluído permanentemente",
-        "undoExpired": "A janela de desfazer (10s) expirou. O e-mail foi excluído permanentemente.",
-        "btnContinue": "Continuar →",
-        "toastMsg": "E-mail excluído",
-        "toastUndo": "Desfazer ({{countdown}}s)"
+        "step3Summary": "Você está prestes a fazer upgrade para o Pro (R$49/mês). Seu cartão será cobrado imediatamente.",
+        "btnBack": "← Voltar",
+        "btnCancel": "Cancelar",
+        "btnConfirm": "Confirmar Upgrade →",
+        "confirmExit": "Sair do assistente de upgrade?",
+        "confirmExitDesc": "Seu progresso não será salvo.",
+        "btnStay": "Ficar",
+        "btnExit": "Sair",
+        "exitedMsg": "✅ Você saiu! Nenhuma cobrança foi feita.",
+        "btnContinue": "Continuar →"
       }
     },
     "h04": {

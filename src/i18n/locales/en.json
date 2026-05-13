@@ -104,26 +104,39 @@
       }
     },
     "h03": {
-      "toolbarTitle": "Inbox",
-      "emailSender": "HR Team",
-      "emailPreview": "Your contract renewal — please review",
-      "oopsMsg": "Oops! You just deleted that email by accident. Can you get it back?",
-      "btnDelete": "🗑 Delete",
+      "toolbarTitle": "Account Settings",
+      "currentPlan": "Current plan: Free",
+      "btnUpgrade": "Upgrade Plan",
+      "stepOf": "Step {{step}} of 3",
+      "step1Title": "Choose your plan",
+      "step2Title": "Billing details",
+      "step3Title": "Confirm upgrade",
+      "planPro": "Pro — $29/mo",
+      "planBusiness": "Business — $59/mo",
+      "labelName": "Full name",
+      "namePlaceholder": "Jane Smith",
+      "labelCard": "Card number",
+      "cardPlaceholder": "•••• •••• •••• ••••",
+      "btnNext": "Next →",
+      "oopsMsg": "You accidentally clicked \"Upgrade Plan\". Try to exit without completing the upgrade.",
       "bad": {
-        "inboxEmpty": "Inbox empty",
-        "noEmails": "No emails found.",
-        "permanentlyDeleted": "The email was permanently deleted. There is no way to recover it.",
-        "btnGiveUp": "I give up — there's no way to get it back →"
+        "step3Summary": "You're about to upgrade to Pro ($29/mo). Your card will be charged immediately.",
+        "btnGiveUp": "I give up — there's no way out →",
+        "btnConfirm": "Confirm Upgrade →",
+        "upgradedMsg": "Upgraded! There was no Cancel, no ✕, and no Back on step 1. You were forced to finish the process.",
+        "btnContinue": "I see the problem →"
       },
       "good": {
-        "inboxEmpty": "Inbox empty",
-        "emailMoved": "Email moved to Trash.",
-        "emailRecovered": "✅ Email recovered! It's back in your inbox.",
-        "emailDeleted": "Email permanently deleted",
-        "undoExpired": "The undo window (10s) expired. The email was deleted permanently.",
-        "btnContinue": "Continue →",
-        "toastMsg": "Email deleted",
-        "toastUndo": "Undo ({{countdown}}s)"
+        "step3Summary": "You're about to upgrade to Pro ($29/mo). Your card will be charged immediately.",
+        "btnBack": "← Back",
+        "btnCancel": "Cancel",
+        "btnConfirm": "Confirm Upgrade →",
+        "confirmExit": "Exit upgrade wizard?",
+        "confirmExitDesc": "Your progress won't be saved.",
+        "btnStay": "Stay",
+        "btnExit": "Exit",
+        "exitedMsg": "✅ You exited! No charges were made.",
+        "btnContinue": "Continue →"
       }
     },
     "h04": {

@@ -1,108 +1,184 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { ScenarioProps } from '../../types/game';
 import s from '../scenario.module.css';
 
-type State = 'inbox' | 'deleted-toast' | 'recovered' | 'gone';
+type View = 'settings' | 'step1' | 'step2' | 'step3' | 'confirming-exit' | 'exited';
 
-// GOOD: undo toast after deletion with a 10-second window
 export function GoodScenario({ onTaskComplete }: ScenarioProps) {
   const { t } = useTranslation();
-  const [state, setState] = useState<State>('inbox');
-  const [countdown, setCountdown] = useState(10);
+  const [view, setView] = useState<View>('settings');
+  const [exitSource, setExitSource] = useState<'step1' | 'step2' | 'step3'>('step1');
 
-  useEffect(() => {
-    if (state !== 'deleted-toast') return;
-    if (countdown <= 0) {
-      setState('gone');
-      return;
-    }
-    const timer = setTimeout(() => setCountdown(c => c - 1), 1000);
-    return () => clearTimeout(timer);
-  }, [state, countdown]);
+  const stepNum = view === 'step1' ? 1 : view === 'step2' ? 2 : 3;
 
-  function handleDelete() {
-    setState('deleted-toast');
-    setCountdown(10);
-  }
-
-  function handleUndo() {
-    setState('recovered');
-    setTimeout(onTaskComplete, 900);
+  function openExitConfirm(from: 'step1' | 'step2' | 'step3') {
+    setExitSource(from);
+    setView('confirming-exit');
   }
 
   return (
-    <div className={s.app}>
+    <div className={s.app} style={{ position: 'relative' }}>
       <div className={s.toolbar}>
-        <span>📧</span>
         <span className={s.toolbarTitle}>{t('scenarios.h03.toolbarTitle')}</span>
       </div>
+
       <div className={s.body}>
-        {state === 'inbox' && (
-          <>
-            <div className={s.card}>
-              <div className={`${s.row} ${s.spaceBetween}`}>
-                <div>
-                  <p className={s.subheading}>{t('scenarios.h03.emailSender')}</p>
-                  <p className={s.muted}>{t('scenarios.h03.emailPreview')}</p>
-                </div>
-                <button
-                  className={`${s.btn} ${s.btnDanger}`}
-                  style={{ fontSize: 12, padding: '6px 12px' }}
-                  onClick={handleDelete}
-                >
-                  {t('scenarios.h03.btnDelete')}
-                </button>
-              </div>
-            </div>
-            <p className={s.muted} style={{ textAlign: 'center' }}>
-              {t('scenarios.h03.oopsMsg')}
-            </p>
-          </>
-        )}
-
-        {state === 'deleted-toast' && (
-          <div className={s.centered}>
-            <span style={{ fontSize: 40 }}>📭</span>
-            <p className={s.heading}>{t('scenarios.h03.good.inboxEmpty')}</p>
-            <p className={s.muted}>{t('scenarios.h03.good.emailMoved')}</p>
-          </div>
-        )}
-
-        {state === 'recovered' && (
-          <div className={s.centered}>
-            <div className={s.alertSuccess} style={{ justifyContent: 'center' }}>
-              {t('scenarios.h03.good.emailRecovered')}
-            </div>
-            <div className={s.card}>
-              <p className={s.subheading}>{t('scenarios.h03.emailSender')}</p>
-              <p className={s.muted}>{t('scenarios.h03.emailPreview')}</p>
-            </div>
-          </div>
-        )}
-
-        {state === 'gone' && (
-          <div className={s.centered}>
-            <span style={{ fontSize: 40 }}>📭</span>
-            <p className={s.heading}>{t('scenarios.h03.good.emailDeleted')}</p>
-            <p className={s.muted}>{t('scenarios.h03.good.undoExpired')}</p>
-            <button
-              className={`${s.btn} ${s.btnSecondary}`}
-              style={{ marginTop: 12 }}
-              onClick={onTaskComplete}
-            >
-              {t('scenarios.h03.good.btnContinue')}
-            </button>
-          </div>
-        )}
+        <div className={s.card}>
+          <p className={s.subheading}>{t('scenarios.h03.currentPlan')}</p>
+          <button
+            className={`${s.btn} ${s.btnPrimary}`}
+            style={{ marginTop: 12 }}
+            onClick={() => setView('step1')}
+            disabled={view !== 'settings'}
+          >
+            {t('scenarios.h03.btnUpgrade')}
+          </button>
+        </div>
+        <p className={s.muted} style={{ textAlign: 'center' }}>
+          {t('scenarios.h03.oopsMsg')}
+        </p>
       </div>
 
-      {state === 'deleted-toast' && (
-        <div className={s.toast}>
-          {t('scenarios.h03.good.toastMsg')}
-          <button className={s.toastAction} onClick={handleUndo}>
-            {t('scenarios.h03.good.toastUndo', { countdown })}
-          </button>
+      {/* Wizard overlay — with clear exit controls */}
+      {(view === 'step1' || view === 'step2' || view === 'step3') && (
+        <div className={s.modalOverlay}>
+          <div className={s.modal}>
+            <div className={`${s.row} ${s.spaceBetween}`}>
+              <p className={s.muted}>{t('scenarios.h03.stepOf', { step: stepNum })}</p>
+              <button
+                className={`${s.btn} ${s.btnSecondary}`}
+                style={{ padding: '4px 10px', fontSize: 14, lineHeight: 1 }}
+                onClick={() => openExitConfirm(view as 'step1' | 'step2' | 'step3')}
+                aria-label="Close"
+              >
+                ✕
+              </button>
+            </div>
+
+            {view === 'step1' && (
+              <>
+                <h3 className={s.modalTitle}>{t('scenarios.h03.step1Title')}</h3>
+                <div className={s.col}>
+                  <label className={s.label} style={{ display: 'flex', gap: 8, cursor: 'pointer' }}>
+                    <input type="radio" name="plan" defaultChecked readOnly /> {t('scenarios.h03.planPro')}
+                  </label>
+                  <label className={s.label} style={{ display: 'flex', gap: 8, cursor: 'pointer' }}>
+                    <input type="radio" name="plan" readOnly /> {t('scenarios.h03.planBusiness')}
+                  </label>
+                </div>
+                <div className={`${s.row} ${s.spaceBetween}`}>
+                  <button
+                    className={`${s.btn} ${s.btnSecondary}`}
+                    onClick={() => openExitConfirm('step1')}
+                  >
+                    {t('scenarios.h03.good.btnCancel')}
+                  </button>
+                  <button className={`${s.btn} ${s.btnPrimary}`} onClick={() => setView('step2')}>
+                    {t('scenarios.h03.btnNext')}
+                  </button>
+                </div>
+              </>
+            )}
+
+            {view === 'step2' && (
+              <>
+                <h3 className={s.modalTitle}>{t('scenarios.h03.step2Title')}</h3>
+                <div className={s.col}>
+                  <div className={s.formGroup}>
+                    <label className={s.label}>{t('scenarios.h03.labelName')}</label>
+                    <input className={s.input} placeholder={t('scenarios.h03.namePlaceholder')} />
+                  </div>
+                  <div className={s.formGroup}>
+                    <label className={s.label}>{t('scenarios.h03.labelCard')}</label>
+                    <input className={s.input} placeholder={t('scenarios.h03.cardPlaceholder')} />
+                  </div>
+                </div>
+                <div className={`${s.row} ${s.spaceBetween}`}>
+                  <div className={s.row}>
+                    <button
+                      className={`${s.btn} ${s.btnSecondary}`}
+                      onClick={() => setView('step1')}
+                    >
+                      {t('scenarios.h03.good.btnBack')}
+                    </button>
+                    <button
+                      className={`${s.btn} ${s.btnSecondary}`}
+                      onClick={() => openExitConfirm('step2')}
+                    >
+                      {t('scenarios.h03.good.btnCancel')}
+                    </button>
+                  </div>
+                  <button className={`${s.btn} ${s.btnPrimary}`} onClick={() => setView('step3')}>
+                    {t('scenarios.h03.btnNext')}
+                  </button>
+                </div>
+              </>
+            )}
+
+            {view === 'step3' && (
+              <>
+                <h3 className={s.modalTitle}>{t('scenarios.h03.step3Title')}</h3>
+                <div className={s.modalBody}>{t('scenarios.h03.good.step3Summary')}</div>
+                <div className={`${s.row} ${s.spaceBetween}`}>
+                  <div className={s.row}>
+                    <button
+                      className={`${s.btn} ${s.btnSecondary}`}
+                      onClick={() => setView('step2')}
+                    >
+                      {t('scenarios.h03.good.btnBack')}
+                    </button>
+                    <button
+                      className={`${s.btn} ${s.btnSecondary}`}
+                      onClick={() => openExitConfirm('step3')}
+                    >
+                      {t('scenarios.h03.good.btnCancel')}
+                    </button>
+                  </div>
+                  <button className={`${s.btn} ${s.btnSuccess}`} onClick={onTaskComplete}>
+                    {t('scenarios.h03.good.btnConfirm')}
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Exit confirmation dialog */}
+      {view === 'confirming-exit' && (
+        <div className={s.modalOverlay}>
+          <div className={s.modal}>
+            <h3 className={s.modalTitle}>{t('scenarios.h03.good.confirmExit')}</h3>
+            <div className={s.modalBody}>{t('scenarios.h03.good.confirmExitDesc')}</div>
+            <div className={`${s.row} ${s.spaceBetween}`}>
+              <button
+                className={`${s.btn} ${s.btnSecondary}`}
+                onClick={() => setView(exitSource)}
+              >
+                {t('scenarios.h03.good.btnStay')}
+              </button>
+              <button
+                className={`${s.btn} ${s.btnDanger}`}
+                onClick={() => setView('exited')}
+              >
+                {t('scenarios.h03.good.btnExit')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {view === 'exited' && (
+        <div className={s.modalOverlay}>
+          <div className={s.modal}>
+            <div className={s.alertSuccess}>{t('scenarios.h03.good.exitedMsg')}</div>
+            <div className={s.flexEnd}>
+              <button className={`${s.btn} ${s.btnSecondary}`} onClick={onTaskComplete}>
+                {t('scenarios.h03.good.btnContinue')}
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
