@@ -25,8 +25,8 @@ export const h02: HeuristicConfig = {
       kind: 'bad',
       component: BadScenario,
       narratorBefore: {
-        en: 'You need to save your document. Find the right option in the menu below.',
-        pt: 'Você precisa salvar seu documento. Encontre a opção correta no menu abaixo.',
+        en: 'You need to save your document. Find the right option in the menu above.',
+        pt: 'Você precisa salvar seu documento. Encontre a opção correta no menu acima.',
       },
       narratorAfter: {
         en: 'Frustrating, right? "Serialize & commit to persistent storage layer" means Save. "Discard volatile in-memory state" means Cancel. Technical jargon creates a wall between the user and the system.',

@@ -275,8 +275,7 @@
       "btnRegister": "Cadastrar",
       "bad": {
         "errorMsg": "❌ Erro 422: Entidade não processável. Falha na validação do corpo da requisição.",
-        "errorCode": "FORM_VALIDATION_ERROR · field[1].format",
-        "btnGiveUp": "Não consigo descobrir o que está errado → continuar"
+        "errorCode": "FORM_VALIDATION_ERROR · field[1].format"
       },
       "good": {
         "errorEmail": "Por favor, use um formato válido: nome@exemplo.com",

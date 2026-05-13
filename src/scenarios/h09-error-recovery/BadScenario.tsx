@@ -4,21 +4,22 @@ import type { ScenarioProps } from '../../types/game';
 import s from '../scenario.module.css';
 
 // BAD: cryptic error message, user can't figure out how to fix it
+// After 2 failed attempts the scenario auto-completes.
 export function BadScenario({ onTaskComplete }: ScenarioProps) {
   const { t } = useTranslation();
   const [email, setEmail] = useState('john.doe@example.com');
   const [password, setPassword] = useState('pass123');
   const [submitted, setSubmitted] = useState(false);
-  const [giveUpShown, setGiveUpShown] = useState(false);
   const [attempts, setAttempts] = useState(0);
 
   function handleSubmit() {
+    const next = attempts + 1;
+    setAttempts(next);
     setSubmitted(true);
-    setAttempts(a => a + 1);
-    if (attempts >= 1) setGiveUpShown(true);
+    if (next === 2) {
+      setTimeout(onTaskComplete, 1500);
+    }
   }
-
-  function handleGiveUp() { onTaskComplete(); }
 
   return (
     <div className={s.app}>
@@ -51,11 +52,11 @@ export function BadScenario({ onTaskComplete }: ScenarioProps) {
             className={`${s.btn} ${s.btnPrimary}`}
             style={{ marginTop: 14 }}
             onClick={handleSubmit}
+            disabled={attempts >= 2}
           >
             {t('scenarios.h09.btnRegister')}
           </button>
 
-          {/* Cryptic error — doesn't tell the user the password is too short */}
           {submitted && (
             <div className={s.alertError} style={{ marginTop: 12 }}>
               {t('scenarios.h09.bad.errorMsg')}
@@ -64,12 +65,6 @@ export function BadScenario({ onTaskComplete }: ScenarioProps) {
             </div>
           )}
         </div>
-
-        {giveUpShown && (
-          <button className={`${s.btn} ${s.btnSecondary}`} onClick={handleGiveUp}>
-            {t('scenarios.h09.bad.btnGiveUp')}
-          </button>
-        )}
       </div>
     </div>
   );

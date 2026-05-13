@@ -276,8 +276,7 @@
       "btnRegister": "Register",
       "bad": {
         "errorMsg": "❌ Error 422: Unprocessable Entity. Request body validation failed.",
-        "errorCode": "FORM_VALIDATION_ERROR · field[1].format",
-        "btnGiveUp": "I can't figure out what's wrong → continue"
+        "errorCode": "FORM_VALIDATION_ERROR · field[1].format"
       },
       "good": {
         "errorEmail": "Please use a valid format: name@example.com",

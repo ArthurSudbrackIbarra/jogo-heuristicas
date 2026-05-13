@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGame } from '../../context/GameContext';
 import { useLang } from '../../hooks/useLang';
@@ -16,6 +16,18 @@ export function GameScreen() {
   const { t } = useTranslation();
   const { lang, pick, setLang } = useLang();
   const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [heuristicIndex, scenarioIndex]);
+
+  useEffect(() => {
+    if (phase === 'feedback') {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    } else if (phase === 'reveal') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [phase]);
 
   const ScenarioComponent = currentScenario.component;
 
