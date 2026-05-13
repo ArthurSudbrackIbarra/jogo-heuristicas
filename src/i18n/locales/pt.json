@@ -1,0 +1,69 @@
+{
+  "lang": {
+    "en": "English",
+    "pt": "Português"
+  },
+  "welcome": {
+    "eyebrow": "Jogo de Aprendizagem Interativo",
+    "title": "As 10 Heurísticas de Nielsen",
+    "subtitle": "Experimente como é um design de interface bom e ruim — na prática. Você vai completar 10 pares de tarefas, cada uma projetada para mostrar uma heurística sendo respeitada e violada. Um narrador vai te guiar em cada etapa.",
+    "features": {
+      "tasks": "Complete tarefas reais de interface",
+      "feel": "Sinta a diferença entre boa e má UX",
+      "narrator": "Comentários do narrador após cada cenário",
+      "learn": "Aprenda as 10 Heurísticas de Nielsen"
+    },
+    "start": "Começar o jogo →",
+    "hint": "~15 minutos · 10 heurísticas · 20 cenários",
+    "mysteryTeaser": "Complete todas as 10 heurísticas para ganhar 100 moedas e resgatar uma recompensa misteriosa! 🍬"
+  },
+  "game": {
+    "heuristicLabel": "Heurística {{current}}/{{total}}",
+    "coins": "{{count}} moedas",
+    "tryOtherVersion": "Tentar a outra versão →",
+    "seeReveal": "Ver a revelação →"
+  },
+  "narrator": {
+    "label": "Narrador",
+    "continue": "Continuar →"
+  },
+  "goalCard": {
+    "badge": "Sua missão — Cenário {{number}}"
+  },
+  "reveal": {
+    "badge": "Heurística de Nielsen",
+    "withoutHeuristic": "Sem esta heurística",
+    "withHeuristic": "Com esta heurística",
+    "nextHeuristic": "Próxima heurística →",
+    "seeResults": "🏁 Ver seus resultados",
+    "coinsEarned": "+10 moedas ganhas!",
+    "coinsProgress": "{{coins}} / 100 moedas",
+    "coinsRemaining": "Faltam {{remaining}} moedas para a recompensa misteriosa!",
+    "coinsReady": "Você tem moedas suficientes para a recompensa misteriosa! 🍬"
+  },
+  "shop": {
+    "title": "Recompensa Misteriosa Desbloqueada!",
+    "subtitle": "Você completou todas as 10 heurísticas e coletou 100 moedas!",
+    "description": "Resgate sua recompensa de doce com os criadores do jogo.",
+    "note": "Encontre os criadores ao final da sessão para retirar seu doce. 🍬",
+    "cta": "Resgatar Recompensa →",
+    "coins": "🪙 100 / 100 moedas"
+  },
+  "results": {
+    "title": "Parabéns!",
+    "subtitle": "Você vivenciou todas as 10 Heurísticas de Nielsen — tanto como devem quanto como não devem ser aplicadas.",
+    "stats": {
+      "heuristics": "Heurísticas aprendidas",
+      "scenarios": "Cenários concluídos",
+      "avgTime": "Tempo médio por tarefa"
+    },
+    "learned": "O que você aprendeu",
+    "playAgain": "Jogar novamente",
+    "feedbackTitle": "Ajude a melhorar nossa pesquisa!",
+    "feedbackSubtitle": "Conte-nos sobre sua experiência com este jogo:",
+    "feedbackCta": "📝 Responder ao questionário de pesquisa →"
+  },
+  "heuristic": {
+    "completed": "✓ Concluída"
+  }
+}

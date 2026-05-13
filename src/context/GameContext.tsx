@@ -2,6 +2,7 @@ import { createContext, useContext, useReducer } from 'react';
 import type { ReactNode } from 'react';
 import type { GameState, GameAction, CompletedEntry } from '../types/game';
 import { heuristics } from '../scenarios';
+import i18n from '../i18n';
 
 // ─── Initial state ────────────────────────────────────────────────────────────
 const INITIAL_STATE: GameState = {
@@ -10,6 +11,8 @@ const INITIAL_STATE: GameState = {
   scenarioIndex: 0,
   scenarioStartTime: 0,
   completedEntries: [],
+  coins: 0,
+  lang: 'en',
 };
 
 // ─── Reducer ──────────────────────────────────────────────────────────────────
@@ -18,6 +21,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
     case 'START_GAME':
       return {
         ...INITIAL_STATE,
+        lang: state.lang,
         phase: 'playing',
         scenarioStartTime: Date.now(),
       };
@@ -39,7 +43,6 @@ function gameReducer(state: GameState, action: GameAction): GameState {
     }
 
     case 'DISMISS_FEEDBACK':
-      // After first scenario → go to second scenario
       if (state.scenarioIndex === 0) {
         return {
           ...state,
@@ -48,16 +51,17 @@ function gameReducer(state: GameState, action: GameAction): GameState {
           scenarioStartTime: Date.now(),
         };
       }
-      // After second scenario → show reveal
       return { ...state, phase: 'reveal' };
 
     case 'DISMISS_REVEAL': {
       const isLast = state.heuristicIndex >= heuristics.length - 1;
+      const newCoins = state.coins + 10;
       if (isLast) {
-        return { ...state, phase: 'results' };
+        return { ...state, coins: newCoins, phase: 'shop' };
       }
       return {
         ...state,
+        coins: newCoins,
         phase: 'playing',
         heuristicIndex: state.heuristicIndex + 1,
         scenarioIndex: 0,
@@ -65,8 +69,15 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       };
     }
 
+    case 'BUY_ITEM':
+      return { ...state, phase: 'results' };
+
     case 'RESTART':
-      return { ...INITIAL_STATE };
+      return { ...INITIAL_STATE, lang: state.lang };
+
+    case 'SET_LANG':
+      i18n.changeLanguage(action.lang);
+      return { ...state, lang: action.lang };
 
     default:
       return state;
@@ -77,9 +88,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
 interface GameContextValue {
   state: GameState;
   dispatch: React.Dispatch<GameAction>;
-  /** Convenience: current heuristic config */
   currentHeuristic: typeof heuristics[number];
-  /** Convenience: current scenario config */
   currentScenario: typeof heuristics[number]['scenarios'][number];
   totalHeuristics: number;
 }

@@ -7,6 +7,7 @@ const STEPS = ['Personal Info', 'Address', 'Payment', 'Confirm'];
 
 export function GoodScenario({ onTaskComplete }: ScenarioProps) {
   const [step, setStep] = useState(0);
+  const [values, setValues] = useState(['', '', '', '']);
 
   function next() {
     if (step >= STEPS.length - 1) { onTaskComplete(); return; }
@@ -21,24 +22,32 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
         <span className={s.toolbarTitle}>Checkout — Step {step + 1} of {STEPS.length}</span>
       </div>
       <div className={s.body}>
-        {/* Step indicator */}
-        <div className={s.row} style={{ gap:4 }}>
+        <div className={s.row} style={{ gap: 4 }}>
           {STEPS.map((_, i) => (
             <div key={i} style={{
-              flex:1, height:4, borderRadius:99,
+              flex: 1, height: 4, borderRadius: 99,
               background: i <= step ? '#6c63ff' : '#e2e8f0',
-              transition:'background 200ms'
+              transition: 'background 200ms'
             }} />
           ))}
         </div>
 
         <div className={s.card}>
           <p className={s.subheading}>{STEPS[step]}</p>
-          <p className={s.muted} style={{ marginTop:6 }}>
+          <p className={s.muted} style={{ marginTop: 6 }}>
             Fill in your {STEPS[step].toLowerCase()} details here.
           </p>
-          <div className={s.formGroup} style={{ marginTop:12 }}>
-            <input className={s.input} placeholder="Sample field" defaultValue="" />
+          <div className={s.formGroup} style={{ marginTop: 12 }}>
+            <input
+              className={s.input}
+              placeholder="Sample field"
+              value={values[step]}
+              onChange={e => {
+                const next = [...values];
+                next[step] = e.target.value;
+                setValues(next);
+              }}
+            />
           </div>
         </div>
 

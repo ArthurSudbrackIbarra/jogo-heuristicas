@@ -4,10 +4,10 @@ import s from '../scenario.module.css';
 
 type State = 'inbox' | 'deleted-toast' | 'recovered' | 'gone';
 
-// GOOD: undo toast after deletion
+// GOOD: undo toast after deletion with a 10-second window
 export function GoodScenario({ onTaskComplete }: ScenarioProps) {
   const [state, setState] = useState<State>('inbox');
-  const [countdown, setCountdown] = useState(5);
+  const [countdown, setCountdown] = useState(10);
 
   useEffect(() => {
     if (state !== 'deleted-toast') return;
@@ -21,7 +21,7 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
 
   function handleDelete() {
     setState('deleted-toast');
-    setCountdown(5);
+    setCountdown(10);
   }
 
   function handleUndo() {
@@ -46,14 +46,14 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
                 </div>
                 <button
                   className={`${s.btn} ${s.btnDanger}`}
-                  style={{ fontSize:12, padding:'6px 12px' }}
+                  style={{ fontSize: 12, padding: '6px 12px' }}
                   onClick={handleDelete}
                 >
                   🗑 Delete
                 </button>
               </div>
             </div>
-            <p className={s.muted} style={{ textAlign:'center' }}>
+            <p className={s.muted} style={{ textAlign: 'center' }}>
               Oops! You just deleted that email by accident. Can you get it back?
             </p>
           </>
@@ -61,7 +61,7 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
 
         {state === 'deleted-toast' && (
           <div className={s.centered}>
-            <span style={{ fontSize:40 }}>📭</span>
+            <span style={{ fontSize: 40 }}>📭</span>
             <p className={s.heading}>Inbox empty</p>
             <p className={s.muted}>Email moved to Trash.</p>
           </div>
@@ -69,7 +69,7 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
 
         {state === 'recovered' && (
           <div className={s.centered}>
-            <div className={s.alertSuccess} style={{ justifyContent:'center' }}>
+            <div className={s.alertSuccess} style={{ justifyContent: 'center' }}>
               ✅ Email recovered! It's back in your inbox.
             </div>
             <div className={s.card}>
@@ -81,12 +81,22 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
 
         {state === 'gone' && (
           <div className={s.centered}>
-            <p className={s.muted}>Email permanently deleted.</p>
+            <span style={{ fontSize: 40 }}>📭</span>
+            <p className={s.heading}>Email permanently deleted</p>
+            <p className={s.muted}>
+              The undo window (10s) expired. The email was deleted permanently.
+            </p>
+            <button
+              className={`${s.btn} ${s.btnSecondary}`}
+              style={{ marginTop: 12 }}
+              onClick={onTaskComplete}
+            >
+              Continue →
+            </button>
           </div>
         )}
       </div>
 
-      {/* Undo toast */}
       {state === 'deleted-toast' && (
         <div className={s.toast}>
           Email deleted

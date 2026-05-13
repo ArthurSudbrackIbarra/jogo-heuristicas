@@ -1,49 +1,69 @@
+import { useTranslation } from 'react-i18next';
 import { Button } from '../../components/Button';
+import { useLang } from '../../hooks/useLang';
 import styles from './WelcomeScreen.module.css';
 import { useGame } from '../../context/GameContext';
 
 export function WelcomeScreen() {
   const { dispatch } = useGame();
+  const { t } = useTranslation();
+  const { lang, setLang } = useLang();
+
+  const features = [
+    { icon: '🎯', key: 'tasks' },
+    { icon: '⚡', key: 'feel' },
+    { icon: '🎙', key: 'narrator' },
+    { icon: '📚', key: 'learn' },
+  ] as const;
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
-        {/* Logo/icon */}
+        {/* Language switcher */}
+        <div className={styles.langSwitcher}>
+          <button
+            className={`${styles.langBtn} ${lang === 'en' ? styles.langActive : ''}`}
+            onClick={() => setLang('en')}
+          >
+            🇺🇸 {t('lang.en')}
+          </button>
+          <button
+            className={`${styles.langBtn} ${lang === 'pt' ? styles.langActive : ''}`}
+            onClick={() => setLang('pt')}
+          >
+            🇧🇷 {t('lang.pt')}
+          </button>
+        </div>
+
         <div className={styles.icon} aria-hidden="true">🧠</div>
 
         <div className={styles.header}>
-          <span className={styles.eyebrow}>Interactive Learning Game</span>
-          <h1 className={styles.title}>Nielsen's 10 Heuristics</h1>
-          <p className={styles.subtitle}>
-            Experience what good and bad UI design feels like — hands on. You'll
-            complete 10 pairs of tasks, each designed to show one heuristic being
-            respected and violated. A narrator will guide you through every step.
-          </p>
+          <span className={styles.eyebrow}>{t('welcome.eyebrow')}</span>
+          <h1 className={styles.title}>{t('welcome.title')}</h1>
+          <p className={styles.subtitle}>{t('welcome.subtitle')}</p>
         </div>
 
-        {/* What to expect */}
+        {/* Mystery teaser */}
+        <div className={styles.mysteryTeaser}>
+          <p>{t('welcome.mysteryTeaser')}</p>
+        </div>
+
         <div className={styles.features}>
-          {[
-            { icon: '🎯', text: 'Complete real-feeling UI tasks' },
-            { icon: '⚡', text: 'Feel the difference between good and bad UX' },
-            { icon: '🎙', text: 'Narrator commentary after each scenario' },
-            { icon: '📚', text: 'Learn all 10 Nielsen Heuristics' },
-          ].map(({ icon, text }) => (
-            <div key={text} className={styles.feature}>
+          {features.map(({ icon, key }) => (
+            <div key={key} className={styles.feature}>
               <span className={styles.featureIcon}>{icon}</span>
-              <span className={styles.featureText}>{text}</span>
+              <span className={styles.featureText}>{t(`welcome.features.${key}`)}</span>
             </div>
           ))}
         </div>
 
         <Button size="lg" onClick={() => dispatch({ type: 'START_GAME' })}>
-          Start the game →
+          {t('welcome.start')}
         </Button>
 
-        <p className={styles.hint}>~15 minutes · 10 heuristics · 20 scenarios</p>
+        <p className={styles.hint}>{t('welcome.hint')}</p>
       </div>
 
-      {/* Decorative background blobs */}
       <div className={styles.blob1} aria-hidden="true" />
       <div className={styles.blob2} aria-hidden="true" />
     </div>

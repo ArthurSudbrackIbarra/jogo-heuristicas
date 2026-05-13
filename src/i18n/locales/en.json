@@ -1,0 +1,69 @@
+{
+  "lang": {
+    "en": "English",
+    "pt": "Português"
+  },
+  "welcome": {
+    "eyebrow": "Interactive Learning Game",
+    "title": "Nielsen's 10 Heuristics",
+    "subtitle": "Experience what good and bad UI design feels like — hands on. You'll complete 10 pairs of tasks, each designed to show one heuristic being respected and violated. A narrator will guide you through every step.",
+    "features": {
+      "tasks": "Complete real-feeling UI tasks",
+      "feel": "Feel the difference between good and bad UX",
+      "narrator": "Narrator commentary after each scenario",
+      "learn": "Learn all 10 Nielsen Heuristics"
+    },
+    "start": "Start the game →",
+    "hint": "~15 minutes · 10 heuristics · 20 scenarios",
+    "mysteryTeaser": "Complete all 10 heuristics to earn 100 coins and claim a mystery reward! 🍬"
+  },
+  "game": {
+    "heuristicLabel": "Heuristic {{current}}/{{total}}",
+    "coins": "{{count}} coins",
+    "tryOtherVersion": "Try the other version →",
+    "seeReveal": "See the reveal →"
+  },
+  "narrator": {
+    "label": "Narrator",
+    "continue": "Continue →"
+  },
+  "goalCard": {
+    "badge": "Your mission — Scenario {{number}}"
+  },
+  "reveal": {
+    "badge": "Nielsen Heuristic",
+    "withoutHeuristic": "Without this heuristic",
+    "withHeuristic": "With this heuristic",
+    "nextHeuristic": "Next heuristic →",
+    "seeResults": "🏁 See your results",
+    "coinsEarned": "+10 coins earned!",
+    "coinsProgress": "{{coins}} / 100 coins",
+    "coinsRemaining": "{{remaining}} coins until the mystery reward!",
+    "coinsReady": "You have enough coins for the mystery reward! 🍬"
+  },
+  "shop": {
+    "title": "Mystery Reward Unlocked!",
+    "subtitle": "You completed all 10 heuristics and collected 100 coins!",
+    "description": "Claim your candy reward from the game creators.",
+    "note": "Find the creators at the end of this session to collect your candy. 🍬",
+    "cta": "Claim Reward →",
+    "coins": "🪙 100 / 100 coins"
+  },
+  "results": {
+    "title": "Congratulations!",
+    "subtitle": "You've experienced all 10 Nielsen Heuristics — both how they should and shouldn't be applied.",
+    "stats": {
+      "heuristics": "Heuristics learned",
+      "scenarios": "Scenarios completed",
+      "avgTime": "Avg. task time"
+    },
+    "learned": "What you learned",
+    "playAgain": "Play again",
+    "feedbackTitle": "Help us improve our research!",
+    "feedbackSubtitle": "Tell us about your experience with this game:",
+    "feedbackCta": "📝 Answer the research questionnaire →"
+  },
+  "heuristic": {
+    "completed": "✓ Completed"
+  }
+}

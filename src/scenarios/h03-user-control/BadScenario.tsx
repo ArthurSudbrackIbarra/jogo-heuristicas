@@ -2,21 +2,11 @@ import { useState } from 'react';
 import type { ScenarioProps } from '../../types/game';
 import s from '../scenario.module.css';
 
-type EmailState = 'inbox' | 'deleted';
+type View = 'inbox' | 'deleted' | 'trash' | 'archived';
 
-// BAD: accidental deletion with no undo or escape
+// BAD: email deleted with no undo — user tries trash and archived (both empty)
 export function BadScenario({ onTaskComplete }: ScenarioProps) {
-  const [emailState, setEmailState] = useState<EmailState>('inbox');
-  const [attempts, setAttempts] = useState(0);
-
-  function handleDelete() {
-    setEmailState('deleted');
-  }
-
-  function handleGiveUp() {
-    setAttempts(a => a + 1);
-    if (attempts >= 1) onTaskComplete();
-  }
+  const [view, setView] = useState<View>('inbox');
 
   return (
     <div className={s.app}>
@@ -25,7 +15,7 @@ export function BadScenario({ onTaskComplete }: ScenarioProps) {
         <span className={s.toolbarTitle}>Inbox</span>
       </div>
       <div className={s.body}>
-        {emailState === 'inbox' ? (
+        {view === 'inbox' && (
           <>
             <div className={s.card}>
               <div className={`${s.row} ${s.spaceBetween}`}>
@@ -36,28 +26,62 @@ export function BadScenario({ onTaskComplete }: ScenarioProps) {
                 {/* Delete immediately, no warning */}
                 <button
                   className={`${s.btn} ${s.btnDanger}`}
-                  style={{ fontSize:12, padding:'6px 12px' }}
-                  onClick={handleDelete}
+                  style={{ fontSize: 12, padding: '6px 12px' }}
+                  onClick={() => setView('deleted')}
                 >
                   🗑 Delete
                 </button>
               </div>
             </div>
-            <p className={s.muted} style={{ textAlign:'center' }}>
+            <p className={s.muted} style={{ textAlign: 'center' }}>
               Oops! You just deleted that email by accident. Can you get it back?
             </p>
           </>
-        ) : (
+        )}
+
+        {view === 'deleted' && (
           <div className={s.centered}>
-            <span style={{ fontSize:40 }}>📭</span>
+            <span style={{ fontSize: 40 }}>📭</span>
             <p className={s.heading}>Inbox empty</p>
             <p className={s.muted}>No emails found.</p>
-            {/* No trash, no undo, no recovery */}
             <button
               className={`${s.btn} ${s.btnSecondary}`}
-              onClick={handleGiveUp}
+              style={{ marginTop: 12 }}
+              onClick={() => setView('trash')}
             >
-              {attempts === 0 ? "I can't get it back..." : "I give up — continue →"}
+              🗑 Check Trash
+            </button>
+          </div>
+        )}
+
+        {view === 'trash' && (
+          <div className={s.centered}>
+            <span style={{ fontSize: 40 }}>🗑️</span>
+            <p className={s.heading}>Trash</p>
+            <p className={s.muted}>
+              No items in trash. Emails are deleted immediately and permanently.
+            </p>
+            <button
+              className={`${s.btn} ${s.btnSecondary}`}
+              style={{ marginTop: 12 }}
+              onClick={() => setView('archived')}
+            >
+              📁 Check Archived
+            </button>
+          </div>
+        )}
+
+        {view === 'archived' && (
+          <div className={s.centered}>
+            <span style={{ fontSize: 40 }}>📁</span>
+            <p className={s.heading}>Archived</p>
+            <p className={s.muted}>No archived emails found.</p>
+            <button
+              className={`${s.btn} ${s.btnSecondary}`}
+              style={{ marginTop: 12 }}
+              onClick={onTaskComplete}
+            >
+              I give up — there's no way to get it back →
             </button>
           </div>
         )}

@@ -2,85 +2,109 @@ import { useState } from 'react';
 import type { ScenarioProps } from '../../types/game';
 import s from '../scenario.module.css';
 
-type Format = { bold: boolean; italic: boolean };
-
-// GOOD: visible toolbar buttons — recognize, don't recall
+// GOOD: click a word to select it, contextual toolbar appears — recognize, don't recall
 export function GoodScenario({ onTaskComplete }: ScenarioProps) {
-  const [fmt, setFmt] = useState<Format>({ bold: false, italic: false });
-  const [done, setDone] = useState(false);
+  const [selected, setSelected] = useState(false);
+  const [bold, setBold] = useState(false);
 
-  function toggle(key: keyof Format) {
-    const next = { ...fmt, [key]: !fmt[key] };
-    setFmt(next);
-    if (next.bold) {
-      setDone(true);
-      setTimeout(onTaskComplete, 800);
-    }
+  function handleSelectWord() {
+    setSelected(true);
   }
 
-  const btnBase: React.CSSProperties = {
-    padding:'4px 10px', borderRadius:6, border:'1px solid #e2e8f0',
-    background:'#fff', cursor:'pointer', fontSize:14, fontWeight:600,
-    transition:'all 120ms'
+  function handleBold() {
+    setBold(true);
+    setSelected(false);
+    setTimeout(onTaskComplete, 800);
+  }
+
+  const toolbarStyle: React.CSSProperties = {
+    position: 'absolute',
+    top: -44,
+    left: '50%',
+    transform: 'translateX(-50%)',
+    background: '#1e293b',
+    border: '1px solid #334155',
+    borderRadius: 8,
+    padding: '4px 6px',
+    display: 'flex',
+    gap: 2,
+    boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+    zIndex: 10,
+    whiteSpace: 'nowrap',
+  };
+
+  const toolBtnStyle: React.CSSProperties = {
+    padding: '4px 10px',
+    borderRadius: 4,
+    border: 'none',
+    background: 'transparent',
+    color: '#e2e8f0',
+    fontSize: 13,
+    fontWeight: 700,
+    cursor: 'pointer',
+    transition: 'background 120ms',
   };
 
   return (
     <div className={s.app}>
-      {/* Visible formatting toolbar */}
       <div className={s.toolbar}>
         <span>✏️</span>
         <span className={s.toolbarTitle}>Text Editor</span>
-        <div style={{ display:'flex', gap:4 }}>
-          <button
-            style={{
-              ...btnBase,
-              fontWeight:700,
-              background: fmt.bold ? '#6c63ff' : '#fff',
-              color: fmt.bold ? '#fff' : '#374151',
-              borderColor: fmt.bold ? '#6c63ff' : '#e2e8f0',
-            }}
-            onClick={() => toggle('bold')}
-            title="Bold (Ctrl+B)"
-          >
-            B
-          </button>
-          <button
-            style={{
-              ...btnBase,
-              fontStyle:'italic',
-              background: fmt.italic ? '#6c63ff' : '#fff',
-              color: fmt.italic ? '#fff' : '#374151',
-              borderColor: fmt.italic ? '#6c63ff' : '#e2e8f0',
-            }}
-            onClick={() => toggle('italic')}
-            title="Italic (Ctrl+I)"
-          >
-            I
-          </button>
-          <button style={{ ...btnBase, textDecoration:'underline' }} title="Underline (Ctrl+U)">U</button>
-          <button style={{ ...btnBase, textDecoration:'line-through' }} title="Strikethrough">S</button>
-        </div>
       </div>
-
       <div className={s.body}>
         <div className={s.card}>
-          <p className={s.subheading} style={{ marginBottom:8 }}>Your document:</p>
-          <p style={{
-            fontSize:14, lineHeight:1.7, fontFamily:'Georgia, serif',
-            fontWeight: fmt.bold ? 700 : 400,
-            fontStyle: fmt.italic ? 'italic' : 'normal',
-          }}>
-            The quick brown fox jumps over the lazy dog.
+          <p className={s.subheading} style={{ marginBottom: 8 }}>Document:</p>
+          <p style={{ fontSize: 14, lineHeight: 1.8, fontFamily: 'Georgia, serif' }}>
+            Today's project update includes an{' '}
+            <span style={{ position: 'relative', display: 'inline-block' }}>
+              {selected && (
+                <span style={toolbarStyle}>
+                  <button
+                    style={{ ...toolBtnStyle, fontWeight: 800 }}
+                    onClick={handleBold}
+                    title="Bold"
+                  >
+                    B
+                  </button>
+                  <button style={{ ...toolBtnStyle, fontStyle: 'italic' }} title="Italic">I</button>
+                  <button style={{ ...toolBtnStyle, textDecoration: 'underline' }} title="Underline">U</button>
+                </span>
+              )}
+              <span
+                onClick={handleSelectWord}
+                style={{
+                  fontWeight: bold ? 700 : 400,
+                  background: selected ? '#bfdbfe' : 'transparent',
+                  color: selected ? '#1e40af' : 'inherit',
+                  borderRadius: 2,
+                  padding: '0 2px',
+                  cursor: bold ? 'default' : 'pointer',
+                  transition: 'background 150ms, color 150ms, font-weight 150ms',
+                  userSelect: 'none',
+                }}
+              >
+                important
+              </span>
+            </span>{' '}
+            milestone for the team.
           </p>
         </div>
 
-        {!done ? (
+        {!bold && !selected && (
           <div className={s.alertInfo}>
-            ℹ️ Click the <strong>B</strong> button in the toolbar above to make the text bold.
+            ℹ️ Click the word <strong>important</strong> in the document to select it.
           </div>
-        ) : (
+        )}
+
+        {selected && (
+          <div className={s.alertInfo}>
+            ✨ Word selected! A formatting toolbar appeared — click <strong>B</strong> to make it bold.
+          </div>
+        )}
+
+        {bold && (
           <div className={s.alertSuccess}>
-            ✅ Bold applied! You just clicked a button you could see — no memorization needed.
+            ✅ Bold applied! You clicked the word, saw the toolbar appear, and recognized the action — no memorization needed.
           </div>
         )}
       </div>

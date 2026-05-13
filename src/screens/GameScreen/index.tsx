@@ -1,4 +1,6 @@
+import { useTranslation } from 'react-i18next';
 import { useGame } from '../../context/GameContext';
+import { useLang } from '../../hooks/useLang';
 import { GoalCard } from '../../components/GoalCard';
 import { NarratorBox } from '../../components/NarratorBox';
 import { ProgressBar } from '../../components/ProgressBar';
@@ -9,9 +11,12 @@ import styles from './GameScreen.module.css';
 
 export function GameScreen() {
   const { state, dispatch, currentHeuristic, currentScenario, totalHeuristics } = useGame();
-  const { phase, heuristicIndex, scenarioIndex } = state;
+  const { phase, heuristicIndex, scenarioIndex, coins } = state;
+  const { t } = useTranslation();
+  const { lang, pick, setLang } = useLang();
 
   const ScenarioComponent = currentScenario.component;
+  const coinsAfterThis = coins + 10;
 
   if (phase === 'reveal') {
     return (
@@ -19,6 +24,7 @@ export function GameScreen() {
         <HeuristicReveal
           heuristic={currentHeuristic}
           isLast={heuristicIndex >= heuristics.length - 1}
+          coinsAfterThis={coinsAfterThis}
           onNext={() => dispatch({ type: 'DISMISS_REVEAL' })}
         />
       </div>
@@ -27,13 +33,12 @@ export function GameScreen() {
 
   return (
     <div className={styles.wrapper}>
-      {/* ── Top bar ──────────────────────────────────────────── */}
       <header className={styles.topBar}>
         <div className={styles.topBarLeft}>
           <span className={styles.heuristicLabel}>
-            Heuristic {heuristicIndex + 1}/{totalHeuristics}
+            {t('game.heuristicLabel', { current: heuristicIndex + 1, total: totalHeuristics })}
           </span>
-          <span className={styles.heuristicName}>{currentHeuristic.name}</span>
+          <span className={styles.heuristicName}>{pick(currentHeuristic.name)}</span>
         </div>
         <div className={styles.progressWrapper}>
           <ProgressBar
@@ -42,19 +47,35 @@ export function GameScreen() {
             scenarioIndex={scenarioIndex}
           />
         </div>
+        <div className={styles.topBarRight}>
+          <span className={styles.coinDisplay}>🪙 {coins}</span>
+          <div className={styles.langSwitcher}>
+            <button
+              className={`${styles.langBtn} ${lang === 'en' ? styles.langActive : ''}`}
+              onClick={() => setLang('en')}
+              title={t('lang.en')}
+            >
+              🇺🇸
+            </button>
+            <button
+              className={`${styles.langBtn} ${lang === 'pt' ? styles.langActive : ''}`}
+              onClick={() => setLang('pt')}
+              title={t('lang.pt')}
+            >
+              🇧🇷
+            </button>
+          </div>
+        </div>
       </header>
 
-      {/* ── Main content ─────────────────────────────────────── */}
       <main className={styles.main}>
-        {/* Goal card */}
         <GoalCard
-          goal={currentHeuristic.goal}
+          goal={pick(currentHeuristic.goal)}
           heuristicNumber={heuristicIndex + 1}
         />
 
-        {/* Scenario frame */}
         <ScenarioFrame
-          title={currentHeuristic.name}
+          title={pick(currentHeuristic.name)}
           disabled={phase === 'feedback'}
         >
           <ScenarioComponent
@@ -63,11 +84,10 @@ export function GameScreen() {
           />
         </ScenarioFrame>
 
-        {/* Narrator */}
         {phase === 'playing' && (
           <NarratorBox
             key={`narrator-before-h${heuristicIndex}-s${scenarioIndex}`}
-            text={currentScenario.narratorBefore}
+            text={pick(currentScenario.narratorBefore)}
             audioSrc={currentScenario.audioBefore}
           />
         )}
@@ -75,11 +95,11 @@ export function GameScreen() {
         {phase === 'feedback' && (
           <NarratorBox
             key={`narrator-after-h${heuristicIndex}-s${scenarioIndex}`}
-            text={currentScenario.narratorAfter}
+            text={pick(currentScenario.narratorAfter)}
             audioSrc={currentScenario.audioAfter}
             showContinue
             continueLabel={
-              scenarioIndex === 0 ? 'Try the other version →' : 'See the reveal →'
+              scenarioIndex === 0 ? t('game.tryOtherVersion') : t('game.seeReveal')
             }
             onContinue={() => dispatch({ type: 'DISMISS_FEEDBACK' })}
           />
