@@ -107,7 +107,7 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
             <button
               className={`${s.btn} ${s.btnPrimary}`}
               onClick={handleSend}
-              disabled={phase !== 'idle'}
+              disabled={phase !== 'idle' || !message.trim()}
             >
               {phase === 'idle'
                 ? t('scenarios.h01.btnSend')

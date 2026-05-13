@@ -9,11 +9,15 @@ export function BadScenario({ onTaskComplete }: ScenarioProps) {
   const { t } = useTranslation();
   const [phase, setPhase] = useState<Phase>('idle');
   const [message, setMessage] = useState(t('scenarios.h01.replyText'));
+  const [sentMessage, setSentMessage] = useState('');
 
   function handleSend() {
     if (phase !== 'idle') return;
+    const text = message;
+    setSentMessage(text);
+    setMessage('');
     setPhase('sending');
-    // After 3 seconds, "silently" complete — no visible confirmation
+    // After 3 seconds, message appears with no feedback during the wait
     setTimeout(() => {
       setPhase('done');
       setTimeout(onTaskComplete, 800);
@@ -35,6 +39,13 @@ export function BadScenario({ onTaskComplete }: ScenarioProps) {
                 {t('scenarios.h01.msgText')}
               </span>
             </div>
+            {phase === 'done' && (
+              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <span style={{ background: '#6c63ff', color: '#fff', borderRadius: 12, padding: '8px 14px', fontSize: 13, maxWidth: 220 }}>
+                  {sentMessage}
+                </span>
+              </div>
+            )}
           </div>
         </div>
 
