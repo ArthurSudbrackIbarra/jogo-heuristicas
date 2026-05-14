@@ -9,6 +9,7 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
   const { t } = useTranslation();
   const [view, setView] = useState<View>('settings');
   const [exitSource, setExitSource] = useState<'step1' | 'step2' | 'step3'>('step1');
+  const [selectedPlan, setSelectedPlan] = useState<'pro' | 'business'>('pro');
 
   const stepNum = view === 'step1' ? 1 : view === 'step2' ? 2 : 3;
 
@@ -61,10 +62,10 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
                 <h3 className={s.modalTitle}>{t('scenarios.h03.step1Title')}</h3>
                 <div className={s.col}>
                   <label className={s.label} style={{ display: 'flex', gap: 8, cursor: 'pointer' }}>
-                    <input type="radio" name="plan" defaultChecked readOnly /> {t('scenarios.h03.planPro')}
+                    <input type="radio" name="plan" checked={selectedPlan === 'pro'} onChange={() => setSelectedPlan('pro')} /> {t('scenarios.h03.planPro')}
                   </label>
                   <label className={s.label} style={{ display: 'flex', gap: 8, cursor: 'pointer' }}>
-                    <input type="radio" name="plan" readOnly /> {t('scenarios.h03.planBusiness')}
+                    <input type="radio" name="plan" checked={selectedPlan === 'business'} onChange={() => setSelectedPlan('business')} /> {t('scenarios.h03.planBusiness')}
                   </label>
                 </div>
                 <div className={`${s.row} ${s.spaceBetween}`}>
@@ -119,7 +120,7 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
             {view === 'step3' && (
               <>
                 <h3 className={s.modalTitle}>{t('scenarios.h03.step3Title')}</h3>
-                <div className={s.modalBody}>{t('scenarios.h03.good.step3Summary')}</div>
+                <div className={s.modalBody}>{t('scenarios.h03.good.step3Summary', { plan: t(`scenarios.h03.plan${selectedPlan === 'pro' ? 'Pro' : 'Business'}`) })}</div>
                 <div className={`${s.row} ${s.spaceBetween}`}>
                   <div className={s.row}>
                     <button

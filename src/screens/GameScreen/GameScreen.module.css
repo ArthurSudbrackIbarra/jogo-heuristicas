@@ -49,8 +49,8 @@
   border-radius: var(--radius-md);
   color: var(--color-text-secondary);
   cursor: pointer;
-  font-size: var(--text-base);
-  padding: 4px 8px;
+  font-size: 24px;
+  padding: 0px 8px 6px 8px;
   line-height: 1;
   transition:
     background-color var(--duration-fast) var(--ease-out),

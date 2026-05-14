@@ -12,7 +12,7 @@
   flex-direction: column;
   align-items: center;
   gap: var(--space-8);
-  max-width: 660px;
+  max-width: 1200px;
   width: 100%;
   animation: fadeIn 500ms var(--ease-out) both;
 }

@@ -57,7 +57,7 @@
       "scenarios": "Cenários concluídos",
       "avgTime": "Tempo médio por tarefa"
     },
-    "learned": "O que você aprendeu",
+    "learned": "O que você aprendeu:",
     "playAgain": "Jogar novamente",
     "feedbackTitle": "Ajude a melhorar nossa pesquisa!",
     "feedbackSubtitle": "Conte-nos sobre sua experiência com este jogo:",
@@ -133,14 +133,14 @@
       "btnNext": "Próximo →",
       "oopsMsg": "Você clicou em \"Fazer Upgrade\" sem querer. Tente sair sem concluir o upgrade.",
       "bad": {
-        "step3Summary": "Você está prestes a fazer upgrade para o Pro (R$49/mês). Seu cartão será cobrado imediatamente.",
+        "step3Summary": "Você está prestes a fazer upgrade para o {{plan}}. Seu cartão será cobrado imediatamente.",
         "btnGiveUp": "Desisti — não tem como sair →",
         "btnConfirm": "Confirmar Upgrade →",
         "upgradedMsg": "Upgrade feito! Não havia Cancelar, nem ✕, nem Voltar na primeira etapa. Você foi forçado a concluir o processo.",
         "btnContinue": "Entendi o problema →"
       },
       "good": {
-        "step3Summary": "Você está prestes a fazer upgrade para o Pro (R$49/mês). Seu cartão será cobrado imediatamente.",
+        "step3Summary": "Você está prestes a fazer upgrade para o {{plan}}. Seu cartão será cobrado imediatamente.",
         "btnBack": "← Voltar",
         "btnCancel": "Cancelar",
         "btnConfirm": "Confirmar Upgrade →",
@@ -262,7 +262,7 @@
         "rating": "★★★★★",
         "reviews": "4,7 (2.341 avaliações)",
         "shipping": "✓ Frete grátis",
-        "btnBuyNow": "Comprar — R$ 7.299",
+        "btnBuyNow": "Comprar — R$ 1.299",
         "returns": "30 dias de devolução grátis · 2 anos de garantia"
       }
     },
@@ -272,6 +272,7 @@
       "labelEmail": "Endereço de e-mail",
       "emailPlaceholder": "voce@exemplo.com",
       "labelPassword": "Senha",
+      "passwordHelper": "* A senha deve ter pelo menos 8 caracteres.",
       "btnRegister": "Cadastrar",
       "bad": {
         "errorMsg": "❌ Erro 422: Entidade não processável. Falha na validação do corpo da requisição.",

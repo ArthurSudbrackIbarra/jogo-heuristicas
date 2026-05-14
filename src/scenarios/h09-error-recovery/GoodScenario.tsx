@@ -58,6 +58,7 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
               value={password}
               onChange={e => { setPassword(e.target.value); setErrors(err => ({ ...err, password: undefined })); }}
             />
+            <p className={s.inputHelper}>{t('scenarios.h09.passwordHelper')}</p>
             {errors.password && <p className={s.inputError}>⚠️ {errors.password}</p>}
           </div>
           <button

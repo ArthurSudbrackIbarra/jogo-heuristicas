@@ -92,6 +92,13 @@
   border-color: #f43f5e;
 }
 
+.inputHelper {
+  text-align: left;
+  font-size: 10px;
+  margin-left: 3px;
+  color: #64748b;
+}
+
 .inputError {
   font-size: 12px;
   color: #f43f5e;

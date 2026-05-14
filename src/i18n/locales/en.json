@@ -57,7 +57,7 @@
       "scenarios": "Scenarios completed",
       "avgTime": "Avg. task time"
     },
-    "learned": "What you learned",
+    "learned": "What you learned:",
     "playAgain": "Play again",
     "feedbackTitle": "Help us improve our research!",
     "feedbackSubtitle": "Tell us about your experience with this game:",
@@ -133,14 +133,14 @@
       "btnNext": "Next →",
       "oopsMsg": "You accidentally clicked \"Upgrade Plan\". Try to exit without completing the upgrade.",
       "bad": {
-        "step3Summary": "You're about to upgrade to Pro ($29/mo). Your card will be charged immediately.",
+        "step3Summary": "You're about to upgrade to {{plan}}. Your card will be charged immediately.",
         "btnGiveUp": "I give up — there's no way out →",
         "btnConfirm": "Confirm Upgrade →",
         "upgradedMsg": "Upgraded! There was no Cancel, no ✕, and no Back on step 1. You were forced to finish the process.",
         "btnContinue": "I see the problem →"
       },
       "good": {
-        "step3Summary": "You're about to upgrade to Pro ($29/mo). Your card will be charged immediately.",
+        "step3Summary": "You're about to upgrade to {{plan}}. Your card will be charged immediately.",
         "btnBack": "← Back",
         "btnCancel": "Cancel",
         "btnConfirm": "Confirm Upgrade →",
@@ -273,6 +273,7 @@
       "labelEmail": "Email address",
       "emailPlaceholder": "you@example.com",
       "labelPassword": "Password",
+      "passwordHelper": "* Password must be at least 8 characters.",
       "btnRegister": "Register",
       "bad": {
         "errorMsg": "❌ Error 422: Unprocessable Entity. Request body validation failed.",
