@@ -1,0 +1,6 @@
+# Sensitive — never commit
+credentials.json
+token.json
+
+# Dependencies
+node_modules/

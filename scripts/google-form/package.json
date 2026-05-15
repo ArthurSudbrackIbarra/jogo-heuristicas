@@ -1,0 +1,19 @@
+{
+  "name": "create-google-form",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Standalone script that builds the bilingual post-game feedback form for the Nielsen Heuristics game via the Google Forms API.",
+  "type": "module",
+  "scripts": {
+    "create": "tsx src/createForm.ts"
+  },
+  "dependencies": {
+    "google-auth-library": "^9.15.0",
+    "googleapis": "^144.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}
