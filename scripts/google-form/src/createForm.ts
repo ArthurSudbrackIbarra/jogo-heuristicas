@@ -14,10 +14,10 @@
  * into the PT section.
  */
 
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { google, type forms_v1 } from 'googleapis';
-import { getAuthorizedClient } from './auth.js';
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { google, type forms_v1 } from "googleapis";
+import { getAuthorizedClient } from "./auth.js";
 import {
   formMeta,
   likertScales,
@@ -27,7 +27,7 @@ import {
   type ChoiceItem,
   type TextItem,
   type SectionBreak,
-} from './questions.js';
+} from "./questions.js";
 
 type Item = forms_v1.Schema$Item;
 type Request = forms_v1.Schema$Request;
@@ -35,8 +35,8 @@ type Option = forms_v1.Schema$Option;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const CREDENTIALS_PATH = path.join(__dirname, '..', 'credentials.json');
-const TOKEN_PATH = path.join(__dirname, '..', 'token.json');
+const CREDENTIALS_PATH = path.join(__dirname, "..", "credentials.json");
+const TOKEN_PATH = path.join(__dirname, "..", "token.json");
 
 // ─── Item builders ───────────────────────────────────────────────────────────
 
@@ -49,7 +49,7 @@ function likertToItem(q: LikertItem, lang: Lang): Item {
       question: {
         required: q.required,
         choiceQuestion: {
-          type: 'RADIO',
+          type: "RADIO",
           options: scale.map((value) => ({ value })),
         },
       },
@@ -60,7 +60,7 @@ function likertToItem(q: LikertItem, lang: Lang): Item {
 function choiceToItem(q: ChoiceItem, lang: Lang): Item {
   const options: Option[] = q.options.map((opt) => {
     const o: Option = { value: opt[lang] };
-    if (q.submitAfter) o.goToAction = 'SUBMIT_FORM';
+    if (q.submitAfter) o.goToAction = "SUBMIT_FORM";
     return o;
   });
   return {
@@ -70,7 +70,7 @@ function choiceToItem(q: ChoiceItem, lang: Lang): Item {
       question: {
         required: q.required,
         choiceQuestion: {
-          type: q.multiple ? 'CHECKBOX' : 'RADIO',
+          type: q.multiple ? "CHECKBOX" : "RADIO",
           options,
         },
       },
@@ -115,12 +115,12 @@ function buildLanguagePass(lang: Lang): LanguagePass {
 
   for (const q of questions) {
     let item: Item;
-    if (q.type === 'section') {
+    if (q.type === "section") {
       item = sectionToItem(q, lang);
       if (firstPageBreakIndex === -1) firstPageBreakIndex = items.length;
-    } else if (q.type === 'likert') {
+    } else if (q.type === "likert") {
       item = likertToItem(q, lang);
-    } else if (q.type === 'choice') {
+    } else if (q.type === "choice") {
       item = choiceToItem(q, lang);
     } else {
       item = textToItem(q, lang);
@@ -130,7 +130,7 @@ function buildLanguagePass(lang: Lang): LanguagePass {
 
   if (firstPageBreakIndex === -1) {
     throw new Error(
-      'Question bank has no section breaks — at least one is required to start the language section.',
+      "Question bank has no section breaks — at least one is required to start the language section.",
     );
   }
   return { items, firstPageBreakIndex };
@@ -140,7 +140,7 @@ function buildLanguagePass(lang: Lang): LanguagePass {
 
 function introItem(): Item {
   return {
-    title: 'Welcome · Bem-vindo(a)',
+    title: "Welcome · Bem-vindo(a)",
     description:
       "Please pick your preferred language below — you'll only see the questionnaire in the language you select.\n\nEscolha o idioma de sua preferência abaixo — você só verá o questionário no idioma escolhido.",
     textItem: {},
@@ -149,15 +149,15 @@ function introItem(): Item {
 
 function languageSelectorPlaceholder(): Item {
   return {
-    title: 'Language · Idioma',
+    title: "Language · Idioma",
     description:
-      'Select the language you would like to answer in.\nSelecione o idioma em que deseja responder.',
+      "Select the language you would like to answer in.\nSelecione o idioma em que deseja responder.",
     questionItem: {
       question: {
         required: true,
         choiceQuestion: {
-          type: 'RADIO',
-          options: [{ value: 'English' }, { value: 'Português' }],
+          type: "RADIO",
+          options: [{ value: "English" }, { value: "Português" }],
         },
       },
     },
@@ -171,17 +171,17 @@ function languageSelectorWithRouting(
 ): Item {
   return {
     itemId,
-    title: 'Language · Idioma',
+    title: "Language · Idioma",
     description:
-      'Select the language you would like to answer in.\nSelecione o idioma em que deseja responder.',
+      "Select the language you would like to answer in.\nSelecione o idioma em que deseja responder.",
     questionItem: {
       question: {
         required: true,
         choiceQuestion: {
-          type: 'RADIO',
+          type: "RADIO",
           options: [
-            { value: 'English', goToSectionId: enPageBreakItemId },
-            { value: 'Português', goToSectionId: ptPageBreakItemId },
+            { value: "English", goToSectionId: enPageBreakItemId },
+            { value: "Português", goToSectionId: ptPageBreakItemId },
           ],
         },
       },
@@ -192,12 +192,12 @@ function languageSelectorWithRouting(
 // ─── Main ────────────────────────────────────────────────────────────────────
 
 async function main(): Promise<void> {
-  console.log('Authorizing Google Forms API client…');
+  console.log("Authorizing Google Forms API client…");
   const auth = await getAuthorizedClient({
     credentialsPath: CREDENTIALS_PATH,
     tokenPath: TOKEN_PATH,
   });
-  const forms = google.forms({ version: 'v1', auth });
+  const forms = google.forms({ version: "v1", auth });
 
   const combinedTitle = `${formMeta.title.en} · ${formMeta.title.pt}`;
   console.log(`Creating form "${combinedTitle}"…`);
@@ -207,12 +207,12 @@ async function main(): Promise<void> {
     },
   });
   const formId = createRes.data.formId;
-  if (!formId) throw new Error('forms.create did not return a formId');
+  if (!formId) throw new Error("forms.create did not return a formId");
   console.log(`Form created (formId: ${formId}).`);
 
   // ── Build flat item list ──
-  const enPass = buildLanguagePass('en');
-  const ptPass = buildLanguagePass('pt');
+  const enPass = buildLanguagePass("en");
+  const ptPass = buildLanguagePass("pt");
 
   // Layout (indices in the final form):
   //   0           : intro text
@@ -237,7 +237,7 @@ async function main(): Promise<void> {
         info: {
           description: `${formMeta.description.en}\n\n— — —\n\n${formMeta.description.pt}`,
         },
-        updateMask: 'description',
+        updateMask: "description",
       },
     },
     ...items.map((item, index) => ({
@@ -269,7 +269,7 @@ async function main(): Promise<void> {
   }
 
   // ── batchUpdate #2: rewrite language selector options with routing ──
-  console.log('Submitting batchUpdate #2 to wire language routing…');
+  console.log("Submitting batchUpdate #2 to wire language routing…");
   await forms.forms.batchUpdate({
     formId,
     requestBody: {
@@ -282,7 +282,7 @@ async function main(): Promise<void> {
               ptPageBreakItemId,
             ),
             location: { index: LANG_INDEX },
-            updateMask: 'questionItem.question.choiceQuestion.options',
+            updateMask: "questionItem.question.choiceQuestion.options",
           },
         },
       ],
@@ -294,22 +294,27 @@ async function main(): Promise<void> {
     createRes.data.responderUri ??
     `https://docs.google.com/forms/d/e/${formId}/viewform`;
 
-  console.log('\n✓ Form created and configured.');
+  console.log("\n✓ Form created and configured.");
   console.log(`  Edit URL:      ${editUrl}`);
   console.log(`  Responder URL: ${responderUrl}`);
-  console.log('\nNext steps:');
+  console.log("\nNext steps:");
   console.log("  1. Open the edit URL and review the form's layout.");
-  console.log("  2. On the 'Responses' tab, click the green Sheets icon to capture submissions into a spreadsheet.");
+  console.log(
+    "  2. On the 'Responses' tab, click the green Sheets icon to capture submissions into a spreadsheet.",
+  );
   console.log(
     "  3. Paste the responder URL into src/screens/ResultsScreen/index.tsx (replace https://forms.gle/PLACEHOLDER).",
   );
   console.log(
-    '  4. To aggregate across languages: response columns share a `[CODE]` prefix (e.g. [L1]) — group columns by prefix.',
+    "  4. To aggregate across languages: response columns share a `[CODE]` prefix (e.g. [L1]) — group columns by prefix.",
   );
 }
 
 main().catch((err) => {
-  console.error('\n✗ Failed to create form:', err instanceof Error ? err.message : err);
+  console.error(
+    "\n✗ Failed to create form:",
+    err instanceof Error ? err.message : err,
+  );
   if (err instanceof Error && err.stack) console.error(err.stack);
   process.exit(1);
 });

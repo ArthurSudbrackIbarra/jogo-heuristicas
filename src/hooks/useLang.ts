@@ -1,5 +1,5 @@
-import { useGame } from '../context/GameContext';
-import type { Lang } from '../types/game';
+import { useGame } from "../context/GameContext";
+import type { Lang } from "../types/game";
 
 export function useLang() {
   const { state, dispatch } = useGame();
@@ -9,7 +9,7 @@ export function useLang() {
   }
 
   function setLang(lang: Lang) {
-    dispatch({ type: 'SET_LANG', lang });
+    dispatch({ type: "SET_LANG", lang });
   }
 
   return { lang: state.lang, pick, setLang };

@@ -1,4 +1,4 @@
-import styles from './ProgressBar.module.css';
+import styles from "./ProgressBar.module.css";
 
 interface ProgressBarProps {
   current: number; // 1-based
@@ -6,7 +6,11 @@ interface ProgressBarProps {
   scenarioIndex: 0 | 1;
 }
 
-export function ProgressBar({ current, total, scenarioIndex }: ProgressBarProps) {
+export function ProgressBar({
+  current,
+  total,
+  scenarioIndex,
+}: ProgressBarProps) {
   const pct = ((current - 1 + (scenarioIndex === 1 ? 0.5 : 0)) / total) * 100;
 
   return (
@@ -28,11 +32,11 @@ export function ProgressBar({ current, total, scenarioIndex }: ProgressBarProps)
             key={i}
             className={[
               styles.dot,
-              i < current - 1 ? styles.done : '',
-              i === current - 1 ? styles.active : '',
+              i < current - 1 ? styles.done : "",
+              i === current - 1 ? styles.active : "",
             ]
               .filter(Boolean)
-              .join(' ')}
+              .join(" ")}
             aria-hidden="true"
           />
         ))}

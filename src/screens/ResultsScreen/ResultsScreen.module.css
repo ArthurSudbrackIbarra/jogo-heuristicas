@@ -18,20 +18,31 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .trophy {
   font-size: 5rem;
   line-height: 1;
-  filter: drop-shadow(0 0 32px rgba(245,158,11,0.5));
+  filter: drop-shadow(0 0 32px rgba(245, 158, 11, 0.5));
   animation: bounce 2s ease-in-out infinite;
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50%       { transform: translateY(-8px) rotate(5deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(5deg);
+  }
 }
 
 .header {
@@ -119,8 +130,14 @@
 }
 
 @keyframes slideIn {
-  from { opacity: 0; transform: translateX(-12px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .listNum {
@@ -212,6 +229,10 @@
 }
 
 @media (max-width: 440px) {
-  .stats { grid-template-columns: 1fr 1fr; }
-  .stats .stat:last-child { grid-column: span 2; }
+  .stats {
+    grid-template-columns: 1fr 1fr;
+  }
+  .stats .stat:last-child {
+    grid-column: span 2;
+  }
 }

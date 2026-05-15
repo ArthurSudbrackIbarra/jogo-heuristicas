@@ -11,8 +11,14 @@
 }
 
 @keyframes fadeInScale {
-  from { opacity: 0; transform: scale(0.97); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .disabled {
@@ -45,9 +51,15 @@
   border-radius: 50%;
 }
 
-.red    { background: #ff5f57; }
-.yellow { background: #febc2e; }
-.green  { background: #28c840; }
+.red {
+  background: #ff5f57;
+}
+.yellow {
+  background: #febc2e;
+}
+.green {
+  background: #28c840;
+}
 
 .titleText {
   flex: 1;
@@ -58,7 +70,10 @@
   margin-right: 52px; /* balance the traffic lights */
 }
 
-.spacer { flex-shrink: 0; width: 52px; }
+.spacer {
+  flex-shrink: 0;
+  width: 52px;
+}
 
 /* ── Address bar ───────────────────────────────────────── */
 .addressBar {

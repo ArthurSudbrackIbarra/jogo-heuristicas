@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react';
-import styles from './ScenarioFrame.module.css';
+import type { ReactNode } from "react";
+import styles from "./ScenarioFrame.module.css";
 
 interface ScenarioFrameProps {
   title: string;
@@ -8,9 +8,13 @@ interface ScenarioFrameProps {
   disabled?: boolean;
 }
 
-export function ScenarioFrame({ title, children, disabled = false }: ScenarioFrameProps) {
+export function ScenarioFrame({
+  title,
+  children,
+  disabled = false,
+}: ScenarioFrameProps) {
   return (
-    <div className={`${styles.shell} ${disabled ? styles.disabled : ''}`}>
+    <div className={`${styles.shell} ${disabled ? styles.disabled : ""}`}>
       {/* Fake OS title bar */}
       <div className={styles.titleBar}>
         <div className={styles.trafficLights} aria-hidden="true">

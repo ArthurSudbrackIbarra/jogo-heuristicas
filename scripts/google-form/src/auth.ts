@@ -12,15 +12,15 @@
  * refresh token.
  */
 
-import { readFile, writeFile } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
-import { createServer } from 'node:http';
-import type { AddressInfo } from 'node:net';
-import { URL } from 'node:url';
-import { exec } from 'node:child_process';
-import { OAuth2Client } from 'google-auth-library';
+import { readFile, writeFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import { createServer } from "node:http";
+import type { AddressInfo } from "node:net";
+import { URL } from "node:url";
+import { exec } from "node:child_process";
+import { OAuth2Client } from "google-auth-library";
 
-const SCOPES = ['https://www.googleapis.com/auth/forms.body'];
+const SCOPES = ["https://www.googleapis.com/auth/forms.body"];
 
 interface DesktopCredentials {
   installed?: {
@@ -47,9 +47,9 @@ interface StoredToken {
 function openBrowser(url: string): void {
   const platform = process.platform;
   const cmd =
-    platform === 'darwin'
+    platform === "darwin"
       ? `open "${url}"`
-      : platform === 'win32'
+      : platform === "win32"
         ? `start "" "${url}"`
         : `xdg-open "${url}"`;
   exec(cmd, () => {
@@ -66,7 +66,7 @@ async function loadCredentials(path: string): Promise<{
       `Could not find ${path}. Download the OAuth Desktop client JSON from Google Cloud Console and save it as credentials.json — see README.md.`,
     );
   }
-  const raw = await readFile(path, 'utf-8');
+  const raw = await readFile(path, "utf-8");
   const parsed = JSON.parse(raw) as DesktopCredentials;
   const block = parsed.installed ?? parsed.web;
   if (!block) {
@@ -80,7 +80,7 @@ async function loadCredentials(path: string): Promise<{
 async function loadStoredToken(path: string): Promise<StoredToken | null> {
   if (!existsSync(path)) return null;
   try {
-    const raw = await readFile(path, 'utf-8');
+    const raw = await readFile(path, "utf-8");
     const parsed = JSON.parse(raw) as StoredToken;
     return parsed.refresh_token ? parsed : null;
   } catch {
@@ -88,8 +88,11 @@ async function loadStoredToken(path: string): Promise<StoredToken | null> {
   }
 }
 
-async function saveStoredToken(path: string, token: StoredToken): Promise<void> {
-  await writeFile(path, JSON.stringify(token, null, 2) + '\n', 'utf-8');
+async function saveStoredToken(
+  path: string,
+  token: StoredToken,
+): Promise<void> {
+  await writeFile(path, JSON.stringify(token, null, 2) + "\n", "utf-8");
 }
 
 async function interactiveAuth(client: OAuth2Client): Promise<string> {
@@ -99,12 +102,12 @@ async function interactiveAuth(client: OAuth2Client): Promise<string> {
       try {
         if (!req.url) {
           res.statusCode = 400;
-          res.end('Missing URL.');
+          res.end("Missing URL.");
           return;
         }
         const reqUrl = new URL(req.url, `http://127.0.0.1`);
-        const code = reqUrl.searchParams.get('code');
-        const error = reqUrl.searchParams.get('error');
+        const code = reqUrl.searchParams.get("code");
+        const error = reqUrl.searchParams.get("error");
         if (error) {
           res.statusCode = 400;
           res.end(`Authorization failed: ${error}. You can close this tab.`);
@@ -114,11 +117,11 @@ async function interactiveAuth(client: OAuth2Client): Promise<string> {
         }
         if (!code) {
           res.statusCode = 400;
-          res.end('Missing authorization code.');
+          res.end("Missing authorization code.");
           return;
         }
         res.statusCode = 200;
-        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.setHeader("Content-Type", "text/html; charset=utf-8");
         res.end(
           '<html><body style="font-family:sans-serif;padding:2rem"><h2>You can close this tab.</h2><p>Authorization received. Return to your terminal.</p></body></html>',
         );
@@ -126,26 +129,28 @@ async function interactiveAuth(client: OAuth2Client): Promise<string> {
         resolve(code);
       } catch (err) {
         res.statusCode = 500;
-        res.end('Internal error.');
+        res.end("Internal error.");
         server.close();
         reject(err);
       }
     });
 
-    server.on('error', reject);
-    server.listen(0, '127.0.0.1', () => {
+    server.on("error", reject);
+    server.listen(0, "127.0.0.1", () => {
       const { port } = server.address() as AddressInfo;
       const redirectUri = `http://127.0.0.1:${port}`;
       // Mutate the client to use this loopback redirect.
       client.redirectUri = redirectUri;
       const authUrl = client.generateAuthUrl({
-        access_type: 'offline',
+        access_type: "offline",
         scope: SCOPES,
-        prompt: 'consent', // force refresh_token issuance on first run
+        prompt: "consent", // force refresh_token issuance on first run
         redirect_uri: redirectUri,
       });
-      console.log('\nOpening browser to authorize the Google Forms API…');
-      console.log(`If it does not open, paste this URL manually:\n  ${authUrl}\n`);
+      console.log("\nOpening browser to authorize the Google Forms API…");
+      console.log(
+        `If it does not open, paste this URL manually:\n  ${authUrl}\n`,
+      );
       openBrowser(authUrl);
     });
   });
@@ -155,7 +160,9 @@ export async function getAuthorizedClient(options: {
   credentialsPath: string;
   tokenPath: string;
 }): Promise<OAuth2Client> {
-  const { clientId, clientSecret } = await loadCredentials(options.credentialsPath);
+  const { clientId, clientSecret } = await loadCredentials(
+    options.credentialsPath,
+  );
   const client = new OAuth2Client({ clientId, clientSecret });
   const stored = await loadStoredToken(options.tokenPath);
 
@@ -175,7 +182,7 @@ export async function getAuthorizedClient(options: {
   const { tokens } = await client.getToken(code);
   if (!tokens.refresh_token) {
     throw new Error(
-      'Google did not return a refresh_token. Delete token.json (if present) and try again. The OAuth client may need access_type=offline + prompt=consent.',
+      "Google did not return a refresh_token. Delete token.json (if present) and try again. The OAuth client may need access_type=offline + prompt=consent.",
     );
   }
   client.setCredentials(tokens);

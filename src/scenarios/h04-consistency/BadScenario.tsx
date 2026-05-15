@@ -1,42 +1,47 @@
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import type { ScenarioProps } from '../../types/game';
-import s from '../scenario.module.css';
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import type { ScenarioProps } from "../../types/game";
+import s from "../scenario.module.css";
 
 // BAD: inconsistent button labels and placement across steps
 export function BadScenario({ onTaskComplete }: ScenarioProps) {
   const { t } = useTranslation();
   const [step, setStep] = useState(0);
-  const [values, setValues] = useState(['', '', '', '']);
+  const [values, setValues] = useState(["", "", "", ""]);
 
   const STEPS = [
     {
-      title: t('scenarios.h04.stepPersonal'),
+      title: t("scenarios.h04.stepPersonal"),
       back: null,
-      forward: t('scenarios.h04.bad.next0'),
+      forward: t("scenarios.h04.bad.next0"),
     },
     {
-      title: t('scenarios.h04.stepAddress'),
-      back: t('scenarios.h04.bad.back1'),
-      forward: t('scenarios.h04.bad.next1'),
+      title: t("scenarios.h04.stepAddress"),
+      back: t("scenarios.h04.bad.back1"),
+      forward: t("scenarios.h04.bad.next1"),
     },
     {
-      title: t('scenarios.h04.stepPayment'),
-      back: t('scenarios.h04.bad.back2'),
-      forward: t('scenarios.h04.bad.next2'),
+      title: t("scenarios.h04.stepPayment"),
+      back: t("scenarios.h04.bad.back2"),
+      forward: t("scenarios.h04.bad.next2"),
     },
     {
-      title: t('scenarios.h04.stepConfirm'),
-      back: t('scenarios.h04.bad.back3'),
-      forward: t('scenarios.h04.bad.next3'),
+      title: t("scenarios.h04.stepConfirm"),
+      back: t("scenarios.h04.bad.back3"),
+      forward: t("scenarios.h04.bad.next3"),
     },
   ];
 
   function next() {
-    if (step >= STEPS.length - 1) { onTaskComplete(); return; }
-    setStep(s => s + 1);
+    if (step >= STEPS.length - 1) {
+      onTaskComplete();
+      return;
+    }
+    setStep((s) => s + 1);
   }
-  function back() { setStep(s => Math.max(0, s - 1)); }
+  function back() {
+    setStep((s) => Math.max(0, s - 1));
+  }
 
   const current = STEPS[step];
 
@@ -45,31 +50,39 @@ export function BadScenario({ onTaskComplete }: ScenarioProps) {
       <div className={s.toolbar}>
         <span>🛒</span>
         <span className={s.toolbarTitle}>
-          {t('scenarios.h04.toolbarTitle', { step: step + 1, total: STEPS.length })}
+          {t("scenarios.h04.toolbarTitle", {
+            step: step + 1,
+            total: STEPS.length,
+          })}
         </span>
       </div>
       <div className={s.body}>
         <div className={s.row} style={{ gap: 4 }}>
           {STEPS.map((_st, i) => (
-            <div key={i} style={{
-              flex: 1, height: 4, borderRadius: 99,
-              background: i <= step ? '#6c63ff' : '#e2e8f0',
-              transition: 'background 200ms'
-            }} />
+            <div
+              key={i}
+              style={{
+                flex: 1,
+                height: 4,
+                borderRadius: 99,
+                background: i <= step ? "#6c63ff" : "#e2e8f0",
+                transition: "background 200ms",
+              }}
+            />
           ))}
         </div>
 
         <div className={s.card}>
           <p className={s.subheading}>{current.title}</p>
           <p className={s.muted} style={{ marginTop: 6 }}>
-            {t('scenarios.h04.fillDetails')}
+            {t("scenarios.h04.fillDetails")}
           </p>
           <div className={s.formGroup} style={{ marginTop: 12 }}>
             <input
               className={s.input}
-              placeholder={t('scenarios.h04.sampleField')}
+              placeholder={t("scenarios.h04.sampleField")}
               value={values[step]}
-              onChange={e => {
+              onChange={(e) => {
                 const next = [...values];
                 next[step] = e.target.value;
                 setValues(next);
@@ -79,17 +92,21 @@ export function BadScenario({ onTaskComplete }: ScenarioProps) {
         </div>
 
         {/* Buttons: inconsistent labels AND placement changes each step */}
-        <div style={{
-          display: 'flex',
-          flexDirection: step % 2 === 0 ? 'row' : 'row-reverse',
-          justifyContent: 'space-between',
-          gap: 8
-        }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: step % 2 === 0 ? "row" : "row-reverse",
+            justifyContent: "space-between",
+            gap: 8,
+          }}
+        >
           {current.back ? (
             <button className={`${s.btn} ${s.btnSecondary}`} onClick={back}>
               {current.back}
             </button>
-          ) : <span />}
+          ) : (
+            <span />
+          )}
           <button className={`${s.btn} ${s.btnPrimary}`} onClick={next}>
             {current.forward}
           </button>

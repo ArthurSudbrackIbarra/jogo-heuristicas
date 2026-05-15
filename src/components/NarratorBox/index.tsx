@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useAudio } from '../../hooks/useAudio';
-import { useLang } from '../../hooks/useLang';
-import type { Lang } from '../../types/game';
-import styles from './NarratorBox.module.css';
+import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
+import { useAudio } from "../../hooks/useAudio";
+import { useLang } from "../../hooks/useLang";
+import type { Lang } from "../../types/game";
+import styles from "./NarratorBox.module.css";
 
 interface NarratorBoxProps {
   text: string;
@@ -20,20 +20,42 @@ export function NarratorBox({
   showContinue = false,
   continueLabel,
   onContinue,
-  className = '',
+  className = "",
 }: NarratorBoxProps) {
-  const { play, stop } = useAudio();
+  const { play, stop, pause, resume, isPlaying } = useAudio();
   const { lang } = useLang();
   const { t } = useTranslation();
+  const pausedRef = useRef(false);
 
   const resolvedAudio = audioSrc?.[lang];
 
   useEffect(() => {
+    pausedRef.current = false;
     if (resolvedAudio) {
       play(resolvedAudio);
     }
     return () => stop();
   }, [resolvedAudio, play, stop]);
+
+  const handleToggle = () => {
+    if (isPlaying) {
+      pause();
+      pausedRef.current = true;
+    } else if (pausedRef.current) {
+      resume();
+      pausedRef.current = false;
+    } else if (resolvedAudio) {
+      play(resolvedAudio);
+      pausedRef.current = false;
+    }
+  };
+
+  const handleRestart = () => {
+    if (resolvedAudio) {
+      play(resolvedAudio);
+      pausedRef.current = false;
+    }
+  };
 
   return (
     <div className={`${styles.box} ${className}`}>
@@ -41,14 +63,34 @@ export function NarratorBox({
         🎙
       </div>
       <div className={styles.content}>
-        <span className={styles.label}>{t('narrator.label')}</span>
+        <span className={styles.label}>{t("narrator.label")}</span>
         <p className={styles.text}>{text}</p>
         {showContinue && (
           <button className={styles.continueBtn} onClick={onContinue}>
-            {continueLabel ?? t('narrator.continue')}
+            {continueLabel ?? t("narrator.continue")}
           </button>
         )}
       </div>
+      {resolvedAudio && (
+        <div className={styles.audioControls}>
+          <button
+            className={styles.audioBtn}
+            onClick={handleRestart}
+            title={t("narrator.restart")}
+            aria-label={t("narrator.restart")}
+          >
+            ↺
+          </button>
+          <button
+            className={styles.audioBtn}
+            onClick={handleToggle}
+            title={isPlaying ? t("narrator.pause") : t("narrator.play")}
+            aria-label={isPlaying ? t("narrator.pause") : t("narrator.play")}
+          >
+            {isPlaying ? "⏸" : "▶"}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

@@ -25,7 +25,10 @@
   },
   "narrator": {
     "label": "Narrator",
-    "continue": "Continue →"
+    "continue": "Continue →",
+    "pause": "Pause audio",
+    "play": "Play audio",
+    "restart": "Restart audio"
   },
   "goalCard": {
     "badge": "Your mission — Scenario {{number}}"

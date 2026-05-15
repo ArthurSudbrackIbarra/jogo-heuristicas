@@ -1,7 +1,7 @@
-import type { ComponentType } from 'react';
+import type { ComponentType } from "react";
 
 // ─── Localisation ─────────────────────────────────────────────────────────────
-export type Lang = 'en' | 'pt';
+export type Lang = "en" | "pt";
 export type Bilingual = Record<Lang, string>;
 
 // ─── Scenario props passed to every scenario component ───────────────────────
@@ -10,7 +10,7 @@ export interface ScenarioProps {
 }
 
 // ─── Scenario descriptor ─────────────────────────────────────────────────────
-export type ScenarioKind = 'good' | 'bad';
+export type ScenarioKind = "good" | "bad";
 
 export interface ScenarioConfig {
   kind: ScenarioKind;
@@ -36,12 +36,12 @@ export interface HeuristicConfig {
 
 // ─── Game state machine ───────────────────────────────────────────────────────
 export type GamePhase =
-  | 'welcome'
-  | 'playing'
-  | 'feedback'
-  | 'reveal'
-  | 'shop'
-  | 'results';
+  | "welcome"
+  | "playing"
+  | "feedback"
+  | "reveal"
+  | "shop"
+  | "results";
 
 export interface CompletedEntry {
   heuristicId: number;
@@ -62,12 +62,12 @@ export interface GameState {
 
 // ─── Dispatcher actions ───────────────────────────────────────────────────────
 export type GameAction =
-  | { type: 'START_GAME' }
-  | { type: 'TASK_COMPLETE' }
-  | { type: 'DISMISS_FEEDBACK' }
-  | { type: 'DISMISS_REVEAL' }
-  | { type: 'BUY_ITEM' }
-  | { type: 'RESTART' }
-  | { type: 'SET_LANG'; lang: Lang }
-  | { type: 'NAVIGATE_TO'; heuristicIndex: number; scenarioIndex: 0 | 1 }
-  | { type: 'FINISH_GAME' };
+  | { type: "START_GAME" }
+  | { type: "TASK_COMPLETE" }
+  | { type: "DISMISS_FEEDBACK" }
+  | { type: "DISMISS_REVEAL" }
+  | { type: "BUY_ITEM" }
+  | { type: "RESTART" }
+  | { type: "SET_LANG"; lang: Lang }
+  | { type: "NAVIGATE_TO"; heuristicIndex: number; scenarioIndex: 0 | 1 }
+  | { type: "FINISH_GAME" };

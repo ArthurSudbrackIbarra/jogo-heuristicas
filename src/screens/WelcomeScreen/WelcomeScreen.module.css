@@ -21,20 +21,31 @@
 }
 
 @keyframes fadeInScale {
-  from { opacity: 0; transform: scale(0.95) translateY(16px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .icon {
   font-size: 5rem;
   line-height: 1;
-  filter: drop-shadow(0 0 32px rgba(108,99,255,0.5));
+  filter: drop-shadow(0 0 32px rgba(108, 99, 255, 0.5));
   animation: bounce 3s ease-in-out infinite;
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .header {
@@ -78,7 +89,9 @@
 }
 
 @media (max-width: 440px) {
-  .features { grid-template-columns: 1fr; }
+  .features {
+    grid-template-columns: 1fr;
+  }
 }
 
 .feature {
@@ -144,8 +157,12 @@
 
 /* ── Mystery teaser ────────────────────────────────────── */
 .mysteryTeaser {
-  background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(108,99,255,0.12));
-  border: 1px solid rgba(245,158,11,0.3);
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.12),
+    rgba(108, 99, 255, 0.12)
+  );
+  border: 1px solid rgba(245, 158, 11, 0.3);
   border-radius: var(--radius-xl);
   padding: var(--space-3) var(--space-5);
   font-size: var(--text-sm);

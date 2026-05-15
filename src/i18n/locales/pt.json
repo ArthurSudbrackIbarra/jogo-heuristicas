@@ -25,7 +25,10 @@
   },
   "narrator": {
     "label": "Narrador",
-    "continue": "Continuar →"
+    "continue": "Continuar →",
+    "pause": "Pausar áudio",
+    "play": "Reproduzir áudio",
+    "restart": "Reiniciar áudio"
   },
   "goalCard": {
     "badge": "Sua missão — Cenário {{number}}"

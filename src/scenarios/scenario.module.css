@@ -9,7 +9,8 @@
   min-height: 320px;
   display: flex;
   flex-direction: column;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: #1e293b;
 }
 
@@ -56,7 +57,7 @@
   border: 1px solid #e2e8f0;
   border-radius: 10px;
   padding: 16px 20px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
 }
 
 /* ── Form elements ─────────────────────────────────────── */
@@ -85,7 +86,7 @@
 
 .input:focus {
   border-color: #6c63ff;
-  box-shadow: 0 0 0 3px rgba(108,99,255,0.12);
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.12);
 }
 
 .input.error {
@@ -113,20 +114,43 @@
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 120ms ease, background-color 120ms ease, transform 100ms ease;
+  transition:
+    opacity 120ms ease,
+    background-color 120ms ease,
+    transform 100ms ease;
   display: inline-flex;
   align-items: center;
   gap: 6px;
 }
 
-.btn:hover:not(:disabled) { opacity: 0.88; }
-.btn:active:not(:disabled) { transform: scale(0.97); }
-.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn:hover:not(:disabled) {
+  opacity: 0.88;
+}
+.btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
-.btnPrimary { background: #6c63ff; color: #fff; }
-.btnSuccess { background: #22c55e; color: #fff; }
-.btnDanger  { background: #f43f5e; color: #fff; }
-.btnSecondary { background: #f1f5f9; color: #374151; border: 1px solid #e2e8f0; }
+.btnPrimary {
+  background: #6c63ff;
+  color: #fff;
+}
+.btnSuccess {
+  background: #22c55e;
+  color: #fff;
+}
+.btnDanger {
+  background: #f43f5e;
+  color: #fff;
+}
+.btnSecondary {
+  background: #f1f5f9;
+  color: #374151;
+  border: 1px solid #e2e8f0;
+}
 
 /* ── Inline alerts / feedback ──────────────────────────── */
 .alertSuccess {
@@ -190,7 +214,11 @@
   display: inline-block;
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 /* ── Typography ────────────────────────────────────────── */
 .heading {
@@ -243,14 +271,20 @@
   align-items: center;
   gap: 12px;
   white-space: nowrap;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   z-index: 999;
   animation: toastIn 300ms ease both;
 }
 
 @keyframes toastIn {
-  from { opacity: 0; transform: translateX(-50%) translateY(12px); }
-  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 .toastAction {
@@ -268,7 +302,7 @@
 .modalOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0, 0, 0, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -282,7 +316,7 @@
   padding: 20px 24px;
   max-width: 720px;
   width: 100%;
-  box-shadow: 0 20px 48px rgba(0,0,0,0.3);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -312,15 +346,37 @@
 }
 
 @keyframes marqueeScroll {
-  from { transform: translateX(100%); }
-  to   { transform: translateX(-100%); }
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
 }
 
 /* ── Utility ───────────────────────────────────────────── */
-.row { display: flex; align-items: center; gap: 8px; }
-.col { display: flex; flex-direction: column; gap: 8px; }
-.spaceBetween { justify-content: space-between; }
-.flexEnd { justify-content: flex-end; }
-.bold { font-weight: 700; }
-.success { color: #22c55e; }
-.danger { color: #f43f5e; }
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.spaceBetween {
+  justify-content: space-between;
+}
+.flexEnd {
+  justify-content: flex-end;
+}
+.bold {
+  font-weight: 700;
+}
+.success {
+  color: #22c55e;
+}
+.danger {
+  color: #f43f5e;
+}

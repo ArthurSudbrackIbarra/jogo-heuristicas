@@ -1,11 +1,17 @@
-import { createContext, useContext, useReducer, useEffect } from 'react';
-import type { ReactNode } from 'react';
-import type { GameState, GameAction, CompletedEntry, Lang, GamePhase } from '../types/game';
-import { heuristics } from '../scenarios';
-import i18n from '../i18n';
+import { createContext, useContext, useReducer, useEffect } from "react";
+import type { ReactNode } from "react";
+import type {
+  GameState,
+  GameAction,
+  CompletedEntry,
+  Lang,
+  GamePhase,
+} from "../types/game";
+import { heuristics } from "../scenarios";
+import i18n from "../i18n";
 
 // ─── localStorage ─────────────────────────────────────────────────────────────
-const STORAGE_KEY = 'jogo-heuristicas-save';
+const STORAGE_KEY = "jogo-heuristicas-save";
 
 interface SavedProgress {
   completedEntries: CompletedEntry[];
@@ -20,10 +26,14 @@ function loadSavedProgress(): Partial<GameState> {
     if (!raw) return {};
     const saved: SavedProgress = JSON.parse(raw);
     return {
-      completedEntries: Array.isArray(saved.completedEntries) ? saved.completedEntries : [],
-      completedHeuristicIds: Array.isArray(saved.completedHeuristicIds) ? saved.completedHeuristicIds : [],
-      coins: typeof saved.coins === 'number' ? saved.coins : 0,
-      lang: saved.lang === 'pt' ? 'pt' : 'en',
+      completedEntries: Array.isArray(saved.completedEntries)
+        ? saved.completedEntries
+        : [],
+      completedHeuristicIds: Array.isArray(saved.completedHeuristicIds)
+        ? saved.completedHeuristicIds
+        : [],
+      coins: typeof saved.coins === "number" ? saved.coins : 0,
+      lang: saved.lang === "pt" ? "pt" : "en",
     };
   } catch {
     return {};
@@ -54,7 +64,9 @@ function clearProgress() {
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function findFirstIncompleteIndex(completedHeuristicIds: number[]): number {
-  const idx = heuristics.findIndex(h => !completedHeuristicIds.includes(h.id));
+  const idx = heuristics.findIndex(
+    (h) => !completedHeuristicIds.includes(h.id),
+  );
   return idx >= 0 ? idx : 0;
 }
 
@@ -75,10 +87,10 @@ function findNextIncompleteIndex(
 // ─── Initial state (loaded from localStorage) ─────────────────────────────────
 function buildInitialState(): GameState {
   const saved = loadSavedProgress();
-  const lang = saved.lang ?? 'en';
+  const lang = saved.lang ?? "en";
   i18n.changeLanguage(lang);
   return {
-    phase: 'welcome' as GamePhase,
+    phase: "welcome" as GamePhase,
     heuristicIndex: 0,
     scenarioIndex: 0,
     scenarioStartTime: 0,
@@ -92,32 +104,32 @@ function buildInitialState(): GameState {
 // ─── Reducer ──────────────────────────────────────────────────────────────────
 function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
-    case 'START_GAME': {
+    case "START_GAME": {
       const allDone = state.completedHeuristicIds.length >= heuristics.length;
       if (allDone) {
-        return { ...state, phase: 'shop' };
+        return { ...state, phase: "shop" };
       }
       const targetIdx = findFirstIncompleteIndex(state.completedHeuristicIds);
       const heuristic = heuristics[targetIdx];
       const badDone = state.completedEntries.some(
-        e => e.heuristicId === heuristic.id && e.kind === 'bad',
+        (e) => e.heuristicId === heuristic.id && e.kind === "bad",
       );
       const scenarioIdx: 0 | 1 = badDone ? 1 : 0;
       return {
         ...state,
-        phase: 'playing',
+        phase: "playing",
         heuristicIndex: targetIdx,
         scenarioIndex: scenarioIdx,
         scenarioStartTime: Date.now(),
       };
     }
 
-    case 'TASK_COMPLETE': {
+    case "TASK_COMPLETE": {
       const elapsed = Date.now() - state.scenarioStartTime;
       const heuristic = heuristics[state.heuristicIndex];
       const scenario = heuristic.scenarios[state.scenarioIndex];
       const alreadyDone = state.completedEntries.some(
-        e => e.heuristicId === heuristic.id && e.kind === scenario.kind,
+        (e) => e.heuristicId === heuristic.id && e.kind === scenario.kind,
       );
       const entry: CompletedEntry = {
         heuristicId: heuristic.id,
@@ -126,25 +138,25 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       };
       return {
         ...state,
-        phase: 'feedback',
+        phase: "feedback",
         completedEntries: alreadyDone
           ? state.completedEntries
           : [...state.completedEntries, entry],
       };
     }
 
-    case 'DISMISS_FEEDBACK':
+    case "DISMISS_FEEDBACK":
       if (state.scenarioIndex === 0) {
         return {
           ...state,
-          phase: 'playing',
+          phase: "playing",
           scenarioIndex: 1,
           scenarioStartTime: Date.now(),
         };
       }
-      return { ...state, phase: 'reveal' };
+      return { ...state, phase: "reveal" };
 
-    case 'DISMISS_REVEAL': {
+    case "DISMISS_REVEAL": {
       const heuristic = heuristics[state.heuristicIndex];
       const alreadyCounted = state.completedHeuristicIds.includes(heuristic.id);
       const newCoins = alreadyCounted ? state.coins : state.coins + 10;
@@ -154,44 +166,57 @@ function gameReducer(state: GameState, action: GameAction): GameState {
 
       const allDone = newCompletedIds.length >= heuristics.length;
       if (allDone) {
-        return { ...state, coins: newCoins, completedHeuristicIds: newCompletedIds, phase: 'shop' };
+        return {
+          ...state,
+          coins: newCoins,
+          completedHeuristicIds: newCompletedIds,
+          phase: "shop",
+        };
       }
 
-      const nextIdx = findNextIncompleteIndex(state.heuristicIndex, newCompletedIds);
+      const nextIdx = findNextIncompleteIndex(
+        state.heuristicIndex,
+        newCompletedIds,
+      );
       if (nextIdx === null) {
-        return { ...state, coins: newCoins, completedHeuristicIds: newCompletedIds, phase: 'shop' };
+        return {
+          ...state,
+          coins: newCoins,
+          completedHeuristicIds: newCompletedIds,
+          phase: "shop",
+        };
       }
 
       return {
         ...state,
         coins: newCoins,
         completedHeuristicIds: newCompletedIds,
-        phase: 'playing',
+        phase: "playing",
         heuristicIndex: nextIdx,
         scenarioIndex: 0,
         scenarioStartTime: Date.now(),
       };
     }
 
-    case 'BUY_ITEM':
-      return { ...state, phase: 'results' };
+    case "BUY_ITEM":
+      return { ...state, phase: "results" };
 
-    case 'FINISH_GAME':
-      return { ...state, phase: 'shop' };
+    case "FINISH_GAME":
+      return { ...state, phase: "shop" };
 
-    case 'NAVIGATE_TO':
+    case "NAVIGATE_TO":
       return {
         ...state,
-        phase: 'playing',
+        phase: "playing",
         heuristicIndex: action.heuristicIndex,
         scenarioIndex: action.scenarioIndex,
         scenarioStartTime: Date.now(),
       };
 
-    case 'RESTART': {
+    case "RESTART": {
       clearProgress();
       const base: GameState = {
-        phase: 'welcome',
+        phase: "welcome",
         heuristicIndex: 0,
         scenarioIndex: 0,
         scenarioStartTime: 0,
@@ -203,7 +228,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       return base;
     }
 
-    case 'SET_LANG':
+    case "SET_LANG":
       i18n.changeLanguage(action.lang);
       return { ...state, lang: action.lang };
 
@@ -216,8 +241,8 @@ function gameReducer(state: GameState, action: GameAction): GameState {
 interface GameContextValue {
   state: GameState;
   dispatch: React.Dispatch<GameAction>;
-  currentHeuristic: typeof heuristics[number];
-  currentScenario: typeof heuristics[number]['scenarios'][number];
+  currentHeuristic: (typeof heuristics)[number];
+  currentScenario: (typeof heuristics)[number]["scenarios"][number];
   totalHeuristics: number;
 }
 
@@ -225,7 +250,11 @@ const GameContext = createContext<GameContextValue | null>(null);
 
 // ─── Provider ─────────────────────────────────────────────────────────────────
 export function GameProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(gameReducer, undefined, buildInitialState);
+  const [state, dispatch] = useReducer(
+    gameReducer,
+    undefined,
+    buildInitialState,
+  );
 
   const currentHeuristic = heuristics[state.heuristicIndex];
   const currentScenario = currentHeuristic.scenarios[state.scenarioIndex];
@@ -233,7 +262,12 @@ export function GameProvider({ children }: { children: ReactNode }) {
   // Persist progress whenever relevant state changes
   useEffect(() => {
     persistProgress(state);
-  }, [state.completedEntries, state.completedHeuristicIds, state.coins, state.lang]);
+  }, [
+    state.completedEntries,
+    state.completedHeuristicIds,
+    state.coins,
+    state.lang,
+  ]);
 
   return (
     <GameContext.Provider
@@ -253,6 +287,6 @@ export function GameProvider({ children }: { children: ReactNode }) {
 // ─── Hook ─────────────────────────────────────────────────────────────────────
 export function useGame(): GameContextValue {
   const ctx = useContext(GameContext);
-  if (!ctx) throw new Error('useGame must be used inside <GameProvider>');
+  if (!ctx) throw new Error("useGame must be used inside <GameProvider>");
   return ctx;
 }

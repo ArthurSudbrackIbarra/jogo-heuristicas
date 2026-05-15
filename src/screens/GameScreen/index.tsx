@@ -1,31 +1,38 @@
-import { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useGame } from '../../context/GameContext';
-import { useLang } from '../../hooks/useLang';
-import { GoalCard } from '../../components/GoalCard';
-import { NarratorBox } from '../../components/NarratorBox';
-import { ScenarioFrame } from '../../components/ScenarioFrame';
-import { HeuristicReveal } from '../../components/HeuristicReveal';
-import { ProgressSidebar } from '../../components/ProgressSidebar';
-import { heuristics } from '../../scenarios';
-import styles from './GameScreen.module.css';
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { useGame } from "../../context/GameContext";
+import { useLang } from "../../hooks/useLang";
+import { GoalCard } from "../../components/GoalCard";
+import { NarratorBox } from "../../components/NarratorBox";
+import { ScenarioFrame } from "../../components/ScenarioFrame";
+import { HeuristicReveal } from "../../components/HeuristicReveal";
+import { ProgressSidebar } from "../../components/ProgressSidebar";
+import { heuristics } from "../../scenarios";
+import styles from "./GameScreen.module.css";
 
 export function GameScreen() {
-  const { state, dispatch, currentHeuristic, currentScenario, totalHeuristics } = useGame();
-  const { phase, heuristicIndex, scenarioIndex, coins, completedHeuristicIds } = state;
+  const {
+    state,
+    dispatch,
+    currentHeuristic,
+    currentScenario,
+    totalHeuristics,
+  } = useGame();
+  const { phase, heuristicIndex, scenarioIndex, coins, completedHeuristicIds } =
+    state;
   const { t } = useTranslation();
   const { lang, pick, setLang } = useLang();
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    window.scrollTo({ top: 0, behavior: "instant" });
   }, [heuristicIndex, scenarioIndex]);
 
   useEffect(() => {
-    if (phase === 'feedback') {
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    } else if (phase === 'reveal') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (phase === "feedback") {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    } else if (phase === "reveal") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [phase]);
 
@@ -40,16 +47,19 @@ export function GameScreen() {
 
   return (
     <div className={styles.gameLayout}>
-      <ProgressSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <ProgressSidebar
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
 
       <div className={styles.contentArea}>
-        {phase === 'reveal' ? (
+        {phase === "reveal" ? (
           <div className={styles.wrapper}>
             <HeuristicReveal
               heuristic={currentHeuristic}
               isLast={isLast}
               coinsAfterThis={coinsAfterThis}
-              onNext={() => dispatch({ type: 'DISMISS_REVEAL' })}
+              onNext={() => dispatch({ type: "DISMISS_REVEAL" })}
             />
           </div>
         ) : (
@@ -58,33 +68,38 @@ export function GameScreen() {
               <div className={styles.topBarLeft}>
                 <button
                   className={styles.menuBtn}
-                  onClick={() => setSidebarOpen(o => !o)}
-                  aria-label={t('sidebar.toggle')}
-                  title={t('sidebar.toggle')}
+                  onClick={() => setSidebarOpen((o) => !o)}
+                  aria-label={t("sidebar.toggle")}
+                  title={t("sidebar.toggle")}
                 >
                   ☰
                 </button>
                 <div className={styles.heuristicInfo}>
                   <span className={styles.heuristicLabel}>
-                    {t('game.heuristicLabel', { current: heuristicIndex + 1, total: totalHeuristics })}
+                    {t("game.heuristicLabel", {
+                      current: heuristicIndex + 1,
+                      total: totalHeuristics,
+                    })}
                   </span>
-                  <span className={styles.heuristicName}>{pick(currentHeuristic.name)}</span>
+                  <span className={styles.heuristicName}>
+                    {pick(currentHeuristic.name)}
+                  </span>
                 </div>
               </div>
               <div className={styles.topBarRight}>
                 <span className={styles.coinDisplay}>🪙 {coins} / 100</span>
                 <div className={styles.langSwitcher}>
                   <button
-                    className={`${styles.langBtn} ${lang === 'en' ? styles.langActive : ''}`}
-                    onClick={() => setLang('en')}
-                    title={t('lang.en')}
+                    className={`${styles.langBtn} ${lang === "en" ? styles.langActive : ""}`}
+                    onClick={() => setLang("en")}
+                    title={t("lang.en")}
                   >
                     🇺🇸
                   </button>
                   <button
-                    className={`${styles.langBtn} ${lang === 'pt' ? styles.langActive : ''}`}
-                    onClick={() => setLang('pt')}
-                    title={t('lang.pt')}
+                    className={`${styles.langBtn} ${lang === "pt" ? styles.langActive : ""}`}
+                    onClick={() => setLang("pt")}
+                    title={t("lang.pt")}
                   >
                     🇧🇷
                   </button>
@@ -100,15 +115,15 @@ export function GameScreen() {
 
               <ScenarioFrame
                 title={pick(currentHeuristic.name)}
-                disabled={phase === 'feedback'}
+                disabled={phase === "feedback"}
               >
                 <ScenarioComponent
                   key={`h${heuristicIndex}-s${scenarioIndex}`}
-                  onTaskComplete={() => dispatch({ type: 'TASK_COMPLETE' })}
+                  onTaskComplete={() => dispatch({ type: "TASK_COMPLETE" })}
                 />
               </ScenarioFrame>
 
-              {phase === 'playing' && (
+              {phase === "playing" && (
                 <NarratorBox
                   key={`narrator-before-h${heuristicIndex}-s${scenarioIndex}`}
                   text={pick(currentScenario.narratorBefore)}
@@ -116,16 +131,18 @@ export function GameScreen() {
                 />
               )}
 
-              {phase === 'feedback' && (
+              {phase === "feedback" && (
                 <NarratorBox
                   key={`narrator-after-h${heuristicIndex}-s${scenarioIndex}`}
                   text={pick(currentScenario.narratorAfter)}
                   audioSrc={currentScenario.audioAfter}
                   showContinue
                   continueLabel={
-                    scenarioIndex === 0 ? t('game.tryOtherVersion') : t('game.seeReveal')
+                    scenarioIndex === 0
+                      ? t("game.tryOtherVersion")
+                      : t("game.seeReveal")
                   }
-                  onContinue={() => dispatch({ type: 'DISMISS_FEEDBACK' })}
+                  onContinue={() => dispatch({ type: "DISMISS_FEEDBACK" })}
                 />
               )}
             </main>

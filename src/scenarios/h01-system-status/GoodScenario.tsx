@@ -1,21 +1,21 @@
-import { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import type { ScenarioProps } from '../../types/game';
-import s from '../scenario.module.css';
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import type { ScenarioProps } from "../../types/game";
+import s from "../scenario.module.css";
 
-type Phase = 'idle' | 'sending' | 'done';
+type Phase = "idle" | "sending" | "done";
 
 export function GoodScenario({ onTaskComplete }: ScenarioProps) {
   const { t } = useTranslation();
-  const [phase, setPhase] = useState<Phase>('idle');
+  const [phase, setPhase] = useState<Phase>("idle");
   const [progress, setProgress] = useState(0);
-  const [message, setMessage] = useState(t('scenarios.h01.replyText'));
-  const [sentMessage, setSentMessage] = useState('');
+  const [message, setMessage] = useState(t("scenarios.h01.replyText"));
+  const [sentMessage, setSentMessage] = useState("");
 
   useEffect(() => {
-    if (phase !== 'sending') return;
+    if (phase !== "sending") return;
     const interval = setInterval(() => {
-      setProgress(p => {
+      setProgress((p) => {
         if (p >= 100) {
           clearInterval(interval);
           return 100;
@@ -27,19 +27,19 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
   }, [phase]);
 
   useEffect(() => {
-    if (progress >= 100 && phase === 'sending') {
+    if (progress >= 100 && phase === "sending") {
       setTimeout(() => {
-        setMessage('');
-        setPhase('done');
+        setMessage("");
+        setPhase("done");
         setTimeout(onTaskComplete, 1200);
       }, 200);
     }
   }, [progress, phase, onTaskComplete]);
 
   function handleSend() {
-    if (phase !== 'idle') return;
+    if (phase !== "idle") return;
     setSentMessage(message);
-    setPhase('sending');
+    setPhase("sending");
     setProgress(0);
   }
 
@@ -47,16 +47,26 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
     <div className={s.app}>
       <div className={s.toolbar}>
         <span>💬</span>
-        <span className={s.toolbarTitle}>{t('scenarios.h01.toolbarTitle')}</span>
-        {phase === 'sending' && (
-          <span className={s.muted} style={{ fontSize: 12, display: 'flex', alignItems: 'center', gap: 6 }}>
+        <span className={s.toolbarTitle}>
+          {t("scenarios.h01.toolbarTitle")}
+        </span>
+        {phase === "sending" && (
+          <span
+            className={s.muted}
+            style={{
+              fontSize: 12,
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+            }}
+          >
             <span className={s.spinner} style={{ width: 14, height: 14 }} />
-            {t('scenarios.h01.good.statusSending')}
+            {t("scenarios.h01.good.statusSending")}
           </span>
         )}
-        {phase === 'done' && (
-          <span style={{ fontSize: 12, color: '#22c55e', fontWeight: 600 }}>
-            {t('scenarios.h01.good.statusDelivered')}
+        {phase === "done" && (
+          <span style={{ fontSize: 12, color: "#22c55e", fontWeight: 600 }}>
+            {t("scenarios.h01.good.statusDelivered")}
           </span>
         )}
       </div>
@@ -64,14 +74,31 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
         {/* Chat history */}
         <div className={s.card}>
           <div className={s.col} style={{ gap: 10 }}>
-            <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-              <span style={{ background: '#f1f5f9', borderRadius: 12, padding: '8px 14px', fontSize: 13, maxWidth: 220 }}>
-                {t('scenarios.h01.msgText')}
+            <div style={{ display: "flex", justifyContent: "flex-start" }}>
+              <span
+                style={{
+                  background: "#f1f5f9",
+                  borderRadius: 12,
+                  padding: "8px 14px",
+                  fontSize: 13,
+                  maxWidth: 220,
+                }}
+              >
+                {t("scenarios.h01.msgText")}
               </span>
             </div>
-            {phase === 'done' && (
-              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <span style={{ background: '#6c63ff', color: '#fff', borderRadius: 12, padding: '8px 14px', fontSize: 13, maxWidth: 220 }}>
+            {phase === "done" && (
+              <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                <span
+                  style={{
+                    background: "#6c63ff",
+                    color: "#fff",
+                    borderRadius: 12,
+                    padding: "8px 14px",
+                    fontSize: 13,
+                    maxWidth: 220,
+                  }}
+                >
                   {sentMessage}
                 </span>
               </div>
@@ -84,21 +111,31 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
           <textarea
             className={s.input}
             rows={3}
-            value={phase !== 'done' ? message : ''}
-            placeholder={t('scenarios.h01.replyPlaceholder')}
-            onChange={e => setMessage(e.target.value)}
-            disabled={phase !== 'idle'}
-            style={{ width: '100%', resize: 'none' }}
+            value={phase !== "done" ? message : ""}
+            placeholder={t("scenarios.h01.replyPlaceholder")}
+            onChange={(e) => setMessage(e.target.value)}
+            disabled={phase !== "idle"}
+            style={{ width: "100%", resize: "none" }}
           />
 
-          {phase === 'sending' && (
+          {phase === "sending" && (
             <div style={{ marginTop: 10 }}>
-              <div className={`${s.row} ${s.spaceBetween}`} style={{ marginBottom: 4 }}>
-                <span className={s.muted} style={{ fontSize: 12 }}>{t('scenarios.h01.good.progressLabel')}</span>
-                <span className={s.muted} style={{ fontSize: 12 }}>{progress}%</span>
+              <div
+                className={`${s.row} ${s.spaceBetween}`}
+                style={{ marginBottom: 4 }}
+              >
+                <span className={s.muted} style={{ fontSize: 12 }}>
+                  {t("scenarios.h01.good.progressLabel")}
+                </span>
+                <span className={s.muted} style={{ fontSize: 12 }}>
+                  {progress}%
+                </span>
               </div>
               <div className={s.progressTrack}>
-                <div className={s.progressFill} style={{ width: `${progress}%` }} />
+                <div
+                  className={s.progressFill}
+                  style={{ width: `${progress}%` }}
+                />
               </div>
             </div>
           )}
@@ -107,20 +144,20 @@ export function GoodScenario({ onTaskComplete }: ScenarioProps) {
             <button
               className={`${s.btn} ${s.btnPrimary}`}
               onClick={handleSend}
-              disabled={phase !== 'idle' || !message.trim()}
+              disabled={phase !== "idle" || !message.trim()}
             >
-              {phase === 'idle'
-                ? t('scenarios.h01.btnSend')
-                : phase === 'sending'
-                  ? t('scenarios.h01.good.btnSending')
-                  : t('scenarios.h01.good.btnSent')}
+              {phase === "idle"
+                ? t("scenarios.h01.btnSend")
+                : phase === "sending"
+                  ? t("scenarios.h01.good.btnSending")
+                  : t("scenarios.h01.good.btnSent")}
             </button>
           </div>
         </div>
 
-        {phase === 'done' && (
+        {phase === "done" && (
           <div className={s.alertSuccess}>
-            {t('scenarios.h01.good.alertDelivered')}
+            {t("scenarios.h01.good.alertDelivered")}
           </div>
         )}
       </div>

@@ -1,4 +1,4 @@
-import { useRef, useCallback, useEffect } from 'react';
+import { useRef, useCallback, useEffect, useState } from "react";
 
 interface UseAudioOptions {
   volume?: number;
@@ -22,9 +22,12 @@ interface AudioControls {
  * If the file is missing the error is silently swallowed — the
  * text fallback in NarratorBox is always visible.
  */
-export function useAudio({ volume = 0.9, onEnd }: UseAudioOptions = {}): AudioControls {
+export function useAudio({
+  volume = 0.9,
+  onEnd,
+}: UseAudioOptions = {}): AudioControls {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const isPlayingRef = useRef(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -38,32 +41,30 @@ export function useAudio({ volume = 0.9, onEnd }: UseAudioOptions = {}): AudioCo
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
-      isPlayingRef.current = false;
+      setIsPlaying(false);
     }
   }, []);
 
   const play = useCallback(
     (src: string) => {
-      // Stop any currently playing audio first
       stop();
 
-      const audio = new Audio(src.startsWith('/') ? src : `/audio/${src}`);
+      const audio = new Audio(src.startsWith("/") ? src : `/audio/${src}`);
       audio.volume = volume;
       audio.onended = () => {
-        isPlayingRef.current = false;
+        setIsPlaying(false);
         onEnd?.();
       };
       audio.onerror = () => {
         // File missing or unsupported — fail silently, text is shown anyway
-        isPlayingRef.current = false;
+        setIsPlaying(false);
       };
 
       audioRef.current = audio;
-      isPlayingRef.current = true;
+      setIsPlaying(true);
 
-      // play() returns a Promise in modern browsers
       audio.play().catch(() => {
-        isPlayingRef.current = false;
+        setIsPlaying(false);
       });
     },
     [stop, volume, onEnd],
@@ -71,13 +72,13 @@ export function useAudio({ volume = 0.9, onEnd }: UseAudioOptions = {}): AudioCo
 
   const pause = useCallback(() => {
     audioRef.current?.pause();
-    isPlayingRef.current = false;
+    setIsPlaying(false);
   }, []);
 
   const resume = useCallback(() => {
     if (audioRef.current) {
       audioRef.current.play().catch(() => {});
-      isPlayingRef.current = true;
+      setIsPlaying(true);
     }
   }, []);
 
@@ -85,12 +86,5 @@ export function useAudio({ volume = 0.9, onEnd }: UseAudioOptions = {}): AudioCo
     if (audioRef.current) audioRef.current.volume = Math.max(0, Math.min(1, v));
   }, []);
 
-  return {
-    play,
-    stop,
-    pause,
-    resume,
-    setVolume,
-    get isPlaying() { return isPlayingRef.current; },
-  };
+  return { play, stop, pause, resume, setVolume, isPlaying };
 }

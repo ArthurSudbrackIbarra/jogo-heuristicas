@@ -1,19 +1,19 @@
-import { GameProvider, useGame } from './context/GameContext';
-import { WelcomeScreen } from './screens/WelcomeScreen';
-import { GameScreen } from './screens/GameScreen';
-import { ShopScreen } from './screens/ShopScreen';
-import { ResultsScreen } from './screens/ResultsScreen';
-import './App.css';
+import { GameProvider, useGame } from "./context/GameContext";
+import { WelcomeScreen } from "./screens/WelcomeScreen";
+import { GameScreen } from "./screens/GameScreen";
+import { ShopScreen } from "./screens/ShopScreen";
+import { ResultsScreen } from "./screens/ResultsScreen";
+import "./App.css";
 
 function GameRouter() {
   const { state } = useGame();
 
   switch (state.phase) {
-    case 'welcome':
+    case "welcome":
       return <WelcomeScreen />;
-    case 'shop':
+    case "shop":
       return <ShopScreen />;
-    case 'results':
+    case "results":
       return <ResultsScreen />;
     default:
       return <GameScreen />;

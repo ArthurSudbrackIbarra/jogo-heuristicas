@@ -15,17 +15,17 @@ The question bank lives in [`src/questions.ts`](src/questions.ts). Edit that fil
 
 ## Question codes
 
-| Prefix | Meaning |
-|--------|---------|
-| `D#`   | Demographics |
-| `L#`   | Learning & comprehension |
-| `N#`   | Narrator / narrative |
-| `G#`   | Gamification |
-| `U#`   | Usability of the game itself |
-| `E#`   | Educational value |
+| Prefix | Meaning                                             |
+| ------ | --------------------------------------------------- |
+| `D#`   | Demographics                                        |
+| `L#`   | Learning & comprehension                            |
+| `N#`   | Narrator / narrative                                |
+| `G#`   | Gamification                                        |
+| `U#`   | Usability of the game itself                        |
+| `E#`   | Educational value                                   |
 | `S#`   | Specific reflection (heuristic choices, difficulty) |
-| `T#`   | Optional open text |
-| `F`    | Final overall rating |
+| `T#`   | Optional open text                                  |
+| `F`    | Final overall rating                                |
 
 In the response sheet, columns share a `[CODE]` prefix between languages — group them by prefix to merge PT-BR and EN-US responses.
 
