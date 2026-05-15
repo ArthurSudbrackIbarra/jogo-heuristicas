@@ -1,0 +1,318 @@
+{
+  "lang": {
+    "en": "English",
+    "pt": "Português"
+  },
+  "welcome": {
+    "eyebrow": "Interactive Learning Game",
+    "title": "Nielsen's 10 Heuristics",
+    "subtitle": "Experience what good and bad UI design feels like — hands on. You'll complete 10 pairs of tasks, each designed to show one heuristic being respected and violated. A narrator will guide you through every step.",
+    "features": {
+      "tasks": "Complete real-feeling UI tasks",
+      "feel": "Feel the difference between good and bad UX",
+      "narrator": "Narrator commentary after each scenario",
+      "learn": "Learn all 10 Nielsen Heuristics"
+    },
+    "start": "Start the game →",
+    "hint": "~15 minutes · 10 heuristics · 20 scenarios",
+    "mysteryTeaser": "Complete all 10 heuristics to earn 100 coins and claim a mystery reward!"
+  },
+  "game": {
+    "heuristicLabel": "Heuristic {{current}}/{{total}}",
+    "coins": "{{count}} coins",
+    "tryOtherVersion": "Try the other version →",
+    "seeReveal": "See the reveal →"
+  },
+  "narrator": {
+    "label": "Narrator",
+    "continue": "Continue →",
+    "pause": "Pause audio",
+    "play": "Play audio",
+    "restart": "Restart audio"
+  },
+  "goalCard": {
+    "badge": "Your mission — Scenario {{number}}"
+  },
+  "reveal": {
+    "badge": "Nielsen Heuristic",
+    "withoutHeuristic": "Without this heuristic",
+    "withHeuristic": "With this heuristic",
+    "nextHeuristic": "Next heuristic →",
+    "seeResults": "🏁 See your results",
+    "coinsEarned": "🪙 +10 coins earned!",
+    "coinsProgress": "{{coins}} / 100 coins",
+    "coinsRemaining": "{{remaining}} coins until the mystery reward!",
+    "coinsReady": "You have enough coins for the mystery reward!"
+  },
+  "shop": {
+    "title": "Mystery Reward Unlocked!",
+    "subtitle": "You completed all 10 heuristics and collected 100 coins!",
+    "description": "Claim your reward from the game creators.",
+    "note": "Find the creators at the end of this session to receive a candy. 🍬",
+    "cta": "Claim Reward →",
+    "coins": "🪙 100 / 100 coins"
+  },
+  "results": {
+    "title": "Congratulations!",
+    "subtitle": "You've experienced all 10 Nielsen Heuristics — both how they should and shouldn't be applied.",
+    "stats": {
+      "heuristics": "Heuristics learned",
+      "scenarios": "Scenarios completed",
+      "avgTime": "Avg. task time"
+    },
+    "learned": "What you learned:",
+    "playAgain": "Play again",
+    "feedbackTitle": "Help us improve our research!",
+    "feedbackSubtitle": "Tell us about your experience with this game:",
+    "feedbackCta": "📝 Answer the research questionnaire →"
+  },
+  "heuristic": {
+    "completed": "✓ Completed"
+  },
+  "sidebar": {
+    "title": "Heuristics",
+    "toggle": "Open progress sidebar",
+    "bad": "Bad",
+    "good": "Good",
+    "reveal": "Reveal",
+    "scenarioDoneTitle": "Completed",
+    "seeResults": "🏁 See results →",
+    "confirmTitle": "Leave this scenario?",
+    "confirmBody": "This scenario isn't complete yet. If you leave now you'll need to redo it to earn the completion mark.",
+    "stay": "Stay",
+    "leave": "Leave anyway"
+  },
+  "scenarios": {
+    "h01": {
+      "toolbarTitle": "Messages — Ana",
+      "msgText": "Hey, Ana! Are we still on for dinner tonight?",
+      "replyText": "Hey! Yeah, dinner sounds great 😊",
+      "replyPlaceholder": "Type here...",
+      "btnSend": "Send",
+      "good": {
+        "statusSending": "Sending…",
+        "statusDelivered": "✓ Delivered",
+        "progressLabel": "Sending to Ana…",
+        "btnSending": "Sending…",
+        "btnSent": "✓ Sent!",
+        "alertDelivered": "✅ Message delivered to Ana"
+      }
+    },
+    "h02": {
+      "toolbarTitle": "Document Editor",
+      "docTitle": "Q3 Strategy Report",
+      "docBody": "This document contains our strategic objectives for the upcoming quarter. Key initiatives include market expansion and operational efficiency improvements…",
+      "bad": {
+        "statusSynced": "Persistent state: SYNCED",
+        "statusPending": "Volatile state: PENDING COMMIT",
+        "actionsLabel": "Persistence operations:",
+        "btnSave": "Serialize and commit to persistent storage layer",
+        "btnDiscard": "Discard volatile in-memory state and abort process",
+        "alertSaved": "ℹ️ Entity object serialized. Persistence layer mutation: COMMITTED."
+      },
+      "good": {
+        "statusSaved": "✓ All changes saved",
+        "statusUnsaved": "Unsaved changes",
+        "actionsLabel": "What would you like to do?",
+        "btnSave": "💾 Save",
+        "btnDiscard": "✕ Discard changes",
+        "alertSaved": "✅ Document saved! Your changes are safe."
+      }
+    },
+    "h03": {
+      "toolbarTitle": "Account Settings",
+      "currentPlan": "Current plan: Free",
+      "btnUpgrade": "Upgrade Plan",
+      "stepOf": "Step {{step}} of 3",
+      "step1Title": "Choose your plan",
+      "step2Title": "Billing details",
+      "step3Title": "Confirm upgrade",
+      "planPro": "Pro — $29/mo",
+      "planBusiness": "Business — $59/mo",
+      "labelName": "Full name",
+      "namePlaceholder": "Jane Smith",
+      "labelCard": "Card number",
+      "cardPlaceholder": "•••• •••• •••• ••••",
+      "btnNext": "Next →",
+      "oopsMsg": "You accidentally clicked \"Upgrade Plan\". Try to exit without completing the upgrade.",
+      "bad": {
+        "step3Summary": "You're about to upgrade to {{plan}}. Your card will be charged immediately.",
+        "btnGiveUp": "I give up — there's no way out →",
+        "btnConfirm": "Confirm Upgrade →",
+        "upgradedMsg": "Upgraded! There was no Cancel, no ✕, and no Back on step 1. You were forced to finish the process.",
+        "btnContinue": "I see the problem →"
+      },
+      "good": {
+        "step3Summary": "You're about to upgrade to {{plan}}. Your card will be charged immediately.",
+        "btnBack": "← Back",
+        "btnCancel": "Cancel",
+        "btnConfirm": "Confirm Upgrade →",
+        "confirmExit": "Exit upgrade wizard?",
+        "confirmExitDesc": "Your progress won't be saved.",
+        "btnStay": "Stay",
+        "btnExit": "Exit",
+        "exitedMsg": "✅ You exited! No charges were made.",
+        "btnContinue": "Continue →"
+      }
+    },
+    "h04": {
+      "toolbarTitle": "Checkout — Step {{step}} of {{total}}",
+      "fillDetails": "Fill in the details for this step.",
+      "sampleField": "Sample field",
+      "stepPersonal": "Personal Info",
+      "stepAddress": "Address",
+      "stepPayment": "Payment",
+      "stepConfirm": "Confirm",
+      "bad": {
+        "next0": "Proceed ›",
+        "next1": "Go on ›",
+        "next2": "Continue →",
+        "next3": "Submit Now",
+        "back1": "‹ Return",
+        "back2": "‹ Go Back",
+        "back3": "‹ Previous"
+      },
+      "good": {
+        "btnBack": "← Back",
+        "btnNext": "Next →",
+        "btnConfirm": "Confirm order →"
+      }
+    },
+    "h05": {
+      "toolbarTitle": "Account Settings",
+      "dangerZone": "Danger Zone",
+      "deleteDesc": "Permanently delete your account and all associated data.",
+      "btnDelete": "Delete Account",
+      "bad": {
+        "alertDeleted": "❌ Account deleted. All data has been permanently removed."
+      },
+      "good": {
+        "btnDeleteEllipsis": "Delete Account…",
+        "dialogTitle": "⚠️ Are you absolutely sure?",
+        "dialogDesc": "This action is permanent and irreversible. All your data, projects and history will be deleted immediately.",
+        "confirmLabelPre": "Type",
+        "confirmLabelPost": "to confirm:",
+        "confirmPlaceholder": "Type DELETE here",
+        "checkboxLabel": "I understand this action cannot be undone",
+        "btnCancel": "Cancel",
+        "btnConfirm": "Permanently delete account",
+        "alertDeleted": "❌ Account deleted. (In a real app this would be permanent.)"
+      }
+    },
+    "h06": {
+      "toolbarTitle": "Text Editor",
+      "docLabel": "Document:",
+      "docTextBefore": "Today's project update includes an",
+      "docTextWord": "important",
+      "docTextAfter": "milestone for the team.",
+      "bad": {
+        "alertSelectWord": "Select the word 'important' in the document to format it.",
+        "alertSelected": "Word selected! Use the toolbar to make it bold.",
+        "titleItalic": "Italic",
+        "titleBold": "Toggle character weight",
+        "titleUnderline": "Underline",
+        "wrongChoice": "That's not bold. Select the word again and try a different option.",
+        "hint": "Hint: the bold option uses a Greek letter",
+        "alertDone": "✅ Bold applied — but how were you supposed to know option 2 was the right one, instead of 1 or 3? You had to guess, not recognize."
+      },
+      "good": {
+        "alertSelectWord": "ℹ️ Select the word 'important' in the document to format it.",
+        "alertSelected": "✨ Word selected! A formatting toolbar appeared — click B to make it bold.",
+        "alertDone": "✅ Bold applied! You selected the word, saw the toolbar appear, and recognized the action — no memorization needed."
+      }
+    },
+    "h07": {
+      "toolbarTitle": "Notifications ({{unread}} unread)",
+      "msg1From": "Alice",
+      "msg1Preview": "Are you free this weekend?",
+      "msg1Body": "Hey! I was wondering if you are free this weekend. We were thinking about going to the park — let me know! 😊",
+      "msg2From": "Bob",
+      "msg2Preview": "The meeting notes are ready",
+      "msg2Body": "Hi team, I just finished writing up the meeting notes from yesterday. You can find them in the shared folder under \"Q3 Planning\". Let me know if anything is missing.",
+      "msg3From": "Carol",
+      "msg3Preview": "Thanks for the presentation!",
+      "msg3Body": "Just wanted to say — your presentation today was fantastic! Really clear and well-prepared. The team was very impressed. Great job! 🎉",
+      "bad": {
+        "instruction": "Open each notification to mark it as read.",
+        "btnOpen": "Open",
+        "btnRead": "✓ Read",
+        "btnMarkRead": "✓ Mark as read"
+      },
+      "good": {
+        "btnMarkAll": "✓ Mark all as read",
+        "instruction": "Click \"Mark all as read\" above, or dismiss each one individually.",
+        "btnDismiss": "Dismiss",
+        "alertDone": "✅ All notifications marked as read!"
+      }
+    },
+    "h08": {
+      "toolbarTitleBad": "MegaShop — Laptop XZ Pro",
+      "toolbarTitleGood": "Shop — Laptop XZ Pro",
+      "productName": "Laptop XZ Pro",
+      "productSpecs": "16GB RAM · 512GB SSD · 14\" Display",
+      "bad": {
+        "banner1": "📣 Subscribe to our newsletter and get 5% off! Enter your email below — limited time only!",
+        "emailPlaceholder": "email@example.com",
+        "btnSubscribe": "Subscribe",
+        "carousel": "🔥 Hot deals you might like: Gaming Chair | Wireless Mouse | USB Hub | Monitor Stand | Webcam | Headset | Keyboard",
+        "promo": "💜 Use code SAVE20 for 20% off on orders over $500! Also check our clearance section for mega deals!",
+        "socialProof": "⭐ 4.7/5 from 2,341 reviews · 🏆 Best Seller · 📦 Free Shipping · 🔄 30-day returns · 🛡️ 2-year warranty · 💳 0% APR",
+        "popupTitle": "Wait! Before you go...",
+        "popupDesc": "Sign up for exclusive deals and never miss a sale!",
+        "btnNoThanks": "No thanks, I don't like saving money",
+        "btnBuyNow": "Buy Now"
+      },
+      "good": {
+        "rating": "★★★★★",
+        "reviews": "4.7 (2,341 reviews)",
+        "shipping": "✓ Free shipping",
+        "btnBuyNow": "Buy Now — $1,299",
+        "returns": "30-day free returns · 2-year warranty"
+      }
+    },
+    "h09": {
+      "toolbarTitle": "Registration",
+      "formTitle": "Create an account",
+      "labelEmail": "Email address",
+      "emailPlaceholder": "you@example.com",
+      "labelPassword": "Password",
+      "passwordHelper": "* Password must be at least 8 characters.",
+      "btnRegister": "Register",
+      "bad": {
+        "errorMsg": "❌ Error 422: Unprocessable Entity. Request body validation failed.",
+        "errorCode": "FORM_VALIDATION_ERROR · field[1].format"
+      },
+      "good": {
+        "errorEmail": "Please use a valid format: name@example.com",
+        "errorPassword": "Password must be at least 8 characters (currently {{length}})",
+        "alertSuccess": "✅ Account created successfully! Welcome aboard."
+      }
+    },
+    "h10": {
+      "toolbarTitle": "Security Settings",
+      "bad": {
+        "label2FA": "2FA",
+        "labelTOTP": "TOTP",
+        "labelFIDO": "FIDO2",
+        "labelOTP": "OTP via SMS",
+        "alertUpdated": "✅ Setting updated."
+      },
+      "good": {
+        "label2FA": "Two-Factor Authentication (2FA)",
+        "descPre": "Adds a second layer of security beyond your password.",
+        "descLink": "What is 2FA?",
+        "chooseMethod": "Choose your 2FA method:",
+        "method1Name": "Authenticator App (Recommended)",
+        "method1Desc": "Use an app like Google Authenticator to generate time-based codes.",
+        "method1Tooltip": "Most secure option. Works offline. Compatible with all 2FA apps.",
+        "method2Name": "Text Message (SMS)",
+        "method2Desc": "Receive a one-time code via SMS each time you log in.",
+        "method2Tooltip": "Convenient but less secure than an authenticator app.",
+        "method3Name": "Hardware Security Key",
+        "method3Desc": "Use a physical key (e.g. YubiKey) for the strongest protection.",
+        "method3Tooltip": "Best security, but requires purchasing a physical device.",
+        "alertEnabled": "✅ Two-Factor Authentication enabled! You're now better protected."
+      }
+    }
+  }
+}

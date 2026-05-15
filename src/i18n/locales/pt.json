@@ -1,0 +1,317 @@
+{
+  "lang": {
+    "en": "English",
+    "pt": "Português"
+  },
+  "welcome": {
+    "eyebrow": "Jogo de Aprendizagem Interativo",
+    "title": "As 10 Heurísticas de Nielsen",
+    "subtitle": "Experimente como é um design de interface bom e ruim — na prática. Você vai completar 10 pares de tarefas, cada uma projetada para mostrar uma heurística sendo respeitada e violada. Um narrador vai te guiar em cada etapa.",
+    "features": {
+      "tasks": "Complete tarefas reais de interface",
+      "feel": "Sinta a diferença entre boa e má UX",
+      "narrator": "Comentários do narrador após cada cenário",
+      "learn": "Aprenda as 10 Heurísticas de Nielsen"
+    },
+    "start": "Começar o jogo →",
+    "hint": "~15 minutos · 10 heurísticas · 20 cenários",
+    "mysteryTeaser": "Complete todas as 10 heurísticas para ganhar 100 moedas e resgatar uma recompensa misteriosa!"
+  },
+  "game": {
+    "heuristicLabel": "Heurística {{current}}/{{total}}",
+    "coins": "{{count}} moedas",
+    "tryOtherVersion": "Tentar a outra versão →",
+    "seeReveal": "Ver a revelação →"
+  },
+  "narrator": {
+    "label": "Narrador",
+    "continue": "Continuar →",
+    "pause": "Pausar áudio",
+    "play": "Reproduzir áudio",
+    "restart": "Reiniciar áudio"
+  },
+  "goalCard": {
+    "badge": "Sua missão — Cenário {{number}}"
+  },
+  "reveal": {
+    "badge": "Heurística de Nielsen",
+    "withoutHeuristic": "Sem esta heurística",
+    "withHeuristic": "Com esta heurística",
+    "nextHeuristic": "Próxima heurística →",
+    "seeResults": "🏁 Ver seus resultados",
+    "coinsEarned": "🪙 +10 moedas ganhas!",
+    "coinsProgress": "{{coins}} / 100 moedas",
+    "coinsRemaining": "Faltam {{remaining}} moedas para a recompensa misteriosa!",
+    "coinsReady": "Você tem moedas suficientes para a recompensa misteriosa!"
+  },
+  "shop": {
+    "title": "Recompensa Misteriosa Desbloqueada!",
+    "subtitle": "Você completou todas as 10 heurísticas e coletou 100 moedas!",
+    "description": "Resgate sua recompensa com os criadores do jogo.",
+    "note": "Encontre os criadores ao final da sessão para receber um bombom. 🍬",
+    "cta": "Resgatar Recompensa →",
+    "coins": "🪙 100 / 100 moedas"
+  },
+  "results": {
+    "title": "Parabéns!",
+    "subtitle": "Você vivenciou todas as 10 Heurísticas de Nielsen — tanto como devem quanto como não devem ser aplicadas.",
+    "stats": {
+      "heuristics": "Heurísticas aprendidas",
+      "scenarios": "Cenários concluídos",
+      "avgTime": "Tempo médio por tarefa"
+    },
+    "learned": "O que você aprendeu:",
+    "playAgain": "Jogar novamente",
+    "feedbackTitle": "Ajude a melhorar nossa pesquisa!",
+    "feedbackSubtitle": "Conte-nos sobre sua experiência com este jogo:",
+    "feedbackCta": "📝 Responder ao questionário de pesquisa →"
+  },
+  "heuristic": {
+    "completed": "✓ Concluída"
+  },
+  "sidebar": {
+    "title": "Heurísticas",
+    "toggle": "Abrir barra de progresso",
+    "bad": "Ruim",
+    "good": "Bom",
+    "reveal": "Revelação",
+    "scenarioDoneTitle": "Concluído",
+    "seeResults": "🏁 Ver resultados →",
+    "confirmTitle": "Sair deste cenário?",
+    "confirmBody": "Este cenário ainda não foi concluído. Se você sair agora, precisará refazê-lo para ganhar a marca de conclusão.",
+    "stay": "Ficar",
+    "leave": "Sair mesmo assim"
+  },
+  "scenarios": {
+    "h01": {
+      "toolbarTitle": "Mensagens — Ana",
+      "msgText": "Ei, Ana! Ainda vamos jantar hoje à noite?",
+      "replyText": "Oi! Sim, o jantar vai ser ótimo 😊",
+      "replyPlaceholder": "Escreva aqui...",
+      "btnSend": "Enviar",
+      "good": {
+        "statusSending": "Enviando…",
+        "statusDelivered": "✓ Entregue",
+        "progressLabel": "Enviando para Ana…",
+        "btnSending": "Enviando…",
+        "btnSent": "✓ Enviado!",
+        "alertDelivered": "✅ Mensagem entregue para Ana"
+      }
+    },
+    "h02": {
+      "toolbarTitle": "Editor de Documentos",
+      "docTitle": "Relatório de Estratégia Q3",
+      "docBody": "Este documento contém nossos objetivos estratégicos para o próximo trimestre. As principais iniciativas incluem expansão de mercado e melhorias de eficiência operacional…",
+      "bad": {
+        "statusSynced": "Estado persistente: SINCRONIZADO",
+        "statusPending": "Estado volátil: COMMIT PENDENTE",
+        "actionsLabel": "Operações de persistência:",
+        "btnSave": "Serializar e confirmar na camada de armazenamento persistente",
+        "btnDiscard": "Descartar estado volátil em memória e abortar processo",
+        "alertSaved": "ℹ️ Objeto entidade serializado. Mutação na camada de persistência: CONFIRMADA."
+      },
+      "good": {
+        "statusSaved": "✓ Todas as alterações salvas",
+        "statusUnsaved": "Alterações não salvas",
+        "actionsLabel": "O que você gostaria de fazer?",
+        "btnSave": "💾 Salvar",
+        "btnDiscard": "✕ Descartar alterações",
+        "alertSaved": "✅ Documento salvo! Suas alterações estão seguras."
+      }
+    },
+    "h03": {
+      "toolbarTitle": "Configurações da Conta",
+      "currentPlan": "Plano atual: Gratuito",
+      "btnUpgrade": "Fazer Upgrade",
+      "stepOf": "Etapa {{step}} de 3",
+      "step1Title": "Escolha seu plano",
+      "step2Title": "Dados de cobrança",
+      "step3Title": "Confirmar upgrade",
+      "planPro": "Pro — R$49/mês",
+      "planBusiness": "Business — R$99/mês",
+      "labelName": "Nome completo",
+      "namePlaceholder": "Maria Silva",
+      "labelCard": "Número do cartão",
+      "cardPlaceholder": "•••• •••• •••• ••••",
+      "btnNext": "Próximo →",
+      "oopsMsg": "Você clicou em \"Fazer Upgrade\" sem querer. Tente sair sem concluir o upgrade.",
+      "bad": {
+        "step3Summary": "Você está prestes a fazer upgrade para o {{plan}}. Seu cartão será cobrado imediatamente.",
+        "btnGiveUp": "Desisti — não tem como sair →",
+        "btnConfirm": "Confirmar Upgrade →",
+        "upgradedMsg": "Upgrade feito! Não havia Cancelar, nem ✕, nem Voltar na primeira etapa. Você foi forçado a concluir o processo.",
+        "btnContinue": "Entendi o problema →"
+      },
+      "good": {
+        "step3Summary": "Você está prestes a fazer upgrade para o {{plan}}. Seu cartão será cobrado imediatamente.",
+        "btnBack": "← Voltar",
+        "btnCancel": "Cancelar",
+        "btnConfirm": "Confirmar Upgrade →",
+        "confirmExit": "Sair do assistente de upgrade?",
+        "confirmExitDesc": "Seu progresso não será salvo.",
+        "btnStay": "Ficar",
+        "btnExit": "Sair",
+        "exitedMsg": "✅ Você saiu! Nenhuma cobrança foi feita.",
+        "btnContinue": "Continuar →"
+      }
+    },
+    "h04": {
+      "toolbarTitle": "Checkout — Passo {{step}} de {{total}}",
+      "fillDetails": "Preencha os detalhes para esta etapa.",
+      "sampleField": "Campo de exemplo",
+      "stepPersonal": "Informações Pessoais",
+      "stepAddress": "Endereço",
+      "stepPayment": "Pagamento",
+      "stepConfirm": "Confirmar",
+      "bad": {
+        "next0": "Prosseguir ›",
+        "next1": "Avançar ›",
+        "next2": "Continuar →",
+        "next3": "Enviar Agora",
+        "back1": "‹ Retornar",
+        "back2": "‹ Voltar Atrás",
+        "back3": "‹ Anterior"
+      },
+      "good": {
+        "btnBack": "← Voltar",
+        "btnNext": "Próximo →",
+        "btnConfirm": "Confirmar pedido →"
+      }
+    },
+    "h05": {
+      "toolbarTitle": "Configurações da Conta",
+      "dangerZone": "Zona de Perigo",
+      "deleteDesc": "Exclua permanentemente sua conta e todos os dados associados.",
+      "btnDelete": "Excluir Conta",
+      "bad": {
+        "alertDeleted": "❌ Conta excluída. Todos os dados foram removidos permanentemente."
+      },
+      "good": {
+        "btnDeleteEllipsis": "Excluir Conta…",
+        "dialogTitle": "⚠️ Você tem certeza absoluta?",
+        "dialogDesc": "Esta ação é permanente e irreversível. Todos os seus dados, projetos e histórico serão excluídos imediatamente.",
+        "confirmLabelPre": "Digite",
+        "confirmLabelPost": "para confirmar:",
+        "confirmPlaceholder": "Digite DELETE aqui",
+        "checkboxLabel": "Entendo que esta ação não pode ser desfeita",
+        "btnCancel": "Cancelar",
+        "btnConfirm": "Excluir conta permanentemente",
+        "alertDeleted": "❌ Conta excluída. (Em um app real, isso seria permanente.)"
+      }
+    },
+    "h06": {
+      "toolbarTitle": "Editor de Texto",
+      "docLabel": "Documento:",
+      "docTextBefore": "A atualização de hoje do projeto inclui um",
+      "docTextWord": "importante",
+      "docTextAfter": "marco para a equipe.",
+      "bad": {
+        "alertSelectWord": "Selecione a palavra 'importante' no documento para formatá-la.",
+        "alertSelected": "Palavra selecionada! Use a barra de ferramentas para deixá-la em negrito.",
+        "titleItalic": "Itálico",
+        "titleBold": "Alternar peso do caractere",
+        "titleUnderline": "Sublinhado",
+        "wrongChoice": "Esse não é o negrito. Selecione a palavra novamente e tente outra opção.",
+        "alertDone": "✅ Negrito aplicado — mas como você saberia que a opção correta era a 2, e não a 1 ou a 3? Você teve que adivinhar em vez de apenas reconhecer."
+      },
+      "good": {
+        "alertSelectWord": "ℹ️ Selecione a palavra 'importante' no documento para formatá-la.",
+        "alertSelected": "✨ Palavra selecionada! Uma barra de formatação apareceu — clique em B para negritá-la.",
+        "alertDone": "✅ Negrito aplicado! Você selecionou a palavra, viu a barra aparecer e reconheceu a ação — sem memorização necessária."
+      }
+    },
+    "h07": {
+      "toolbarTitle": "Notificações ({{unread}} não lidas)",
+      "msg1From": "Alice",
+      "msg1Preview": "Você está livre neste fim de semana?",
+      "msg1Body": "Oi! Eu queria saber se você está livre neste fim de semana. A gente estava pensando em ir ao parque — me avisa! 😊",
+      "msg2From": "Bob",
+      "msg2Preview": "As atas da reunião estão prontas",
+      "msg2Body": "Oi equipe, acabei de terminar de escrever as atas da reunião de ontem. Você pode encontrá-las na pasta compartilhada em \"Planejamento Q3\". Me avise se algo estiver faltando.",
+      "msg3From": "Carol",
+      "msg3Preview": "Obrigada pela apresentação!",
+      "msg3Body": "Só queria dizer — sua apresentação hoje foi fantástica! Muito clara e bem preparada. A equipe ficou muito impressionada. Ótimo trabalho! 🎉",
+      "bad": {
+        "instruction": "Abra cada notificação para marcá-la como lida.",
+        "btnOpen": "Abrir",
+        "btnRead": "✓ Lida",
+        "btnMarkRead": "✓ Marcar como lida"
+      },
+      "good": {
+        "btnMarkAll": "✓ Marcar todas como lidas",
+        "instruction": "Clique em \"Marcar todas como lidas\" acima, ou dispense cada uma individualmente.",
+        "btnDismiss": "Dispensar",
+        "alertDone": "✅ Todas as notificações marcadas como lidas!"
+      }
+    },
+    "h08": {
+      "toolbarTitleBad": "MegaLoja — Laptop XZ Pro",
+      "toolbarTitleGood": "Loja — Laptop XZ Pro",
+      "productName": "Laptop XZ Pro",
+      "productSpecs": "16GB RAM · 512GB SSD · Tela de 14\"",
+      "bad": {
+        "banner1": "📣 Assine nossa newsletter e ganhe 5% de desconto! Digite seu e-mail abaixo — por tempo limitado!",
+        "emailPlaceholder": "email@exemplo.com",
+        "btnSubscribe": "Assinar",
+        "carousel": "🔥 Ofertas quentes que você pode gostar: Cadeira Gamer | Mouse Sem Fio | Hub USB | Suporte para Monitor | Webcam | Headset | Teclado",
+        "promo": "💜 Use o código ECONOMIZE20 para 20% de desconto em pedidos acima de R$500! Confira também nossa seção de liquidação!",
+        "socialProof": "⭐ 4,7/5 de 2.341 avaliações · 🏆 Mais Vendido · 📦 Frete Grátis · 🔄 30 dias para devolução · 🛡️ 2 anos de garantia · 💳 0% de juros",
+        "popupTitle": "Espera! Antes de ir...",
+        "popupDesc": "Cadastre-se para ofertas exclusivas e nunca perca uma promoção!",
+        "btnNoThanks": "Não obrigado, não gosto de economizar",
+        "btnBuyNow": "Comprar Agora"
+      },
+      "good": {
+        "rating": "★★★★★",
+        "reviews": "4,7 (2.341 avaliações)",
+        "shipping": "✓ Frete grátis",
+        "btnBuyNow": "Comprar — R$ 1.299",
+        "returns": "30 dias de devolução grátis · 2 anos de garantia"
+      }
+    },
+    "h09": {
+      "toolbarTitle": "Cadastro",
+      "formTitle": "Criar uma conta",
+      "labelEmail": "Endereço de e-mail",
+      "emailPlaceholder": "voce@exemplo.com",
+      "labelPassword": "Senha",
+      "passwordHelper": "* A senha deve ter pelo menos 8 caracteres.",
+      "btnRegister": "Cadastrar",
+      "bad": {
+        "errorMsg": "❌ Erro 422: Entidade não processável. Falha na validação do corpo da requisição.",
+        "errorCode": "FORM_VALIDATION_ERROR · field[1].format"
+      },
+      "good": {
+        "errorEmail": "Por favor, use um formato válido: nome@exemplo.com",
+        "errorPassword": "A senha deve ter pelo menos 8 caracteres (atualmente {{length}})",
+        "alertSuccess": "✅ Conta criada com sucesso! Bem-vindo(a)!"
+      }
+    },
+    "h10": {
+      "toolbarTitle": "Configurações de Segurança",
+      "bad": {
+        "label2FA": "2FA",
+        "labelTOTP": "TOTP",
+        "labelFIDO": "FIDO2",
+        "labelOTP": "OTP via SMS",
+        "alertUpdated": "✅ Configuração atualizada."
+      },
+      "good": {
+        "label2FA": "Autenticação de Dois Fatores (2FA)",
+        "descPre": "Adiciona uma segunda camada de segurança além da sua senha.",
+        "descLink": "O que é 2FA?",
+        "chooseMethod": "Escolha seu método de 2FA:",
+        "method1Name": "App de Autenticação (Recomendado)",
+        "method1Desc": "Use um app como Google Authenticator para gerar códigos baseados em tempo.",
+        "method1Tooltip": "Opção mais segura. Funciona offline. Compatível com todos os apps de 2FA.",
+        "method2Name": "Mensagem de Texto (SMS)",
+        "method2Desc": "Receba um código único via SMS cada vez que fizer login.",
+        "method2Tooltip": "Conveniente, mas menos seguro do que um app de autenticação.",
+        "method3Name": "Chave de Segurança de Hardware",
+        "method3Desc": "Use uma chave física (ex: YubiKey) para a maior proteção.",
+        "method3Tooltip": "Melhor segurança, mas requer a compra de um dispositivo físico.",
+        "alertEnabled": "✅ Autenticação de Dois Fatores ativada! Você agora está mais protegido(a)."
+      }
+    }
+  }
+}

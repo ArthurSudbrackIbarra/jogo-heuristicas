@@ -1,0 +1,158 @@
+/* ── Outer flex container (sidebar + content) ─────────────────────────── */
+.gameLayout {
+  display: flex;
+  min-height: 100dvh;
+  position: relative;
+}
+
+/* ── Content column (everything right of sidebar) ─────────────────────── */
+.contentArea {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Inner wrapper (fills the content column) ─────────────────────────── */
+.wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+/* ── Top bar ──────────────────────────────────────────────────────────── */
+.topBar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-6);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border-subtle);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-above);
+}
+
+.topBarLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex: 1;
+  min-width: 0;
+}
+
+.menuBtn {
+  flex-shrink: 0;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-size: 24px;
+  padding: 6px;
+  line-height: 1;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.menuBtn:hover {
+  background: var(--color-card);
+  color: var(--color-text-primary);
+}
+
+.heuristicInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  margin-left: var(--space-3);
+}
+
+.heuristicLabel {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.heuristicName {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 280px;
+}
+
+.topBarRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.coinDisplay {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-accent-hover);
+  white-space: nowrap;
+}
+
+.langSwitcher {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.langBtn {
+  padding: 4px 8px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: transparent;
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  opacity: 0.5;
+  transition:
+    opacity var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.langBtn:hover {
+  opacity: 0.8;
+  background: var(--color-card);
+}
+
+.langActive {
+  opacity: 1;
+  background: var(--color-card);
+  border-color: var(--color-accent);
+}
+
+/* ── Main content ─────────────────────────────────────────────────────── */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .topBar {
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .main {
+    padding: var(--space-4);
+  }
+}
