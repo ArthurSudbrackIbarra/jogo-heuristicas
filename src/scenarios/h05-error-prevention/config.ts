@@ -39,8 +39,8 @@ export const h05: HeuristicConfig = {
       kind: "good",
       component: GoodScenario,
       narratorBefore: {
-        en: "Try to delete your account again — follow all the steps.",
-        pt: "Tente excluir sua conta novamente — siga todas as etapas.",
+        en: "Now try to delete your account again — follow all the steps.",
+        pt: "Agora tente excluir sua conta novamente — siga todas as etapas.",
       },
       audioBefore: { pt: "audios/pt/H5GBPT.mp3" },
       narratorAfter: {

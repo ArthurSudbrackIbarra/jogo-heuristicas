@@ -3,6 +3,7 @@ import { useRef, useCallback, useEffect, useState } from "react";
 interface UseAudioOptions {
   volume?: number;
   onEnd?: () => void;
+  startPlaying?: boolean;
 }
 
 interface AudioControls {
@@ -26,9 +27,10 @@ interface AudioControls {
 export function useAudio({
   volume = 0.9,
   onEnd,
+  startPlaying = false,
 }: UseAudioOptions = {}): AudioControls {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(startPlaying);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -42,6 +44,7 @@ export function useAudio({
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
+      audioRef.current = null;
       setIsPlaying(false);
     }
   }, []);
@@ -56,20 +59,23 @@ export function useAudio({
         : `${base}/${src.replace(/^\//, "")}`;
       const audio = new Audio(resolvedSrc);
       audio.volume = volume;
+      // Guard every async callback: if this audio has already been replaced
+      // (e.g. by StrictMode's double-effect or a scenario change), ignore it.
       audio.onended = () => {
-        setIsPlaying(false);
-        onEnd?.();
+        if (audioRef.current === audio) {
+          setIsPlaying(false);
+          onEnd?.();
+        }
       };
       audio.onerror = () => {
-        // File missing or unsupported — fail silently, text is shown anyway
-        setIsPlaying(false);
+        if (audioRef.current === audio) setIsPlaying(false);
       };
 
       audioRef.current = audio;
       setIsPlaying(true);
 
       audio.play().catch(() => {
-        setIsPlaying(false);
+        if (audioRef.current === audio) setIsPlaying(false);
       });
     },
     [stop, volume, onEnd],
