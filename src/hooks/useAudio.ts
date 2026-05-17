@@ -17,8 +17,9 @@ interface AudioControls {
 /**
  * Lightweight hook for narrator audio playback.
  *
- * Audio files live in /public/audio/.
- * Reference them by filename only: play('h01-bad-before.mp3')
+ * Audio files live in /public/audios/{lang}/.
+ * Reference them as relative paths, e.g. 'audios/pt/H1BAPT.mp3'.
+ * The Vite BASE_URL is prepended automatically so GitHub Pages deployments work.
  * If the file is missing the error is silently swallowed — the
  * text fallback in NarratorBox is always visible.
  */
@@ -49,7 +50,11 @@ export function useAudio({
     (src: string) => {
       stop();
 
-      const audio = new Audio(src.startsWith("/") ? src : `/audio/${src}`);
+      const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+      const resolvedSrc = src.startsWith("http")
+        ? src
+        : `${base}/${src.replace(/^\//, "")}`;
+      const audio = new Audio(resolvedSrc);
       audio.volume = volume;
       audio.onended = () => {
         setIsPlaying(false);

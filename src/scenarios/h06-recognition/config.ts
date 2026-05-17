@@ -28,10 +28,12 @@ export const h06: HeuristicConfig = {
         en: "Select the word 'important' to get the formatting toolbar. The toolbar will appear — but can you figure out which button makes it bold?",
         pt: "Selecione a palavra 'importante' para ver a barra de formatação. A barra vai aparecer — mas você consegue descobrir qual botão a deixa em negrito?",
       },
+      audioBefore: { pt: "audios/pt/H6BBPT.mp3" },
       narratorAfter: {
         en: "The toolbar appeared, but the options were simply labeled '1', '2', and '3'. How were you supposed to know which one was for bold? You had to guess or use trial and error for each button. That's the opposite of recognition.",
         pt: "A barra apareceu, mas as opções estavam rotuladas apenas como '1', '2' e '3'. Como saber qual delas aplicaria o negrito? Você teve que adivinhar ou testar cada botão por tentativa e erro. Isso é o oposto de reconhecimento.",
       },
+      audioAfter: { pt: "audios/pt/H6BAPT.mp3" },
     },
     {
       kind: "good",
@@ -40,10 +42,12 @@ export const h06: HeuristicConfig = {
         en: "Same task — make 'important' bold. Select the word and notice what changes.",
         pt: "Mesma tarefa — deixe 'importante' em negrito. Selecione a palavra e observe o que muda.",
       },
+      audioBefore: { pt: "audios/pt/H6GBPT.mp3" },
       narratorAfter: {
         en: "You selected the word, saw your options appear, and recognized what to do. No memorization, no guessing. Visible, familiar choices eliminate cognitive load.",
         pt: "Você selecionou a palavra, viu as opções aparecerem e reconheceu o que fazer. Sem memorização, sem adivinhação. Escolhas visíveis e familiares eliminam a carga cognitiva.",
       },
+      audioAfter: { pt: "audios/pt/H6GAPT.mp3" },
     },
   ],
   revealText: {

@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "../Button";
 import { useLang } from "../../hooks/useLang";
+import { useAudio } from "../../hooks/useAudio";
 import styles from "./HeuristicReveal.module.css";
 import type { HeuristicConfig } from "../../types/game";
 
@@ -20,6 +22,11 @@ export function HeuristicReveal({
   const { t } = useTranslation();
   const { pick } = useLang();
   const remaining = 100 - coinsAfterThis;
+  const { play } = useAudio();
+
+  useEffect(() => {
+    play("audios/sound-effects/level-complete.mp3");
+  }, [play]);
 
   return (
     <div className={styles.wrapper}>

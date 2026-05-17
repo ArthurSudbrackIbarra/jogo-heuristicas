@@ -28,10 +28,12 @@ export const h08: HeuristicConfig = {
         en: 'You want to buy a laptop. Find the "Buy Now" button on this page.',
         pt: 'Você quer comprar um laptop. Encontre o botão "Comprar Agora" nesta página.',
       },
+      audioBefore: { pt: "audios/pt/H8BBPT.mp3" },
       narratorAfter: {
         en: "Popups, banners, newsletter forms, recommendation carousels — all competing for your attention. The actual purpose of the page — buying the product — was buried. Every distraction is a design failure.",
         pt: "Pop-ups, banners, formulários de newsletter, carrosséis de recomendações — tudo competindo pela sua atenção. O objetivo real da página — comprar o produto — estava enterrado. Cada distração é uma falha de design.",
       },
+      audioAfter: { pt: "audios/pt/H8BAPT.mp3" },
     },
     {
       kind: "good",
@@ -40,10 +42,12 @@ export const h08: HeuristicConfig = {
         en: 'Same product, same goal. Find and click "Buy Now".',
         pt: 'Mesmo produto, mesmo objetivo. Encontre e clique em "Comprar Agora".',
       },
+      audioBefore: { pt: "audios/pt/H8GBPT.mp3" },
       narratorAfter: {
         en: "Instantly obvious. Product info, price, and a single clear call-to-action. No noise, no distractions. The design serves one goal — helping you buy the laptop — and does only that.",
         pt: "Imediatamente óbvio. Informações do produto, preço e uma única chamada para ação clara. Sem ruído, sem distrações. O design serve a um objetivo — ajudá-lo a comprar o laptop — e faz apenas isso.",
       },
+      audioAfter: { pt: "audios/pt/H8GAPT.mp3" },
     },
   ],
   revealText: {
