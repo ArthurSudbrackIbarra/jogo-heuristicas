@@ -9,19 +9,21 @@ import type { HeuristicConfig } from "../../types/game";
 interface HeuristicRevealProps {
   heuristic: HeuristicConfig;
   isLast: boolean;
-  coinsAfterThis: number;
+  starsAfterThis: number;
   onNext: () => void;
 }
+
+const TOTAL_STARS = 10;
 
 export function HeuristicReveal({
   heuristic,
   isLast,
-  coinsAfterThis,
+  starsAfterThis,
   onNext,
 }: HeuristicRevealProps) {
   const { t } = useTranslation();
   const { pick } = useLang();
-  const remaining = 100 - coinsAfterThis;
+  const remaining = TOTAL_STARS - starsAfterThis;
   const { play } = useAudio();
 
   useEffect(() => {
@@ -64,28 +66,28 @@ export function HeuristicReveal({
           </div>
         </div>
 
-        {/* Coin progress */}
-        <div className={styles.coinSection}>
-          <div className={styles.coinHeader}>
-            <span className={styles.coinEarned}>{t("reveal.coinsEarned")}</span>
-            <span className={styles.coinCount}>
-              {t("reveal.coinsProgress", { coins: coinsAfterThis })}
+        {/* Star progress */}
+        <div className={styles.starSection}>
+          <div className={styles.starHeader}>
+            <span className={styles.starEarned}>{t("reveal.starsEarned")}</span>
+            <span className={styles.starCount}>
+              {t("reveal.starsProgress", { stars: starsAfterThis })}
             </span>
           </div>
-          <div className={styles.coinTrack}>
+          <div className={styles.starTrack}>
             <div
-              className={styles.coinFill}
-              style={{ width: `${coinsAfterThis}%` }}
+              className={styles.starFill}
+              style={{ width: `${(starsAfterThis / TOTAL_STARS) * 100}%` }}
               role="progressbar"
-              aria-valuenow={coinsAfterThis}
+              aria-valuenow={starsAfterThis}
               aria-valuemin={0}
-              aria-valuemax={100}
+              aria-valuemax={TOTAL_STARS}
             />
           </div>
-          <p className={styles.coinMessage}>
+          <p className={styles.starMessage}>
             {remaining > 0
-              ? t("reveal.coinsRemaining", { remaining })
-              : t("reveal.coinsReady")}
+              ? t("reveal.starsRemaining", { remaining })
+              : t("reveal.starsReady")}
           </p>
         </div>
 

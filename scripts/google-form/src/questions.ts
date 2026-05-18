@@ -387,8 +387,8 @@ export const questions: FormItem[] = [
       pt: "Gamificação",
     },
     description: {
-      en: "About the coins, the progress sidebar, and the mystery reward.",
-      pt: "Sobre as moedas, a barra lateral de progresso e a recompensa misteriosa.",
+      en: "About the stars, the progress sidebar, and the Heuristics Expert ending.",
+      pt: "Sobre as estrelas, a barra lateral de progresso e a tela final de Especialista em Heurísticas.",
     },
   },
   {
@@ -397,8 +397,8 @@ export const questions: FormItem[] = [
     scale: "agreement",
     required: true,
     prompt: {
-      en: "Earning coins for each completed heuristic motivated me to keep playing.",
-      pt: "Ganhar moedas a cada heurística concluída me motivou a continuar jogando.",
+      en: "Earning a star for each completed heuristic motivated me to keep playing.",
+      pt: "Ganhar uma estrela a cada heurística concluída me motivou a continuar jogando.",
     },
   },
   {
@@ -407,8 +407,8 @@ export const questions: FormItem[] = [
     scale: "agreement",
     required: true,
     prompt: {
-      en: "The promise of a mystery reward at the end added a sense of intrigue or curiosity.",
-      pt: "A promessa de uma recompensa misteriosa no final trouxe uma sensação de intriga ou curiosidade.",
+      en: 'Being told I would become a "Heuristics Expert" by collecting all 10 stars made me want to finish the game.',
+      pt: 'Saber que eu me tornaria "Especialista em Heurísticas" ao coletar todas as 10 estrelas me deu vontade de terminar o jogo.',
     },
   },
   {
@@ -437,8 +437,8 @@ export const questions: FormItem[] = [
     scale: "agreement",
     required: true,
     prompt: {
-      en: "The gamification elements (coins, reward, progress) distracted me from the actual learning content.",
-      pt: "Os elementos de gamificação (moedas, recompensa, progresso) me distraíram do conteúdo de aprendizado em si.",
+      en: "The gamification elements (stars, expert ending, progress) distracted me from the actual learning content.",
+      pt: "Os elementos de gamificação (estrelas, tela de especialista, progresso) me distraíram do conteúdo de aprendizado em si.",
     },
     description: {
       en: "Note: this question is intentionally phrased in the opposite direction.",

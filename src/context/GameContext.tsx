@@ -16,7 +16,7 @@ const STORAGE_KEY = "jogo-heuristicas-save";
 interface SavedProgress {
   completedEntries: CompletedEntry[];
   completedHeuristicIds: number[];
-  coins: number;
+  stars: number;
   lang: Lang;
 }
 
@@ -25,14 +25,18 @@ function loadSavedProgress(): Partial<GameState> {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return {};
     const saved: SavedProgress = JSON.parse(raw);
+    const completedHeuristicIds = Array.isArray(saved.completedHeuristicIds)
+      ? saved.completedHeuristicIds
+      : [];
     return {
       completedEntries: Array.isArray(saved.completedEntries)
         ? saved.completedEntries
         : [],
-      completedHeuristicIds: Array.isArray(saved.completedHeuristicIds)
-        ? saved.completedHeuristicIds
-        : [],
-      coins: typeof saved.coins === "number" ? saved.coins : 0,
+      completedHeuristicIds,
+      stars:
+        typeof saved.stars === "number"
+          ? saved.stars
+          : completedHeuristicIds.length,
       lang: saved.lang === "pt" ? "pt" : "en",
     };
   } catch {
@@ -44,7 +48,7 @@ function persistProgress(state: GameState) {
   const saved: SavedProgress = {
     completedEntries: state.completedEntries,
     completedHeuristicIds: state.completedHeuristicIds,
-    coins: state.coins,
+    stars: state.stars,
     lang: state.lang,
   };
   try {
@@ -96,7 +100,7 @@ function buildInitialState(): GameState {
     scenarioStartTime: 0,
     completedEntries: saved.completedEntries ?? [],
     completedHeuristicIds: saved.completedHeuristicIds ?? [],
-    coins: saved.coins ?? 0,
+    stars: saved.stars ?? 0,
     lang,
   };
 }
@@ -107,7 +111,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
     case "START_GAME": {
       const allDone = state.completedHeuristicIds.length >= heuristics.length;
       if (allDone) {
-        return { ...state, phase: "shop" };
+        return { ...state, phase: "expert" };
       }
       const targetIdx = findFirstIncompleteIndex(state.completedHeuristicIds);
       const heuristic = heuristics[targetIdx];
@@ -159,7 +163,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
     case "DISMISS_REVEAL": {
       const heuristic = heuristics[state.heuristicIndex];
       const alreadyCounted = state.completedHeuristicIds.includes(heuristic.id);
-      const newCoins = alreadyCounted ? state.coins : state.coins + 10;
+      const newStars = alreadyCounted ? state.stars : state.stars + 1;
       const newCompletedIds = alreadyCounted
         ? state.completedHeuristicIds
         : [...state.completedHeuristicIds, heuristic.id];
@@ -168,9 +172,9 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       if (allDone) {
         return {
           ...state,
-          coins: newCoins,
+          stars: newStars,
           completedHeuristicIds: newCompletedIds,
-          phase: "shop",
+          phase: "expert",
         };
       }
 
@@ -181,15 +185,15 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       if (nextIdx === null) {
         return {
           ...state,
-          coins: newCoins,
+          stars: newStars,
           completedHeuristicIds: newCompletedIds,
-          phase: "shop",
+          phase: "expert",
         };
       }
 
       return {
         ...state,
-        coins: newCoins,
+        stars: newStars,
         completedHeuristicIds: newCompletedIds,
         phase: "playing",
         heuristicIndex: nextIdx,
@@ -198,11 +202,11 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       };
     }
 
-    case "BUY_ITEM":
+    case "FINISH_EXPERT":
       return { ...state, phase: "results" };
 
     case "FINISH_GAME":
-      return { ...state, phase: "shop" };
+      return { ...state, phase: "expert" };
 
     case "NAVIGATE_TO":
       return {
@@ -222,7 +226,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
         scenarioStartTime: 0,
         completedEntries: [],
         completedHeuristicIds: [],
-        coins: 0,
+        stars: 0,
         lang: state.lang,
       };
       return base;
@@ -265,7 +269,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
   }, [
     state.completedEntries,
     state.completedHeuristicIds,
-    state.coins,
+    state.stars,
     state.lang,
   ]);
 
