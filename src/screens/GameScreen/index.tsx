@@ -18,11 +18,11 @@ export function GameScreen() {
     currentScenario,
     totalHeuristics,
   } = useGame();
-  const { phase, heuristicIndex, scenarioIndex, coins, completedHeuristicIds } =
+  const { phase, heuristicIndex, scenarioIndex, stars, completedHeuristicIds } =
     state;
   const { t } = useTranslation();
   const { lang, pick, setLang } = useLang();
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -39,7 +39,7 @@ export function GameScreen() {
   const ScenarioComponent = currentScenario.component;
 
   const alreadyCounted = completedHeuristicIds.includes(currentHeuristic.id);
-  const coinsAfterThis = alreadyCounted ? coins : coins + 10;
+  const starsAfterThis = alreadyCounted ? stars : stars + 1;
   const futureCompletedCount = alreadyCounted
     ? completedHeuristicIds.length
     : completedHeuristicIds.length + 1;
@@ -58,7 +58,7 @@ export function GameScreen() {
             <HeuristicReveal
               heuristic={currentHeuristic}
               isLast={isLast}
-              coinsAfterThis={coinsAfterThis}
+              starsAfterThis={starsAfterThis}
               onNext={() => dispatch({ type: "DISMISS_REVEAL" })}
             />
           </div>
@@ -87,7 +87,7 @@ export function GameScreen() {
                 </div>
               </div>
               <div className={styles.topBarRight}>
-                <span className={styles.coinDisplay}>🪙 {coins} / 100</span>
+                <span className={styles.starDisplay}>⭐ {stars} / 10</span>
                 <div className={styles.langSwitcher}>
                   <button
                     className={`${styles.langBtn} ${lang === "en" ? styles.langActive : ""}`}

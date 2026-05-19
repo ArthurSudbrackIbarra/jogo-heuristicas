@@ -155,8 +155,8 @@
   font-weight: 700;
 }
 
-/* ── Mystery teaser ────────────────────────────────────── */
-.mysteryTeaser {
+/* ── Expert teaser ─────────────────────────────────────── */
+.expertTeaser {
   background: linear-gradient(
     135deg,
     rgba(245, 158, 11, 0.12),
@@ -169,6 +169,23 @@
   font-weight: 600;
   color: var(--color-text-secondary);
   line-height: var(--leading-loose);
+}
+
+.expertStar {
+  display: inline-block;
+  margin-right: var(--space-2);
+  filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.8));
+  animation: expertStarPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes expertStarPulse {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.15) rotate(10deg);
+  }
 }
 
 /* ── Decorative blobs ──────────────────────────────────── */

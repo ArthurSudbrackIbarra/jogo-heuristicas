@@ -95,10 +95,10 @@
   flex-shrink: 0;
 }
 
-.coinDisplay {
+.starDisplay {
   font-size: var(--text-sm);
   font-weight: 700;
-  color: var(--color-accent-hover);
+  color: #fbbf24;
   white-space: nowrap;
 }
 

@@ -28,10 +28,12 @@ export const h02: HeuristicConfig = {
         en: "You need to save your document. Find the right option in the menu above.",
         pt: "Você precisa salvar seu documento. Encontre a opção correta no menu acima.",
       },
+      audioBefore: { pt: "audios/pt/H2BBPT.mp3" },
       narratorAfter: {
         en: 'Frustrating, right? "Serialize & commit to persistent storage layer" means Save. "Discard volatile in-memory state" means Cancel. Technical jargon creates a wall between the user and the system.',
         pt: 'Frustrante, não é? "Serializar e confirmar na camada de armazenamento persistente" significa Salvar. "Descartar estado volátil em memória" significa Cancelar. O jargão técnico cria uma barreira entre o usuário e o sistema.',
       },
+      audioAfter: { pt: "audios/pt/H2BAPT.mp3" },
     },
     {
       kind: "good",
@@ -40,10 +42,12 @@ export const h02: HeuristicConfig = {
         en: "Same task — save the document. Notice how the language has changed.",
         pt: "Mesma tarefa — salvar o documento. Observe como a linguagem mudou.",
       },
+      audioBefore: { pt: "audios/pt/H2GBPT.mp3" },
       narratorAfter: {
         en: 'Instantly clear! "💾 Save", "✕ Discard changes" — these match how people think about documents in the real world. No translation needed.',
         pt: 'Imediatamente claro! "💾 Salvar", "✕ Descartar alterações" — esses termos correspondem à forma como as pessoas pensam sobre documentos no mundo real. Sem necessidade de tradução.',
       },
+      audioAfter: { pt: "audios/pt/H2GAPT.mp3" },
     },
   ],
   revealText: {

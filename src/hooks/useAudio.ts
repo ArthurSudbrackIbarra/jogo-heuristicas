@@ -3,6 +3,7 @@ import { useRef, useCallback, useEffect, useState } from "react";
 interface UseAudioOptions {
   volume?: number;
   onEnd?: () => void;
+  startPlaying?: boolean;
 }
 
 interface AudioControls {
@@ -17,17 +18,19 @@ interface AudioControls {
 /**
  * Lightweight hook for narrator audio playback.
  *
- * Audio files live in /public/audio/.
- * Reference them by filename only: play('h01-bad-before.mp3')
+ * Audio files live in /public/audios/{lang}/.
+ * Reference them as relative paths, e.g. 'audios/pt/H1BAPT.mp3'.
+ * The Vite BASE_URL is prepended automatically so GitHub Pages deployments work.
  * If the file is missing the error is silently swallowed — the
  * text fallback in NarratorBox is always visible.
  */
 export function useAudio({
   volume = 0.9,
   onEnd,
+  startPlaying = false,
 }: UseAudioOptions = {}): AudioControls {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(startPlaying);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -41,6 +44,7 @@ export function useAudio({
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
+      audioRef.current = null;
       setIsPlaying(false);
     }
   }, []);
@@ -49,22 +53,29 @@ export function useAudio({
     (src: string) => {
       stop();
 
-      const audio = new Audio(src.startsWith("/") ? src : `/audio/${src}`);
+      const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+      const resolvedSrc = src.startsWith("http")
+        ? src
+        : `${base}/${src.replace(/^\//, "")}`;
+      const audio = new Audio(resolvedSrc);
       audio.volume = volume;
+      // Guard every async callback: if this audio has already been replaced
+      // (e.g. by StrictMode's double-effect or a scenario change), ignore it.
       audio.onended = () => {
-        setIsPlaying(false);
-        onEnd?.();
+        if (audioRef.current === audio) {
+          setIsPlaying(false);
+          onEnd?.();
+        }
       };
       audio.onerror = () => {
-        // File missing or unsupported — fail silently, text is shown anyway
-        setIsPlaying(false);
+        if (audioRef.current === audio) setIsPlaying(false);
       };
 
       audioRef.current = audio;
       setIsPlaying(true);
 
       audio.play().catch(() => {
-        setIsPlaying(false);
+        if (audioRef.current === audio) setIsPlaying(false);
       });
     },
     [stop, volume, onEnd],

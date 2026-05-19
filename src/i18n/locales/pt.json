@@ -15,11 +15,11 @@
     },
     "start": "Começar o jogo →",
     "hint": "~15 minutos · 10 heurísticas · 20 cenários",
-    "mysteryTeaser": "Complete todas as 10 heurísticas para ganhar 100 moedas e resgatar uma recompensa misteriosa!"
+    "expertTeaser": "Colete todas as 10 estrelas para se tornar um(a) Especialista em Heurísticas!"
   },
   "game": {
     "heuristicLabel": "Heurística {{current}}/{{total}}",
-    "coins": "{{count}} moedas",
+    "stars": "{{count}} estrelas",
     "tryOtherVersion": "Tentar a outra versão →",
     "seeReveal": "Ver a revelação →"
   },
@@ -39,18 +39,18 @@
     "withHeuristic": "Com esta heurística",
     "nextHeuristic": "Próxima heurística →",
     "seeResults": "🏁 Ver seus resultados",
-    "coinsEarned": "🪙 +10 moedas ganhas!",
-    "coinsProgress": "{{coins}} / 100 moedas",
-    "coinsRemaining": "Faltam {{remaining}} moedas para a recompensa misteriosa!",
-    "coinsReady": "Você tem moedas suficientes para a recompensa misteriosa!"
+    "starsEarned": "⭐ +1 estrela conquistada!",
+    "starsProgress": "{{stars}} / 10 estrelas",
+    "starsRemaining": "Faltam {{remaining}} estrelas para você se tornar Especialista em Heurísticas!",
+    "starsReady": "Você coletou todas as estrelas — agora é Especialista em Heurísticas!"
   },
-  "shop": {
-    "title": "Recompensa Misteriosa Desbloqueada!",
-    "subtitle": "Você completou todas as 10 heurísticas e coletou 100 moedas!",
-    "description": "Resgate sua recompensa com os criadores do jogo.",
-    "note": "Encontre os criadores ao final da sessão para receber um bombom. 🍬",
-    "cta": "Resgatar Recompensa →",
-    "coins": "🪙 100 / 100 moedas"
+  "expert": {
+    "title": "Você é Especialista em Heurísticas!",
+    "subtitle": "Você completou todas as 10 heurísticas e coletou todas as estrelas.",
+    "description": "Agora você consegue identificar problemas de usabilidade que a maioria não percebe.",
+    "note": "Use o que aprendeu na próxima vez que for projetar, construir ou avaliar uma interface.",
+    "cta": "Ver seus resultados →",
+    "stars": "⭐ 10 / 10 estrelas"
   },
   "results": {
     "title": "Parabéns!",

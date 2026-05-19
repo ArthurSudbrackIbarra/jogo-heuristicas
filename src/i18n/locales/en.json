@@ -15,11 +15,11 @@
     },
     "start": "Start the game →",
     "hint": "~15 minutes · 10 heuristics · 20 scenarios",
-    "mysteryTeaser": "Complete all 10 heuristics to earn 100 coins and claim a mystery reward!"
+    "expertTeaser": "Collect all 10 stars to become a Heuristics Expert!"
   },
   "game": {
     "heuristicLabel": "Heuristic {{current}}/{{total}}",
-    "coins": "{{count}} coins",
+    "stars": "{{count}} stars",
     "tryOtherVersion": "Try the other version →",
     "seeReveal": "See the reveal →"
   },
@@ -39,18 +39,18 @@
     "withHeuristic": "With this heuristic",
     "nextHeuristic": "Next heuristic →",
     "seeResults": "🏁 See your results",
-    "coinsEarned": "🪙 +10 coins earned!",
-    "coinsProgress": "{{coins}} / 100 coins",
-    "coinsRemaining": "{{remaining}} coins until the mystery reward!",
-    "coinsReady": "You have enough coins for the mystery reward!"
+    "starsEarned": "⭐ +1 star earned!",
+    "starsProgress": "{{stars}} / 10 stars",
+    "starsRemaining": "{{remaining}} more stars to become a Heuristics Expert!",
+    "starsReady": "You've collected every star — you're now a Heuristics Expert!"
   },
-  "shop": {
-    "title": "Mystery Reward Unlocked!",
-    "subtitle": "You completed all 10 heuristics and collected 100 coins!",
-    "description": "Claim your reward from the game creators.",
-    "note": "Find the creators at the end of this session to receive a candy. 🍬",
-    "cta": "Claim Reward →",
-    "coins": "🪙 100 / 100 coins"
+  "expert": {
+    "title": "You're a Heuristics Expert!",
+    "subtitle": "You completed all 10 heuristics and collected every star.",
+    "description": "You can now spot usability issues that most people miss.",
+    "note": "Use what you've learned the next time you design, build, or evaluate an interface.",
+    "cta": "See your results →",
+    "stars": "⭐ 10 / 10 stars"
   },
   "results": {
     "title": "Congratulations!",

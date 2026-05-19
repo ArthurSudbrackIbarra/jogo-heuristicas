@@ -28,10 +28,12 @@ export const h07: HeuristicConfig = {
         en: "You have 3 unread notifications. Mark all of them as read.",
         pt: "Você tem 3 notificações não lidas. Marque todas como lidas.",
       },
+      audioBefore: { pt: "audios/pt/H7BBPT.mp3" },
       narratorAfter: {
         en: "You had to open each notification individually and mark it as read — multiple clicks per notification. Imagine having 50. There's no shortcut, no bulk action. Efficiency is zero for power users.",
         pt: "Você teve que abrir cada notificação individualmente e marcá-la como lida — vários cliques por notificação. Imagine ter 50. Não há atalho, nenhuma ação em lote. A eficiência é zero para usuários avançados.",
       },
+      audioAfter: { pt: "audios/pt/H7BAPT.mp3" },
     },
     {
       kind: "good",
@@ -40,10 +42,12 @@ export const h07: HeuristicConfig = {
         en: "Same task — 3 notifications to mark as read. Notice any shortcuts?",
         pt: "Mesma tarefa — 3 notificações para marcar como lidas. Notou algum atalho?",
       },
+      audioBefore: { pt: "audios/pt/H7GBPT.mp3" },
       narratorAfter: {
         en: 'One click — "Mark all as read" — handles everything instantly. Individual dismiss still works for granular control. Both novices and power users are served efficiently.',
         pt: 'Um clique — "Marcar todas como lidas" — resolve tudo instantaneamente. A opção de dispensar individualmente ainda funciona para controle granular. Tanto iniciantes quanto usuários avançados são atendidos de forma eficiente.',
       },
+      audioAfter: { pt: "audios/pt/H7GAPT.mp3" },
     },
   ],
   revealText: {

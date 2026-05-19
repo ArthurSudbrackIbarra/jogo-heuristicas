@@ -45,9 +45,14 @@ export function WelcomeScreen() {
           <p className={styles.subtitle}>{t("welcome.subtitle")}</p>
         </div>
 
-        {/* Mystery teaser */}
-        <div className={styles.mysteryTeaser}>
-          <p>{t("welcome.mysteryTeaser")}</p>
+        {/* Expert teaser */}
+        <div className={styles.expertTeaser}>
+          <p>
+            <span className={styles.expertStar} aria-hidden="true">
+              ⭐
+            </span>
+            {t("welcome.expertTeaser")}
+          </p>
         </div>
 
         <div className={styles.features}>

@@ -28,10 +28,12 @@ export const h10: HeuristicConfig = {
         en: "Enable Two-Factor Authentication on this settings page.",
         pt: "Ative a Autenticação de Dois Fatores nesta página de configurações.",
       },
+      audioBefore: { pt: "audios/pt/H10BBPT.mp3" },
       narratorAfter: {
         en: '"2FA", "TOTP", "FIDO2" — what do these mean? The page offers no explanations, no tooltips, no "Learn more" links. Unfamiliar users are left guessing what each option does and which to choose.',
         pt: '"2FA", "TOTP", "FIDO2" — o que esses termos significam? A página não oferece explicações, dicas de ferramentas, nem links de "Saiba mais". Usuários não familiarizados ficam adivinhando o que cada opção faz e qual escolher.',
       },
+      audioAfter: { pt: "audios/pt/H10BAPT.mp3" },
     },
     {
       kind: "good",
@@ -40,10 +42,12 @@ export const h10: HeuristicConfig = {
         en: "Enable 2FA again — notice how much clearer this version is.",
         pt: "Ative o 2FA novamente — observe o quanto esta versão é mais clara.",
       },
+      audioBefore: { pt: "audios/pt/H10GBPT.mp3" },
       narratorAfter: {
         en: "Each option has a clear name, a plain-language description, and an info tooltip with extra context. The recommended option is labeled. Users can make informed decisions without leaving the page.",
         pt: "Cada opção tem um nome claro, uma descrição em linguagem simples e uma dica de informação com contexto adicional. A opção recomendada está indicada. Os usuários podem tomar decisões informadas sem sair da página.",
       },
+      audioAfter: { pt: "audios/pt/H10GAPT.mp3" },
     },
   ],
   revealText: {

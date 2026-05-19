@@ -22,12 +22,14 @@ export function NarratorBox({
   onContinue,
   className = "",
 }: NarratorBoxProps) {
-  const { play, stop, pause, resume, isPlaying } = useAudio();
   const { lang } = useLang();
   const { t } = useTranslation();
   const pausedRef = useRef(false);
 
   const resolvedAudio = audioSrc?.[lang];
+  const { play, stop, pause, resume, isPlaying } = useAudio({
+    startPlaying: !!resolvedAudio,
+  });
 
   useEffect(() => {
     pausedRef.current = false;

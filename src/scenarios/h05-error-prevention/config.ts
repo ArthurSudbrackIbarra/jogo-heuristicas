@@ -28,22 +28,26 @@ export const h05: HeuristicConfig = {
         en: "Find and click the option to delete your account.",
         pt: "Encontre e clique na opção para excluir sua conta.",
       },
+      audioBefore: { pt: "audios/pt/H5BBPT.mp3" },
       narratorAfter: {
         en: "One click and it's gone — no warning, no confirmation, no second chance. A single misclick permanently destroys an account. This is catastrophic error design.",
         pt: "Um clique e foi-se — sem aviso, sem confirmação, sem segunda chance. Um único clique equivocado destrói permanentemente uma conta. Este é um design catastrófico de erros.",
       },
+      audioAfter: { pt: "audios/pt/H5BAPT.mp3" },
     },
     {
       kind: "good",
       component: GoodScenario,
       narratorBefore: {
-        en: "Try to delete your account again — follow all the steps.",
-        pt: "Tente excluir sua conta novamente — siga todas as etapas.",
+        en: "Now try to delete your account again — follow all the steps.",
+        pt: "Agora tente excluir sua conta novamente — siga todas as etapas.",
       },
+      audioBefore: { pt: "audios/pt/H5GBPT.mp3" },
       narratorAfter: {
         en: "Three layers of protection: a less prominent button, a clear warning dialog, a type-to-confirm field, and a checkbox acknowledging the consequences. Errors are prevented before they happen.",
         pt: "Três camadas de proteção: um botão menos proeminente, um diálogo de aviso claro, um campo de confirmação por digitação e uma caixa de seleção reconhecendo as consequências. Os erros são prevenidos antes de acontecerem.",
       },
+      audioAfter: { pt: "audios/pt/H5GAPT.mp3" },
     },
   ],
   revealText: {

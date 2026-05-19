@@ -40,7 +40,7 @@ export type GamePhase =
   | "playing"
   | "feedback"
   | "reveal"
-  | "shop"
+  | "expert"
   | "results";
 
 export interface CompletedEntry {
@@ -56,7 +56,7 @@ export interface GameState {
   scenarioStartTime: number;
   completedEntries: CompletedEntry[];
   completedHeuristicIds: number[];
-  coins: number;
+  stars: number;
   lang: Lang;
 }
 
@@ -66,7 +66,7 @@ export type GameAction =
   | { type: "TASK_COMPLETE" }
   | { type: "DISMISS_FEEDBACK" }
   | { type: "DISMISS_REVEAL" }
-  | { type: "BUY_ITEM" }
+  | { type: "FINISH_EXPERT" }
   | { type: "RESTART" }
   | { type: "SET_LANG"; lang: Lang }
   | { type: "NAVIGATE_TO"; heuristicIndex: number; scenarioIndex: 0 | 1 }
