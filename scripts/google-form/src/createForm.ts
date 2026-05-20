@@ -1,29 +1,27 @@
 /**
- * Build the post-game feedback Google Form from the bilingual question bank.
+ * Build the post-game feedback Google Form from the question bank.
  *
- * The form has three top-level sections:
- *   1. Welcome + language selector (default section, no page break needed).
- *   2. English questionnaire (starts at the first page break we emit for EN).
- *   3. Portuguese questionnaire (starts at the first page break for PT).
+ * Form layout:
+ *   Page 1 (default page, no break):
+ *     - TCLE text (loaded verbatim from paper/claude_context/forms_header.txt,
+ *       split into chunks under the Google Forms description-length limit)
+ *     - Required consent checkbox
+ *   Page 2: Demographics ("Sobre você")
+ *   Page 3: Open-ended questions ("Sobre o jogo")
  *
- * The language selector's options each carry `goToSectionId` pointing at
- * the corresponding language's first page break, so the respondent only
- * sees questions in their chosen language. The very last question in each
- * language ("Overall rating") uses `goToAction: SUBMIT_FORM` on every
- * option so the EN section terminates cleanly instead of falling through
- * into the PT section.
+ * The TCLE wording is mandated by the ethics committee approval and must
+ * match the source file exactly — do not edit forms_header.txt without the
+ * advisor's approval.
  */
 
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { readFileSync } from "node:fs";
 import { google, type forms_v1 } from "googleapis";
 import { getAuthorizedClient } from "./auth.js";
 import {
   formMeta,
-  likertScales,
   questions,
-  type Lang,
-  type LikertItem,
   type ChoiceItem,
   type TextItem,
   type SectionBreak,
@@ -31,162 +29,84 @@ import {
 
 type Item = forms_v1.Schema$Item;
 type Request = forms_v1.Schema$Request;
-type Option = forms_v1.Schema$Option;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const CREDENTIALS_PATH = path.join(__dirname, "..", "credentials.json");
 const TOKEN_PATH = path.join(__dirname, "..", "token.json");
+const TCLE_PATH = path.join(__dirname, "..", "TCLE.txt");
 
-// ─── Item builders ───────────────────────────────────────────────────────────
+// ─── TCLE loader ─────────────────────────────────────────────────────────────
 
-function likertToItem(q: LikertItem, lang: Lang): Item {
-  const scale = likertScales[q.scale][lang];
+function loadTcleItem(): Item {
+  const raw = readFileSync(TCLE_PATH, "utf-8");
+  const normalized = raw.replace(/\r\n/g, "\n").replace(/[ \t]+$/gm, "");
+  const trimmed = normalized.replace(/\n+$/g, "");
+
+  // First non-empty line is the title; the remaining lines (verbatim) become
+  // the description body. Kept as a single block per the advisor's request —
+  // if Google Forms rejects the description for being too long, we'll need
+  // to chunk it again.
+  const lines = trimmed.split("\n");
+  const firstNonEmpty = lines.findIndex((l) => l.trim().length > 0);
+  const title =
+    firstNonEmpty >= 0 ? lines[firstNonEmpty].trim() : "Termo de Consentimento";
+  // Preserve the blank line that follows the title in the source file so the
+  // Google Forms description renders with visual separation between title and
+  // body. If the source has no such blank line, prepend one.
+  const rawBody = lines.slice(firstNonEmpty + 1).join("\n");
+  const body = rawBody.startsWith("\n") ? rawBody : "\n" + rawBody;
+
   return {
-    title: `[${q.code}] ${q.prompt[lang]}`,
-    description: q.description?.[lang],
-    questionItem: {
-      question: {
-        required: q.required,
-        choiceQuestion: {
-          type: "RADIO",
-          options: scale.map((value) => ({ value })),
-        },
-      },
-    },
+    title,
+    description: body,
+    textItem: {},
   };
 }
 
-function choiceToItem(q: ChoiceItem, lang: Lang): Item {
-  const options: Option[] = q.options.map((opt) => {
-    const o: Option = { value: opt[lang] };
-    if (q.submitAfter) o.goToAction = "SUBMIT_FORM";
-    return o;
-  });
+// ─── Item builders ───────────────────────────────────────────────────────────
+
+function choiceToItem(q: ChoiceItem): Item {
   return {
-    title: `[${q.code}] ${q.prompt[lang]}`,
-    description: q.description?.[lang],
+    title: `[${q.code}] ${q.prompt}`,
+    description: q.description,
     questionItem: {
       question: {
         required: q.required,
         choiceQuestion: {
           type: q.multiple ? "CHECKBOX" : "RADIO",
-          options,
+          options: q.options.map((value) => ({ value })),
         },
       },
     },
   };
 }
 
-function textToItem(q: TextItem, lang: Lang): Item {
+function textToItem(q: TextItem): Item {
   return {
-    title: `[${q.code}] ${q.prompt[lang]}`,
-    description: q.description?.[lang],
+    title: `[${q.code}] ${q.prompt}`,
+    description: q.description,
     questionItem: {
       question: {
         required: q.required,
-        textQuestion: {
-          paragraph: q.paragraph,
-        },
+        textQuestion: { paragraph: q.paragraph },
       },
     },
   };
 }
 
-function sectionToItem(sec: SectionBreak, lang: Lang): Item {
+function sectionToItem(sec: SectionBreak): Item {
   return {
-    title: sec.title[lang],
-    description: sec.description?.[lang],
+    title: sec.title,
+    description: sec.description,
     pageBreakItem: {},
   };
 }
 
-// ─── Per-language pass ───────────────────────────────────────────────────────
-
-interface LanguagePass {
-  items: Item[];
-  /** Index within `items` of the first page break — used as the section's entry point for routing. */
-  firstPageBreakIndex: number;
-}
-
-function buildLanguagePass(lang: Lang): LanguagePass {
-  const items: Item[] = [];
-  let firstPageBreakIndex = -1;
-
-  for (const q of questions) {
-    let item: Item;
-    if (q.type === "section") {
-      item = sectionToItem(q, lang);
-      if (firstPageBreakIndex === -1) firstPageBreakIndex = items.length;
-    } else if (q.type === "likert") {
-      item = likertToItem(q, lang);
-    } else if (q.type === "choice") {
-      item = choiceToItem(q, lang);
-    } else {
-      item = textToItem(q, lang);
-    }
-    items.push(item);
-  }
-
-  if (firstPageBreakIndex === -1) {
-    throw new Error(
-      "Question bank has no section breaks — at least one is required to start the language section.",
-    );
-  }
-  return { items, firstPageBreakIndex };
-}
-
-// ─── Top-of-form items (intro + language selector) ───────────────────────────
-
-function introItem(): Item {
-  return {
-    title: "Welcome · Bem-vindo(a)",
-    description:
-      "Please pick your preferred language below — you'll only see the questionnaire in the language you select.\n\nEscolha o idioma de sua preferência abaixo — você só verá o questionário no idioma escolhido.",
-    textItem: {},
-  };
-}
-
-function languageSelectorPlaceholder(): Item {
-  return {
-    title: "Language · Idioma",
-    description:
-      "Select the language you would like to answer in.\nSelecione o idioma em que deseja responder.",
-    questionItem: {
-      question: {
-        required: true,
-        choiceQuestion: {
-          type: "RADIO",
-          options: [{ value: "English" }, { value: "Português" }],
-        },
-      },
-    },
-  };
-}
-
-function languageSelectorWithRouting(
-  itemId: string,
-  enPageBreakItemId: string,
-  ptPageBreakItemId: string,
-): Item {
-  return {
-    itemId,
-    title: "Language · Idioma",
-    description:
-      "Select the language you would like to answer in.\nSelecione o idioma em que deseja responder.",
-    questionItem: {
-      question: {
-        required: true,
-        choiceQuestion: {
-          type: "RADIO",
-          options: [
-            { value: "English", goToSectionId: enPageBreakItemId },
-            { value: "Português", goToSectionId: ptPageBreakItemId },
-          ],
-        },
-      },
-    },
-  };
+function questionToItem(q: ChoiceItem | TextItem | SectionBreak): Item {
+  if (q.type === "section") return sectionToItem(q);
+  if (q.type === "choice") return choiceToItem(q);
+  return textToItem(q);
 }
 
 // ─── Main ────────────────────────────────────────────────────────────────────
@@ -199,44 +119,25 @@ async function main(): Promise<void> {
   });
   const forms = google.forms({ version: "v1", auth });
 
-  const combinedTitle = `${formMeta.title.en} · ${formMeta.title.pt}`;
-  console.log(`Creating form "${combinedTitle}"…`);
+  console.log(`Creating form "${formMeta.title}"…`);
   const createRes = await forms.forms.create({
-    requestBody: {
-      info: { title: combinedTitle },
-    },
+    requestBody: { info: { title: formMeta.title } },
   });
   const formId = createRes.data.formId;
   if (!formId) throw new Error("forms.create did not return a formId");
   console.log(`Form created (formId: ${formId}).`);
 
-  // ── Build flat item list ──
-  const enPass = buildLanguagePass("en");
-  const ptPass = buildLanguagePass("pt");
+  const tcleItem = loadTcleItem();
+  console.log(
+    `Loaded TCLE (${(tcleItem.description ?? "").length} chars in description).`,
+  );
 
-  // Layout (indices in the final form):
-  //   0           : intro text
-  //   1           : language selector (placeholder, no routing yet)
-  //   2 .. 2+enN-1: EN items (first page break = EN entry)
-  //   2+enN..end  : PT items (first page break = PT entry)
-  const items: Item[] = [
-    introItem(),
-    languageSelectorPlaceholder(),
-    ...enPass.items,
-    ...ptPass.items,
-  ];
+  const items: Item[] = [tcleItem, ...questions.map(questionToItem)];
 
-  const LANG_INDEX = 1;
-  const EN_ENTRY_INDEX = 2 + enPass.firstPageBreakIndex;
-  const PT_ENTRY_INDEX = 2 + enPass.items.length + ptPass.firstPageBreakIndex;
-
-  // ── batchUpdate #1: description + every item ──
-  const initialRequests: Request[] = [
+  const requests: Request[] = [
     {
       updateFormInfo: {
-        info: {
-          description: `${formMeta.description.en}\n\n— — —\n\n${formMeta.description.pt}`,
-        },
+        info: { description: formMeta.description },
         updateMask: "description",
       },
     },
@@ -245,48 +146,10 @@ async function main(): Promise<void> {
     })),
   ];
 
-  console.log(`Submitting ${items.length} items in batchUpdate #1…`);
-  const batchRes = await forms.forms.batchUpdate({
-    formId,
-    requestBody: { requests: initialRequests },
-  });
-
-  const replies = batchRes.data.replies ?? [];
-  // replies[0] is the updateFormInfo reply (empty). Subsequent replies are
-  // createItem replies in the same order as the items array.
-  const CREATE_REPLY_OFFSET = 1;
-  const idOf = (itemsIdx: number): string | undefined =>
-    replies[CREATE_REPLY_OFFSET + itemsIdx]?.createItem?.itemId ?? undefined;
-
-  const langItemId = idOf(LANG_INDEX);
-  const enPageBreakItemId = idOf(EN_ENTRY_INDEX);
-  const ptPageBreakItemId = idOf(PT_ENTRY_INDEX);
-
-  if (!langItemId || !enPageBreakItemId || !ptPageBreakItemId) {
-    throw new Error(
-      `Could not resolve itemIds from batchUpdate response. lang=${langItemId} en=${enPageBreakItemId} pt=${ptPageBreakItemId}`,
-    );
-  }
-
-  // ── batchUpdate #2: rewrite language selector options with routing ──
-  console.log("Submitting batchUpdate #2 to wire language routing…");
+  console.log(`Submitting ${items.length} items…`);
   await forms.forms.batchUpdate({
     formId,
-    requestBody: {
-      requests: [
-        {
-          updateItem: {
-            item: languageSelectorWithRouting(
-              langItemId,
-              enPageBreakItemId,
-              ptPageBreakItemId,
-            ),
-            location: { index: LANG_INDEX },
-            updateMask: "questionItem.question.choiceQuestion.options",
-          },
-        },
-      ],
-    },
+    requestBody: { requests },
   });
 
   const editUrl = `https://docs.google.com/forms/d/${formId}/edit`;
@@ -304,9 +167,6 @@ async function main(): Promise<void> {
   );
   console.log(
     "  3. Paste the responder URL into src/screens/ResultsScreen/index.tsx (replace https://forms.gle/PLACEHOLDER).",
-  );
-  console.log(
-    "  4. To aggregate across languages: response columns share a `[CODE]` prefix (e.g. [L1]) — group columns by prefix.",
   );
 }
 

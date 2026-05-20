@@ -1,33 +1,27 @@
 # Post-game feedback form builder
 
-Standalone TypeScript script that creates the bilingual post-game survey for the Nielsen Heuristics game via the Google Forms API.
+Standalone TypeScript script that creates the post-game survey for the Nielsen Heuristics game via the Google Forms API.
 
 ## What it does
 
-Running `npm run create` produces a single Google Form that:
+Running `npm run create` produces a single Google Form (in Brazilian Portuguese) that:
 
-- Greets the respondent in both English and Portuguese.
-- Asks them to pick a language; subsequent questions only appear in that language (uses Google Forms' "go to section based on answer" routing).
-- Contains the same question set in both languages, with a shared `[CODE]` prefix on every question title so responses can be aggregated across languages in the response spreadsheet.
-- Ends with a final overall rating that submits the form.
+- Opens with the **Termo de Consentimento Livre e Esclarecido (TCLE)** loaded verbatim from [`paper/claude_context/forms_header.txt`](../../paper/claude_context/forms_header.txt) — this wording is mandated by the ethics committee approval and must not be altered.
+- Requires the respondent to confirm consent before continuing.
+- Asks five quick multiple-choice demographic questions (role, age range, area, prior familiarity with the heuristics, HCI evaluation experience).
+- Ends with five open-ended (paragraph) questions capturing qualitative feedback on the game, on whether it helped comprehension of the heuristics, on the effects of the gamification and narration, and on improvements.
 
-The question bank lives in [`src/questions.ts`](src/questions.ts). Edit that file and re-run the script to regenerate.
+The question bank lives in [`src/questions.ts`](src/questions.ts). The TCLE text lives in [`paper/claude_context/forms_header.txt`](../../paper/claude_context/forms_header.txt) and is read at runtime — edit the question bank and/or the TCLE file and re-run the script to regenerate.
 
 ## Question codes
 
-| Prefix | Meaning                                             |
-| ------ | --------------------------------------------------- |
-| `D#`   | Demographics                                        |
-| `L#`   | Learning & comprehension                            |
-| `N#`   | Narrator / narrative                                |
-| `G#`   | Gamification                                        |
-| `U#`   | Usability of the game itself                        |
-| `E#`   | Educational value                                   |
-| `S#`   | Specific reflection (heuristic choices, difficulty) |
-| `T#`   | Optional open text                                  |
-| `F`    | Final overall rating                                |
+| Prefix | Meaning                        |
+| ------ | ------------------------------ |
+| `C#`   | Consent confirmation           |
+| `D#`   | Demographics (multiple choice) |
+| `T#`   | Open-text (paragraph)          |
 
-In the response sheet, columns share a `[CODE]` prefix between languages — group them by prefix to merge PT-BR and EN-US responses.
+Each question title in the form is prefixed with `[CODE]` so columns are easy to spot in the response spreadsheet.
 
 ## One-time setup
 
@@ -65,7 +59,7 @@ The script prints the form's **edit URL** and **responder URL** on success.
 
 ## After creating the form
 
-1. Open the edit URL and skim the form to make sure it looks right.
+1. Open the edit URL and skim the form to make sure the TCLE rendered correctly and the layout looks right.
 2. On the **Responses** tab, click the green Sheets icon to capture submissions into a linked spreadsheet.
 3. Replace the `https://forms.gle/PLACEHOLDER` URL in [`src/screens/ResultsScreen/index.tsx`](../../src/screens/ResultsScreen/index.tsx) with the responder URL (or a shortened `forms.gle` link from Google Forms' "Send" button).
 
@@ -79,3 +73,4 @@ Running the script again creates a **new** form — it does not modify the previ
 - **`Google did not return a refresh_token`** — Delete `token.json` and rerun. Make sure the OAuth client is a **Desktop** type.
 - **`Access blocked: project has not been verified`** — On the consent screen, add your account as a Test user (consent screen → Test users).
 - **`Insufficient Permission`** — Make sure the scope `forms.body` was approved during consent. Delete `token.json` and rerun.
+- **`Invalid value at 'requests[N].create_item.item.description'`** — The TCLE chunking logic may have produced a chunk over the API limit. Lower `MAX_DESC_CHARS` in [`src/createForm.ts`](src/createForm.ts).
