@@ -28,12 +28,12 @@ export const h01: HeuristicConfig = {
         en: "Try to send Ana a message. Click the Send button when you're ready.",
         pt: "Tente enviar uma mensagem para a Ana. Clique no botão Enviar quando estiver pronto.",
       },
-      audioBefore: { pt: "audios/pt/H1BBPT.mp3" },
+      audioBefore: { pt: "audios/pt/H1BBPT.mp3", en: "audios/en/H1BBEN.mp3" },
       narratorAfter: {
         en: "Did you notice anything strange? After clicking Send, the interface gave you zero feedback. No spinner, no progress, no confirmation. You had no idea if the message was sent or lost.",
         pt: "Notou algo estranho? Após clicar em Enviar, a interface não deu nenhum retorno. Sem carregamento, sem progresso, sem confirmação. Você não tinha como saber se a mensagem foi enviada ou perdida.",
       },
-      audioAfter: { pt: "audios/pt/H1BAPT.mp3" },
+      audioAfter: { pt: "audios/pt/H1BAPT.mp3", en: "audios/en/H1BAEN.mp3" },
     },
     {
       kind: "good",
@@ -42,12 +42,12 @@ export const h01: HeuristicConfig = {
         en: "Now try the same task — send Ana a message. See how this version handles it.",
         pt: "Agora tente a mesma tarefa — envie uma mensagem para a Ana. Veja como esta versão lida com isso.",
       },
-      audioBefore: { pt: "audios/pt/H1GBPT.mp3" },
+      audioBefore: { pt: "audios/pt/H1GBPT.mp3", en: "audios/en/H1GBEN.mp3" },
       narratorAfter: {
         en: 'Much better! This version showed a progress bar, a "Sending…" status, and a final "✅ Message delivered" confirmation. You always knew exactly what the system was doing.',
         pt: 'Muito melhor! Esta versão exibiu uma barra de progresso, um status "Enviando…" e uma confirmação final "✅ Mensagem entregue". Você sempre soube exatamente o que o sistema estava fazendo.',
       },
-      audioAfter: { pt: "audios/pt/H1GAPT.mp3" },
+      audioAfter: { pt: "audios/pt/H1GAPT.mp3", en: "audios/en/H1GAEN.mp3" },
     },
   ],
   revealText: {

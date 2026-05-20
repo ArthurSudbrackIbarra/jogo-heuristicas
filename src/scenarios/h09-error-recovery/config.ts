@@ -28,12 +28,12 @@ export const h09: HeuristicConfig = {
         en: "Fill in the form and try to register. Something's wrong — see if you can figure out what.",
         pt: "Preencha o formulário e tente se cadastrar. Algo está errado — veja se você consegue descobrir o que é.",
       },
-      audioBefore: { pt: "audios/pt/H9BBPT.mp3" },
+      audioBefore: { pt: "audios/pt/H9BBPT.mp3", en: "audios/en/H9BBEN.mp3" },
       narratorAfter: {
         en: '"Error 422: Unprocessable Entity" tells you nothing actionable. Which field is wrong? What rule did it break? How do you fix it? The user is stuck without a map.',
         pt: '"Erro 422: Entidade não processável" não diz nada acionável. Qual campo está errado? Qual regra foi violada? Como você corrige? O usuário fica preso sem um mapa.',
       },
-      audioAfter: { pt: "audios/pt/H9BAPT.mp3" },
+      audioAfter: { pt: "audios/pt/H9BAPT.mp3", en: "audios/en/H9BAEN.mp3" },
     },
     {
       kind: "good",
@@ -42,12 +42,12 @@ export const h09: HeuristicConfig = {
         en: "Same form — try to figure out what is wrong and register successfully.",
         pt: "Mesmo formulário — tente descobrir o que está errado e cadastrar-se com sucesso.",
       },
-      audioBefore: { pt: "audios/pt/H9GBPT.mp3" },
+      audioBefore: { pt: "audios/pt/H9GBPT.mp3", en: "audios/en/H9GBEN.mp3" },
       narratorAfter: {
         en: "The inline error highlighted the exact field and explained the specific problem: the password is too short. You knew exactly what to fix, fixed it, and resubmitted. That's a recoverable error experience.",
         pt: "O erro inline destacou o campo exato e explicou o problema específico: a senha é muito curta. Você soube exatamente o que corrigir, corrigiu e reenviou. Isso é uma experiência de erro recuperável.",
       },
-      audioAfter: { pt: "audios/pt/H9GAPT.mp3" },
+      audioAfter: { pt: "audios/pt/H9GAPT.mp3", en: "audios/en/H9GAEN.mp3" },
     },
   ],
   revealText: {

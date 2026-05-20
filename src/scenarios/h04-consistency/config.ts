@@ -28,12 +28,12 @@ export const h04: HeuristicConfig = {
         en: "Navigate through all four checkout steps. Pay attention to the buttons.",
         pt: "Navegue pelas quatro etapas do checkout. Preste atenção nos botões.",
       },
-      audioBefore: { pt: "audios/pt/H4BBPT.mp3" },
+      audioBefore: { pt: "audios/pt/H4BBPT.mp3", en: "audios/en/H4BBEN.mp3" },
       narratorAfter: {
         en: 'Did the buttons confuse you? "Proceed", "Go on", "Continue", "Return", "Go Back", "Previous" — all meaning the same two actions but with different words and positions on every step. Exhausting!',
         pt: 'Os botões te confundiram? "Prosseguir", "Avançar", "Continuar", "Retornar", "Voltar", "Anterior" — todos com o mesmo significado, mas com palavras e posições diferentes em cada etapa. Exaustivo!',
       },
-      audioAfter: { pt: "audios/pt/H4BAPT.mp3" },
+      audioAfter: { pt: "audios/pt/H4BAPT.mp3", en: "audios/en/H4BAEN.mp3" },
     },
     {
       kind: "good",
@@ -42,12 +42,12 @@ export const h04: HeuristicConfig = {
         en: "Go through the same checkout — notice how the navigation feels now.",
         pt: "Percorra o mesmo checkout — observe como a navegação parece agora.",
       },
-      audioBefore: { pt: "audios/pt/H4GBPT.mp3" },
+      audioBefore: { pt: "audios/pt/H4GBPT.mp3", en: "audios/en/H4GBEN.mp3" },
       narratorAfter: {
         en: '"← Back" and "Next →" on every step, always in the same position. Once you learn the pattern once, you can rely on it forever. Consistency builds confidence.',
         pt: '"← Voltar" e "Avançar →" em cada etapa, sempre na mesma posição. Uma vez que você aprende o padrão, pode contar com ele para sempre. Consistência constrói confiança.',
       },
-      audioAfter: { pt: "audios/pt/H4GAPT.mp3" },
+      audioAfter: { pt: "audios/pt/H4GAPT.mp3", en: "audios/en/H4GAEN.mp3" },
     },
   ],
   revealText: {
