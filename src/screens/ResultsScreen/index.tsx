@@ -77,7 +77,7 @@ export function ResultsScreen() {
             {t("results.feedbackSubtitle")}
           </p>
           <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSdx1xGikbVJamz3N4_9chJYY4GNHjcVUyo-FTCqWOFFuVsdWw/viewform?usp=dialog"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSe9h1NgWXMdh5TMJ-rlC07KSQkp1lk8I5WmqgfV6OK18lI-yA/viewform?usp=dialog"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.feedbackLink}

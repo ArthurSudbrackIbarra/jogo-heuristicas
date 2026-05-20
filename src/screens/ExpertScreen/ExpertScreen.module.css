@@ -109,7 +109,8 @@
   font-size: 2rem;
   line-height: 1;
   filter: drop-shadow(0 0 14px rgba(245, 158, 11, 0.85));
-  animation: starPop 600ms var(--ease-out) both,
+  animation:
+    starPop 600ms var(--ease-out) both,
     starPulse 2.6s ease-in-out infinite;
 }
 
@@ -189,7 +190,12 @@
 .title {
   font-size: clamp(var(--text-2xl), 5vw, var(--text-4xl));
   font-weight: 800;
-  background: linear-gradient(135deg, #fbbf24, #f59e0b 50%, var(--color-accent-hover));
+  background: linear-gradient(
+    135deg,
+    #fbbf24,
+    #f59e0b 50%,
+    var(--color-accent-hover)
+  );
   background-size: 200% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
