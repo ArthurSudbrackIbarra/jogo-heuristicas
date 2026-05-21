@@ -1,0 +1,88 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+
+\usepackage{graphicx,url}
+
+\usepackage[brazilian]{babel}
+\usepackage[T1]{fontenc} % Codificação para fontes com suporte a caracteres acentuados
+\usepackage[utf8]{inputenc} % Codificação UTF-8 (necessário apenas para pdflatex)
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{graphicx,url}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{textcomp}
+\usepackage{url}
+\usepackage{enumerate}
+\usepackage{multirow}
+\usepackage{soul}
+\usepackage{verbatim}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[shortlabels]{enumitem}
+\usepackage{scalefnt}
+\usepackage{comment}
+\usepackage{lscape}
+\usepackage{fancyhdr}
+\usepackage{IHC}
+\usepackage[super]{nth}
+\usepackage{pdfcomment} % By IHC 2026: insert screen-reader descriptions in images
+
+% Prevent hyphenation
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+\sloppy
+
+\input{IHC_info}
+
+\title{A Web-Based Educational Game to Support the Understanding of
+Nielsen's Heuristics Through Paired Scenarios: An Experience Report}
+
+% Authors and affiliations omitted for double-blind review (IHC 2026).
+% Reinstate in the camera-ready version, along with the CAAE number in the
+% "Cuidados Éticos" section.
+\author{Authors omitted for double-blind review}
+
+\address{Affiliations omitted for double-blind review
+  \email{Emails omitted for double-blind review}
+}
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{plain}
+
+% Structured abstract (ABNT 6028:2021 adaptation) -- max 10 lines.
+\begin{abstract}
+\textbf{Introduction}: Teaching Nielsen's usability heuristics traditionally relies on reading abstract definitions, which novices often find hard to internalize.
+\textbf{Objective}: To support the teaching of Nielsen's heuristics through paired interactive scenarios.
+\textbf{Methodology}: Design and evaluation of a web-based educational game where players complete each task in paired violating and compliant interfaces, with narration and gamification; open-ended responses were analysed via qualitative content analysis.
+\textbf{Results}: Initial results suggest the paired bad/good contrast is the main mechanism supporting learning over traditional reading; narration served as a focusing aid, gamification as mild engagement scaffolding rather than a learning driver.
+\end{abstract}
+
+\keywords{Nielsen's usability heuristics, HCI education, educational game, game-based learning, experience report.}
+
+% Per IHC 2026 rules, a Portuguese "resumo" / "palavras-chave" block is required
+% only for papers written in Portuguese. This paper is in English, so the
+% resumo and palavraschave blocks are intentionally omitted.
+
+\input{sections/introduction}
+
+% \input{sections/background}
+% \input{sections/related-work}
+% \input{sections/game}
+% \input{sections/methodology}
+% \input{sections/ethics}
+% \input{sections/results}
+% \input{sections/discussion}
+% \input{sections/conclusion}
+% \input{sections/acknowledgments}
+
+\bibliographystyle{sbc}
+\bibliography{references/references}
+
+\end{document}
