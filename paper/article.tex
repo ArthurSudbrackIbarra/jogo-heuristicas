@@ -4,7 +4,7 @@
 
 \usepackage{graphicx,url}
 
-\usepackage[brazilian]{babel}
+\usepackage[brazilian,english]{babel}
 \usepackage[T1]{fontenc} % Codificação para fontes com suporte a caracteres acentuados
 \usepackage[utf8]{inputenc} % Codificação UTF-8 (necessário apenas para pdflatex)
 \usepackage{multicol}
@@ -38,6 +38,15 @@
 \sloppy
 
 \input{IHC_info}
+
+% Force English caption and section labels. Babel's [brazilian,english]
+% option should already produce English by default, but the SBC template
+% combined with some Overleaf caches can leak the Brazilian defaults, so
+% we override them explicitly here.
+\renewcommand{\figurename}{Figure}
+\renewcommand{\tablename}{Table}
+\renewcommand{\refname}{References}
+\renewcommand{\bibname}{References}
 
 \title{A Web-Based Educational Game to Support the Understanding of
 Nielsen's Heuristics Through Paired Scenarios: An Experience Report}
