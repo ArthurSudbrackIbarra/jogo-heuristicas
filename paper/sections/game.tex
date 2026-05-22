@@ -35,38 +35,53 @@ To make this flow concrete, Figures~\ref{fig:h8-bad}, \ref{fig:h8-good}, and~\re
 
 \subsection{The ten heuristics}
 
-The ten heuristics covered by the game follow the consolidated formulation by Nielsen~\cite{nielsen1994heuristic,nielsen2024tenheuristics}. Each heuristic is paired with a concrete, self-contained task that can be carried out by the player in a few clicks within a single screen. Table~\ref{tab:heuristics} lists the heuristics in the order in which they appear in the game and the task used in each pair of scenarios.
+The ten heuristics covered by the game follow the consolidated formulation by Nielsen~\cite{nielsen1994heuristic,nielsen2024tenheuristics}. Each heuristic is paired with a concrete, self-contained task that can be carried out by the player in a few clicks within a single screen. The bad and the good scenario for the same heuristic use the same task, but the interface around it is intentionally redesigned so that the contrast between violating and respecting the heuristic is directly visible in the interaction. Table~\ref{tab:heuristics} lists the heuristics in the order in which they appear in the game, the task used in each pair of scenarios, and the specific design contrast between the violating and the compliant interface.
 
-\begin{table}[ht]
-  \caption{The ten Nielsen heuristics and the concrete task used in each pair of scenarios.}
-  \label{tab:heuristics}
-  \centering
-  \begin{tabular}{c|p{5cm}|p{8cm}}
-    \hline
-    \textbf{\#} & \textbf{Heuristic} & \textbf{Task} \\
-    \hline
-    1 & Visibility of System Status & Send a message to your friend Ana about dinner tonight. \\
-    \hline
-    2 & Match Between System and the Real World & Save your document before closing. \\
-    \hline
-    3 & User Control and Freedom & You accidentally opened a plan-upgrade wizard --- exit without completing it. \\
-    \hline
-    4 & Consistency and Standards & Navigate through all four checkout form steps. \\
-    \hline
-    5 & Error Prevention & Delete your account from settings. \\
-    \hline
-    6 & Recognition Rather Than Recall & Bold the word ``important'' in the document. \\
-    \hline
-    7 & Flexibility and Efficiency of Use & Mark all three unread notifications as read. \\
-    \hline
-    8 & Aesthetic and Minimalist Design & Find and click the ``Buy Now'' button for the Laptop XZ Pro. \\
-    \hline
-    9 & Help Users Recognise, Diagnose, and Recover from Errors & Fix the form error and complete registration. \\
-    \hline
-    10 & Help and Documentation & Enable Two-Factor Authentication (2FA) in Security Settings. \\
-    \hline
-  \end{tabular}
-\end{table}
+{
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}[c]{c|p{2.3cm}|p{2.5cm}|p{4.0cm}|p{4.0cm}}
+  \caption{The ten Nielsen heuristics, the concrete task used in each pair of scenarios, and the design contrast between the violating (bad) and the compliant (good) interface.}
+  \label{tab:heuristics}\\
+  \hline
+  \textbf{\#} & \textbf{Heuristic} & \textbf{Task} & \textbf{Bad scenario} & \textbf{Good scenario} \\
+  \hline
+  \endfirsthead
+
+  \multicolumn{5}{l}{\textit{Table~\thetable\ --- continued from previous page}}\\
+  \hline
+  \textbf{\#} & \textbf{Heuristic} & \textbf{Task} & \textbf{Bad scenario} & \textbf{Good scenario} \\
+  \hline
+  \endhead
+
+  \hline
+  \multicolumn{5}{r}{\textit{Continued on next page}}\\
+  \endfoot
+
+  \hline
+  \endlastfoot
+
+  1 & Visibility of System Status & Send a message to a friend about dinner tonight. & No feedback while the message is sending; the user cannot tell whether it went through. & A progress bar followed by a ``Message delivered'' confirmation keeps the user informed at every step. \\
+  \hline
+  2 & Match Between System and the Real World & Save the document before closing. & Buttons labelled ``Serialize \& commit to persistent storage layer'' and ``Discard volatile in-memory state'' force the user to decode technical jargon. & Plain-language labels such as ``Save'' and ``Discard changes'' use the vocabulary people actually think in. \\
+  \hline
+  3 & User Control and Freedom & Exit an accidentally opened upgrade wizard without completing the upgrade. & No cancel, close, or back option on the first step --- the user must either complete the upgrade or abandon the session. & Multiple clearly marked exits (a close button, a cancel link on every step, and a confirmation dialog) let the user leave at any point. \\
+  \hline
+  4 & Consistency and Standards & Navigate through all four checkout steps. & Navigation buttons change label (``Proceed'', ``Go on'', ``Continue'') and position from step to step, forcing the user to re-learn the interface at every screen. & Identical ``Back'' and ``Next'' buttons in the same position on every step. \\
+  \hline
+  5 & Error Prevention & Delete the account from settings. & A single click permanently deletes the account, with no warning or confirmation. & Several protective layers --- a de-emphasised button, a warning dialog, a type-to-confirm field, and an acknowledgement checkbox --- prevent accidental deletion. \\
+  \hline
+  6 & Recognition Rather Than Recall & Make the word ``important'' bold in a document. & Toolbar buttons are labelled only ``1'', ``2'', and ``3'', with no indication of what they do; the user has to memorise or guess. & Visible, familiar formatting controls let the user recognise the correct action immediately. \\
+  \hline
+  7 & Flexibility and Efficiency of Use & Mark all three unread notifications as read. & Each notification must be dismissed individually; no bulk action is available. & A single ``Mark all as read'' action handles the task, while individual dismiss options remain available for granular control. \\
+  \hline
+  8 & Aesthetic and Minimalist Design & Find and click the ``Buy Now'' button for the Laptop XZ Pro. & Popups, banners, newsletter forms, and recommendation carousels compete for attention and bury the actual goal of the page. & A clean layout shows only the product, the price, and a single clear call-to-action. \\
+  \hline
+  9 & Help Users Recognise, Diagnose, and Recover from Errors & Fix the form error and complete registration. & A generic message ``Error 422: Unprocessable Entity'' tells the user nothing about which field is wrong or how to fix it. & Inline error messages highlight the exact field and explain the specific problem (for example, ``Password must be at least 8 characters''). \\
+  \hline
+  10 & Help and Documentation & Enable Two-Factor Authentication in Security Settings. & Options are labelled only by acronym (``2FA'', ``TOTP'', ``FIDO2''), with no explanation or links to documentation. & Each option carries a plain-language description and an inline information tooltip, with a recommended choice highlighted. \\
+\end{longtable}
+}
 
 The interfaces used in the bad and good scenarios are not static mock-ups: they are interactive components that the player operates with real clicks, typing, and navigation. This was a deliberate design choice, so that the difference between violating and respecting a heuristic is felt through the interaction rather than read as a description.
 
