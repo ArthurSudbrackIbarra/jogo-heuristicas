@@ -1,0 +1,78 @@
+\section{Results}
+\label{sec:results}
+
+\subsection{Participants}
+\label{sec:results:participants}
+
+The questionnaire was answered by $N = 30$ participants over a six-day window in May 2026. All responses were substantive, so no entries were removed during data cleaning. The three figures that follow summarise the sample. Each is described in prose so the argument can be followed without consulting the chart.
+
+Figure~\ref{fig:demographics-role-area} pairs the current role (D1) with the primary area of study or work (D3). The role question allowed more than one selection, since some participants combine study and professional practice. Most respondents were students --- 15 undergraduates, 8 master's students, and 3 doctoral students. Four professors or researchers and five industry professionals completed the sample, with five participants reporting both a student role and an industry role. The area distribution is heavily skewed: 24 of the 30 participants come from Computer Science or Software Engineering, with 3 from Design or UX, 2 from other technology areas, and 1 from Information Systems. No participants from Education or from non-technology areas joined the study.
+
+\begin{figure}[ht]
+\centering
+\pdftooltip{\includegraphics[width=.95\textwidth]{figures/demographics-role-area.png}}{Two horizontal bar charts side by side. The left chart shows the count of selections for each role option from question D1: 15 for undergraduate student, 8 for master's student, 3 for doctoral student, 4 for professor or researcher, 5 for industry professional, and 1 for ``other''. Several participants selected more than one role, so the total exceeds the sample size of 30. The right chart shows the count for each area option from question D3: 24 for Computer Science or Software Engineering, 3 for Design or UX, 2 for ``other technology area'', 1 for Information Systems, 0 for Education and 0 for ``other non-technology area''.}
+\caption{Participant roles (D1, multi-select) and primary areas of study or work (D3).}
+\label{fig:demographics-role-area}
+\end{figure}
+
+Figure~\ref{fig:demographics-age} shows the age distribution (D2), which the form collected as a raw numeric value rather than as a range. Ages span from 18 to 52, with a median of 24. Sixteen participants fall in the 18--24 range, 11 in the 25--34 range, 2 in the 35--44 range, and 1 in the 45--54 range. The sample skews young, which is consistent with the dominant student profile reported above.
+
+\begin{figure}[ht]
+\centering
+\pdftooltip{\includegraphics[width=.7\textwidth]{figures/demographics-age.png}}{A histogram of participant ages with four age-range bins on the horizontal axis: 18--24, 25--34, 35--44, and 45--54. The bars have heights 16, 11, 2, and 1, respectively. The distribution is right-skewed, with most participants in the youngest two bins.}
+\caption{Distribution of participant ages (D2) across four age ranges.}
+\label{fig:demographics-age}
+\end{figure}
+
+Figure~\ref{fig:expertise-profile} pairs prior familiarity with Nielsen's heuristics (D4) with practical experience in HCI or usability evaluation (D5). The two scales are ordered from no familiarity or experience at the top to direct prior use or regular practice at the bottom. For D4, 14 participants had never heard of the heuristics before the study, 3 had heard of them without knowing the content, 6 knew them superficially, 6 knew them well, and 1 had already used them in projects or evaluations. For D5, 8 reported no practical experience, 12 reported little experience limited to coursework, 6 reported some experience in academic projects, and 4 reported regular practice in their professional or research work. Taken together, roughly two thirds of the sample is novice or near-novice on both scales, while a minority is comfortable with the topic.
+
+\begin{figure}[ht]
+\centering
+\pdftooltip{\includegraphics[width=.95\textwidth]{figures/expertise-profile.png}}{Two horizontal bar charts side by side, both ordered from novice at the top to expert at the bottom. The left chart shows responses to question D4, prior familiarity with Nielsen's heuristics: 14 for ``never heard of them'', 3 for ``heard of them but did not know the content'', 6 for ``knew them superficially'', 6 for ``knew them well'', and 1 for ``had already used them in projects or evaluations''. The right chart shows responses to question D5, practical experience with HCI or usability evaluation: 8 for ``none'', 12 for ``little, only in coursework'', 6 for ``some, in academic projects'', and 4 for ``substantial, in regular professional or research practice''.}
+\caption{Prior familiarity with Nielsen's heuristics (D4) and practical experience with HCI or usability evaluation (D5).}
+\label{fig:expertise-profile}
+\end{figure}
+
+The sample is therefore dominated by computing students with little or no prior exposure to the heuristics, with a smaller group of experts --- designers, professors, and industry professionals --- whose responses provide a critical contrast in the qualitative analysis that follows. Participant identifiers ($P_1$ through $P_{30}$) are anonymous and follow the order in which the responses were received.\footnote{Original responses were written in Portuguese. Quotes shown in this section were translated by the authors; the AI-tool disclosure for translation is provided in the Acknowledgments.}
+
+\subsection{Overall appreciation}
+\label{sec:results:t1}
+
+A clear majority of participants reported a positive overall experience with the game. Twenty-six of the thirty responses said the participant liked playing it; three were mixed, framing the artefact as more of a guided demonstration than a game proper; and one response was negative on game-ness grounds. The reasons given for liking the game clustered into a few recurring themes.
+
+The most common reason was didactic clarity. Several participants described the game as ``didactic'' or ``informative'', and as a way to ``transform theory into practice'' ($P_{19}$, undergraduate, Information Systems). A second recurring theme was that the scenarios mirror real-world frustrations. $P_1$ (master's, no prior familiarity) noted that the game ``showed problems that really happen and that companies do nothing to fix''. $P_{16}$ (undergraduate, also industry professional) reframed this as a pedagogical strategy: ``the game gives you a first-person perspective; suffering to learn is a good tactic so you do not make the same mistakes again''.
+
+The mixed and negative responses are worth surfacing because they point to a tension that recurs later in the data. $P_2$ (master's, designer, knew the heuristics well) expected to be challenged and instead experienced ``almost a guided tour through the heuristics''. $P_7$ (undergraduate) was more explicit: ``there is no aspect of it that resembles a game'', because ``the user cannot make mistakes and there is no incentive to reason about the answer''. $P_{30}$ (undergraduate, no prior familiarity) reached the same conclusion through a different route: ``as a game, no --- in my experience this is a demonstration of how user experience can be done badly, and the corresponding solutions''. We return to this point in Section~\ref{sec:discussion}.
+
+\subsection{Perceived support for understanding}
+\label{sec:results:t2}
+
+Question T2 asked participants how the game supported their understanding of Nielsen's heuristics, with an explicit comparison to reading the definitions on one's own. The responses identify three mechanisms that together account for most of the perceived support.
+
+The first and most-cited mechanism is the paired contrast between the violating and the compliant scenarios. Eight participants named the contrast as the single most important aspect of the game. $P_1$ wrote that ``the comparison between the examples was the most distinguishing feature; showing first the wrong version and then the right one helped me a lot''. $P_{12}$ (master's, no prior familiarity) made the same point in different words: ``what helped me the most was the way the game first showed a messy scenario and right after a correct one''. The same mechanism is named by $P_6$, $P_{11}$, $P_{15}$, $P_{16}$, and $P_{21}$, often using the words ``error and correct'', ``worse versus better'', or ``without and with'' --- the same vocabulary the game itself uses on the reveal screen.
+
+The second mechanism is the interactive nature of the scenarios. Participants treated ``practical examples'' and ``interactive interfaces'' as distinct from a static contrast: doing the task in the violating interface made the heuristic concrete. $P_{14}$ (professor, Design/UX, knew the heuristics well) summarised this clearly: ``the fact that the interfaces are interactive contributed without doubt to a better understanding; it let me experience how the design is actually an obstacle for the user''. $P_9$ (master's) gave the most specific illustration: ``the interactive part --- sending the message and feeling the impact of thinking it had been lost, for example''. The same mechanism appears in $P_{10}$, $P_{13}$, $P_{17}$, $P_{22}$, $P_{23}$, and $P_{27}$.
+
+The third mechanism is the naming of the concept on the reveal screen. For participants who had never heard of the heuristics, the reveal step is where the practical experience is named and labelled. $P_5$ (master's, no prior familiarity) put it directly: ``I did not even know these concepts had names like that''. $P_{24}$ (undergraduate, also industry professional, knew the heuristics superficially) added that ``seeing each heuristic explained and named separately was useful; it added to what I already knew''.
+
+Several participants made the comparison with traditional reading explicit. $P_{30}$ articulated this most fully: ``I would have taken longer to understand by reading a fancy definition on its own; this was a good combination of learning and entertainment. Also, by having a way to respond to the questions, it is a more active method of learning than just reading, which is a more passive way.'' One participant offered a mild dissent: $P_7$, who did not find the game very supportive, still acknowledged that ``at least we had some examples of errors and successes according to Nielsen's heuristics''.
+
+\subsection{Gamification and narration}
+\label{sec:results:t3}
+
+Question T3 asked about gamification --- stars, progress bar, and the ``Heuristics Expert'' closing screen --- and about narration in a single prompt. The data splits cleanly into two sub-themes, and we present them separately because the responses diverge in direction.
+
+For gamification, around twelve participants reported a positive effect on focus or motivation. $P_1$ noted that the gamification ``helped me stay focused and more immersed; it stopped being something boring and only theoretical''. $P_{24}$ added that ``gamifying helped me hold my attention and made the learning process more satisfying''. A separate group of about five respondents singled out the progress bar as helpful while saying the stars and the Expert screen did not affect them. $P_2$ wrote that ``the progress bar gave me a sense of arriving somewhere; the stars did not influence me or motivate me'', and $P_5$ that ``the progress bar helped; the stars did not make a difference, nor did the final screen''. Three participants reported no effect from gamification at all ($P_{13}$, $P_{29}$, $P_{30}$). The remaining critique was structural: $P_6$ (professor) said gamification ``helped only superficially, since there was practically only one path to follow and it was not possible to lose points''; $P_7$ extended this into a call for ``a real gamification with scoring and rewards''.
+
+For narration, around nine participants described it as helping them focus or recognise the heuristic in action. $P_8$ (master's, no prior familiarity) gave the sharpest example: ``in some cases without the heuristic I got irritated by the lack of pattern, and the narration helped me understand that this was exactly what was being demonstrated''. $P_{14}$ added that ``the narration contributed to understanding and to staying focused on the activity''. About four participants reported the opposite effect. $P_{18}$ wrote that the narration ``bothered me a bit'' and that a button to silence it was missing; $P_{20}$ and $P_{22}$ raised similar points about volume control and distraction from reading. $P_{10}$ accepted the narration but commented that it ``could be a little less robotic''.
+
+\subsection{Reported issues and suggestions}
+\label{sec:results:t4}
+
+Question T4 asked about negative points and suggested improvements, and Question T5 collected optional general comments. Three recurring patterns emerged across these responses.
+
+The most consistent pattern is a wish for the player to be able to fail or to choose. Five participants asked for an explicit way to be wrong or for more challenge. $P_2$ suggested that the user should try to identify which heuristic applies before the game reveals it; $P_7$ argued that without the possibility of error there is no need to reason, which makes the experience tedious; $P_8$ proposed losing stars or lives on mistakes; $P_{18}$ and $P_{25}$ asked for a more interactive format with real decisions. The wording differs but the underlying request is the same: a recognition step that the player completes before the reveal screen.
+
+The second pattern is narration ergonomics. Beyond the mixed reception reported in Section~\ref{sec:results:t3}, four participants pointed to concrete affordances: $P_5$ asked that the audio not play automatically; $P_{18}$ and $P_{20}$ asked for a mute or volume control; $P_9$ noted that some narration tracks were long enough to feel like watching a video. These are inexpensive to address.
+
+The third pattern is a wish for more depth and a small set of one-off suggestions. $P_{16}$ proposed adding a second activity per heuristic to support fixation, and $P_6$ suggested that some scenarios could be replaced by more realistic variants. A scattered set of further comments touched on small interface details and tone --- including $P_{17}$'s suggestion that the game open with a light-hearted warning about being intentionally frustrating at first --- but did not cluster into a shared theme.
