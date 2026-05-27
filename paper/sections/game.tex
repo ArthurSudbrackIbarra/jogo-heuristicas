@@ -1,28 +1,36 @@
-\section{The Game}
+\section{The Game (NEW VERSION!!!)}
 \label{sec:game}
 
 % \subsection{Concept and structure}
 
-The artifact is a web-based, single-session educational game that supports understanding of Nielsen's ten heuristics through interactive paired scenarios. For each heuristic, the player completes the same concrete task in two interfaces: one that violates the heuristic and one that respects it. A narrator frames each interaction before and after, and a reveal screen at the end of the pair names the heuristic and explains it through the contrast between the two interfaces. The game is bilingual (English and Portuguese) and runs entirely in the browser, with no server-side state.
+The artifact is a web-based, single-session educational game that supports understanding of Nielsen's ten heuristics through interactive paired scenarios. For each heuristic, the player completes the same concrete task in two interfaces: one that violates the heuristic and one that respects it. In each scenario, a narrator first announces the mission --- the task the player must complete --- and, after the task is completed, returns to comment on what was good or bad about the interface. Once both scenarios have been completed for a given heuristic, a reveal screen recaps the contrast side by side, explains why the compliant interface is better, and presents the heuristic with its definition. The game is bilingual (English and Portuguese) and runs entirely in the browser, with no server-side state.
 
-Each of the ten heuristics follows the same five-step flow: The player first sees a \emph{goal card} stating the concrete task to be performed. They then enter the \emph{bad scenario}, where the narrator presents the goal, and the task is carried out in an interface that violates the heuristic; after completing the task, the narrator returns to comment on what just happened. The same task is then repeated in the \emph{good scenario}, with the narrator framing the interaction before and after in an interface that respects the heuristic. A \emph{reveal screen} closes the pair, naming the heuristic, presenting its definition, and recapping the contrast side by side. The player is awarded a star and advances to the next heuristic. After all ten heuristics have been completed, a celebratory closing screen greets the player as a ``heuristics expert'' and a final results screen links to the post-game questionnaire described in Section~\ref{sec:method}.
+The full sequence of player and narrator actions follows the same flow throughout the session:
 
-To make this flow concrete, Figures~\ref{fig:h8-bad}, \ref{fig:h8-good}, and~\ref{fig:h8-reveal} show the full sequence for heuristic 8, \emph{Aesthetic and Minimalist Design}, whose task is to find and click the ``Buy Now'' button for a specific laptop on a shop page.
+\begin{enumerate}
+  \item The player enters the \emph{bad scenario} for the current heuristic.
+  \item The narrator announces the mission (the task to be completed).
+  \item The player attempts the task; the bad interface produces friction, and the player works around it until the task is completed.
+  \item The narrator returns to comment on what was wrong with that interface.
+  \item The player enters the \emph{good scenario} for the same heuristic.
+  \item The narrator again announces the same mission.
+  \item The player completes the task in the compliant interface.
+  \item The narrator returns to comment on what was good about that interface.
+  \item The player reaches the \emph{reveal screen}, which recaps both scenarios side by side, explains why the compliant interface is better, and names the heuristic with its definition. The player is awarded a star.
+  \item The player advances to the next heuristic, and steps 1--9 repeat.
+  \item Once all ten heuristics have been completed, a celebratory closing screen greets the player as a ``heuristics expert'' for having collected the ten stars.
+  \item A final overview screen lets the player revisit each heuristic and shows the average time spent on each. From this screen, a link leads to the post-game questionnaire described in Section~\ref{sec:method}.
+  \item The player can choose to play again, restarting the cycle with progress reset to zero.
+\end{enumerate}
+
+To make this flow concrete, Figure~\ref{fig:h8-scenarios} shows the paired scenarios for heuristic 8, \emph{Aesthetic and Minimalist Design} --- the bad scenario in (a) and the good scenario in (b) --- whose task is to find and click the ``Buy Now'' button for a specific laptop on a shop page; Figure~\ref{fig:h8-reveal} shows the reveal screen that closes the pair.
 
 \begin{figure}[ht]
 \centering
-\pdftooltip{\includegraphics[width=.95\textwidth]{figures/h8-bad-scenario-after-and-before.png}}
-{Two side-by-side screenshots of the bad scenario for heuristic 8 (Aesthetic and Minimalist Design). On the left, the player enters the scenario: the mission ``Find and click the Buy Now button for the Laptop XZ Pro'' appears at the top, above a cluttered shop interface with overlapping yellow newsletter banners, recommendation carousels of unrelated products, deal labels, and prices that obscure the actual product. The narrator at the bottom says: ``You want to buy a laptop. Find the Buy Now button on this page.'' On the right, after the task is completed, the same interface is shown; the narrator now comments: ``Popups, banners, newsletter forms, recommendation carousels --- all competing for your attention. The actual purpose of the page --- buying the product --- was buried. Every distraction is a design failure.''}
-\caption{Bad scenario for heuristic 8 (Aesthetic and Minimalist Design): the player's mission and the cluttered interface they meet (left), and the narrator's commentary after the task is completed (right).}
-\label{fig:h8-bad}
-\end{figure}
-
-\begin{figure}[ht]
-\centering
-\pdftooltip{\includegraphics[width=.95\textwidth]{figures/h8-good-scenario-after-and-before.png}}
-{Two side-by-side screenshots of the good scenario for heuristic 8 (Aesthetic and Minimalist Design). On the left, the player enters the scenario with the same mission ``Find and click the Buy Now button for the Laptop XZ Pro'' at the top, but the interface below is now minimal: a single product card for the Laptop XZ Pro showing its name, specifications (16 GB RAM, 512 GB SSD, 14-inch display), a 4.7-star rating, the price (\$1,299) with free shipping, and a single prominent purple ``Buy Now --- \$1,299'' button below. The narrator says: ``Same product, same goal. Find and click Buy Now.'' On the right, the same interface is shown after the task is completed; the narrator now comments: ``Instantly obvious. Product info, price, and a single clear call-to-action. No noise, no distractions. The design serves one goal --- helping you buy the laptop --- and does only that.''}
-\caption{Good scenario for heuristic 8 (Aesthetic and Minimalist Design): the same mission in a minimal interface (left), and the narrator's commentary after the task is completed (right).}
-\label{fig:h8-good}
+\pdftooltip{\includegraphics[width=.95\textwidth]{figures/h8-paired-scenarios.png}}
+{Four screenshots illustrating heuristic 8 (Aesthetic and Minimalist Design), arranged as two panels. Panel (a) shows the bad scenario in two side-by-side states. On the left of panel (a), the player enters the scenario: the mission ``Find and click the Buy Now button for the Laptop XZ Pro'' appears at the top, above a cluttered shop interface with overlapping yellow newsletter banners, recommendation carousels of unrelated products, deal labels, and prices that obscure the actual product; the narrator at the bottom says: ``You want to buy a laptop. Find the Buy Now button on this page.''. On the right of panel (a), after the task is completed, the same interface is shown and the narrator comments: ``Popups, banners, newsletter forms, recommendation carousels --- all competing for your attention. The actual purpose of the page --- buying the product --- was buried. Every distraction is a design failure.''. Panel (b) shows the good scenario in two side-by-side states. On the left of panel (b), the same mission appears at the top, but the interface below is now minimal: a single product card for the Laptop XZ Pro showing its name, specifications (16 GB RAM, 512 GB SSD, 14-inch display), a 4.7-star rating, the price (\$1,299) with free shipping, and a single prominent purple ``Buy Now --- \$1,299'' button below; the narrator says: ``Same product, same goal. Find and click Buy Now.''. On the right of panel (b), after the task is completed, the narrator comments: ``Instantly obvious. Product info, price, and a single clear call-to-action. No noise, no distractions. The design serves one goal --- helping you buy the laptop --- and does only that.''.}
+\caption{Paired scenarios for heuristic 8 (Aesthetic and Minimalist Design): (a) bad scenario --- the player's mission and the cluttered interface they meet (left), and the narrator's commentary after the task is completed (right); (b) good scenario --- the same mission in a minimal interface (left), and the narrator's commentary after the task is completed (right).}
+\label{fig:h8-scenarios}
 \end{figure}
 
 \begin{figure}[ht]
