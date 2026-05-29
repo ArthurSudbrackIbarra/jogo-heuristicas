@@ -1,0 +1,80 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+
+\usepackage{graphicx,url}
+
+\usepackage[brazilian,english]{babel}
+\usepackage[T1]{fontenc} % Codificação para fontes com suporte a caracteres acentuados
+\usepackage[utf8]{inputenc} % Codificação UTF-8 (necessário apenas para pdflatex)
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{graphicx,url}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{textcomp}
+\usepackage{url}
+\usepackage{enumerate}
+\usepackage{multirow}
+\usepackage{soul}
+\usepackage{verbatim}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[shortlabels]{enumitem}
+\usepackage{scalefnt}
+\usepackage{comment}
+\usepackage{lscape}
+\usepackage{fancyhdr}
+\usepackage{IHC}
+\usepackage[super]{nth}
+\usepackage{pdfcomment} % By IHC 2026: insert screen-reader descriptions in images
+\usepackage{longtable}
+
+% Prevent hyphenation
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+\sloppy
+
+\input{IHC_info}
+
+% Force English caption and section labels. Babel's [brazilian,english]
+% option should already produce English by default, but the SBC template
+% combined with some Overleaf caches can leak the Brazilian defaults, so
+% we override them explicitly here.
+\renewcommand{\figurename}{Figure}
+\renewcommand{\tablename}{Table}
+\renewcommand{\refname}{References}
+
+\title{A Web-Based Educational Game to Support the Understanding of
+Nielsen's Heuristics Through Paired Scenarios: An Experience Report}
+
+% Authors and affiliations omitted for double-blind review (IHC 2026).
+
+\author{Authors omitted for double-blind review}
+
+\address{Affiliations omitted for double-blind review
+  \email{Emails omitted for double-blind review}
+}
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{plain}
+
+\input{sections/abstract}
+\input{sections/introduction}
+\input{sections/background}
+\input{sections/game}
+\input{sections/methodology}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+\input{sections/acknowledgments}
+
+\bibliographystyle{sbc}
+\bibliography{references/references}
+
+\end{document}
